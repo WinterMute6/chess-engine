@@ -8,5 +8,20 @@ namespace chess_engine
         {
             Console.WriteLine("Hello World!");
         }
+
+     
+            
+
+            
     }
-}
+
+    class Board
+    {
+        public void GetCell()
+        {
+
+        }
+
+
+    }
+
