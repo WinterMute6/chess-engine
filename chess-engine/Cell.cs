@@ -1,10 +1,10 @@
 ﻿namespace chess_engine
 {
+    /// <summary>
+    /// Board Cell 
+    /// </summary>
     class Cell
     {
-
-        
-
 
         public int Number { get; set; }
 
