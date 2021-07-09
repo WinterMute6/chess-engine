@@ -1,7 +1,7 @@
 ﻿namespace chess_engine
 {
     /// <summary>
-    /// Board Cell 
+    /// Board Cell .
     /// </summary>
     class Cell
     {
