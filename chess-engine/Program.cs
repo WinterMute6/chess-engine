@@ -16,18 +16,31 @@ namespace chess_engine
 
         }
 
-       /* public static void GetAvailableMoves(Board board)
+        public static void GetAvailableMoves(Board board)
         {
-            foreach (Cell cell in board)
+            foreach (Cell cell in board.cells)
             {
-                switch()
+                switch(cell.Piece.Color)
                 {
-
-
-                    break;
+                    case "White":
+                        switch(cell.Piece.Figure)
+                        {
+                            case "Pawn":
+                                //cell.Piece.Figure.Where(x => x.Number) = cell.Number + 8;
+                                break;
+                        }
+                        break;
+                    case "Black":
+                        switch(cell.Piece.Figure)
+                        {
+                            case "Pawn":
+                                //action here
+                                break;
+                        }
+                        break;
                 }
             }
-        }*/
+        }
 
         public static void SetupBoard(Board board)
         {

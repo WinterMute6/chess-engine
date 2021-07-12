@@ -4,11 +4,18 @@ namespace chess_engine
 {
     class Piece
     {
-        private string Name
+        public string Figure
         {
             get
             {
-            return $"{_color} {_figure}";
+            return $"{_figure}";
+            }
+        }
+        public string Color
+        {
+            get
+            {
+                return $"{_color}";
             }
         }
         private Color _color;
