@@ -7,7 +7,6 @@
     {
 
         public int Number { get; set; }
-
         public Piece Piece { get; set; }
         public (char, int) Position
         {
@@ -15,10 +14,7 @@
             {
                 return ("abcdefgh"[this.Number % 8], this.Number / 8 + 1);
             }
-
-                
         }
-
     }
 }
 

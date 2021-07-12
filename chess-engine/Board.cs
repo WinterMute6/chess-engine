@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace chess_engine
 {
     class Board
     {
         private static string columns = "abcdefgh";
-        public Cell[] cells = new Cell[64];
+        public List<Cell> cells = new Cell[64].ToList();
         public Board()
         {
             for (int i = 0; i < 64; i++)

@@ -14,15 +14,20 @@ namespace chess_engine
             var cell = board.GetCell('h', 8);
 
 
-
-            /*List<Move> GetAvailableMoves(Cell initial)
-            { 
-                var availableMoves = new List<Move>();
-
-                return availableMoves;
-
-            }*/
         }
+
+       /* public static void GetAvailableMoves(Board board)
+        {
+            foreach (Cell cell in board)
+            {
+                switch()
+                {
+
+
+                    break;
+                }
+            }
+        }*/
 
         public static void SetupBoard(Board board)
         {
