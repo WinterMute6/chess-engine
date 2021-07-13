@@ -2,7 +2,7 @@
 
 namespace chess_engine
 {
-    class Piece
+    public class Piece
     {
         private Color _color;
         
@@ -20,7 +20,6 @@ namespace chess_engine
             _color = color;
             Figure = figure;
         }
-        public List<Move> AvailableMoves { get; set; }
     }
 }
 
