@@ -22,7 +22,7 @@ namespace chess_engine.tests
             //Act
             board.Cell('h', 5).Piece = new Piece(Color.White, Figure.Pawn);
             board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            var blackMoves = board.GetAvailableMoves(board.listOfCells[48].Piece);
+            var blackMoves = board.GetAvailableMoves(board.Cells[48].Piece);
 
             //Assert
             Assert.AreEqual(0, blackMoves.Count());
@@ -122,7 +122,7 @@ namespace chess_engine.tests
 
             // Act
             board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            var blackMoves = board.GetAvailableMoves(board.listOfCells[48].Piece);
+            var blackMoves = board.GetAvailableMoves(board.Cells[48].Piece);
 
             // Assert
             Assert.AreEqual(0, blackMoves.Count());
@@ -146,7 +146,7 @@ namespace chess_engine.tests
             //var cell = board.GetCell('h', 8);
             //board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
             board.Cell('a', 3).Piece = new Piece(Color.White, Figure.Pawn);
-            var whiteMoves = board.GetAvailableMoves(board.listOfCells[8].Piece);
+            var whiteMoves = board.GetAvailableMoves(board.Cells[8].Piece);
       
             // Assert
             Assert.AreEqual(0, whiteMoves.Count());

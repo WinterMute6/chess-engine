@@ -5,6 +5,11 @@
     /// </summary>
     public class Cell
     {
+        public Cell(Board board)
+        {
+            this.board = board;
+        }
+        public Board Board { get { return board; } }
         public bool IsLeftEdge
         {
             get { return Number % 8 == 0; }
@@ -18,6 +23,8 @@
         }
         public int Number { get; set; }
         private Piece _piece;
+        private readonly Board board;
+
         public Piece Piece {
             get { return _piece; }
             set { value.Cell = this; _piece = value; }

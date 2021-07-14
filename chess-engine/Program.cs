@@ -20,8 +20,8 @@ namespace chess_engine
 
             var cell = board.Cell('h', 8);
             board.Cell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            var whiteMoves = board.GetAvailableMoves(board.listOfCells[8].Piece);
-            var blackMoves = board.GetAvailableMoves(board.listOfCells[49].Piece);
+            var whiteMoves = board.GetAvailableMoves(board.Cells[8].Piece);
+            var blackMoves = board.GetAvailableMoves(board.Cells[49].Piece);
         }
     }
 
