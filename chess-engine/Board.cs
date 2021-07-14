@@ -23,7 +23,7 @@ namespace chess_engine
         }
         public List<Move> GetAvailableMoves(Piece piece)
         {
-            //return piece.GetAvailableMoves(this);
+            return piece.GetAvailableMoves(this);
             var availableMoves = new List<Move>();
 
             /*int moveUp1;

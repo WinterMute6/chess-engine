@@ -41,50 +41,43 @@ namespace chess_engine
 
             if (this.Color == Color.White)
             {
-                switch (this.Figure)
+                if (!this.Cell.IsLeftEdge && board.listOfCells[this.Cell.Number + 7].IsOccupied && board.listOfCells[this.Cell.Number + 7].Piece.Color == Color.Black)
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 7 });
+
+                if (!this.Cell.IsRightEdge && board.listOfCells[this.Cell.Number + 9].IsOccupied && board.listOfCells[this.Cell.Number + 9].Piece.Color == Color.Black)
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 9 });
+
+                if (board.listOfCells[this.Cell.Number + 8].IsEmpty)
                 {
-                    case Figure.Pawn:
 
-                        if (!this.Cell.IsLeftEdge && board.listOfCells[this.Cell.Number + 7].Piece != null && board.listOfCells[this.Cell.Number + 7].Piece.Color == Color.Black)
-                            availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 7 });
-
-                        if (!this.Cell.IsRightEdge && board.listOfCells[this.Cell.Number + 9].Piece != null && board.listOfCells[this.Cell.Number + 9].Piece.Color == Color.Black)
-                            availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 9 });
-
-                        if (board.listOfCells[this.Cell.Number + 8].Piece != null)
-                            break;
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 8 });
-                        if (board.listOfCells[this.Cell.Number + 16].Piece != null)
-                            break;
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 8 });
+                    if (board.listOfCells[this.Cell.Number + 16].IsEmpty)
+                    {
                         if (this.Cell.Number <= 15)
                             availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number + 16 });
-                        break;
+                    }
                 }
+                
             }
             else
             {
-                switch (this.Figure)
+                if (!this.Cell.IsLeftEdge && board.listOfCells[this.Cell.Number - 9].IsOccupied && board.listOfCells[this.Cell.Number - 9].Piece.Color == Color.White)
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 9 });
+
+                if (!this.Cell.IsRightEdge && board.listOfCells[this.Cell.Number - 7].IsOccupied && board.listOfCells[this.Cell.Number - 7].Piece.Color == Color.White)
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 7 });
+
+                if (board.listOfCells[this.Cell.Number - 8].IsEmpty)
                 {
-                    case Figure.Pawn:
-                        if (!this.Cell.IsLeftEdge && board.listOfCells[this.Cell.Number - 9].Piece != null && board.listOfCells[this.Cell.Number - 9].Piece.Color == Color.White)
-                            availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 9 });
-
-                        if (!this.Cell.IsRightEdge && board.listOfCells[this.Cell.Number - 7].Piece != null && board.listOfCells[this.Cell.Number - 7].Piece.Color == Color.White)
-                            availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 7 });
-
-                        if (board.listOfCells[this.Cell.Number - 8].Piece != null)
-                            break;
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 8 });
-                        if (board.listOfCells[this.Cell.Number - 16].Piece != null)
-                            break;
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 8 });
+                    if (board.listOfCells[this.Cell.Number - 16].IsEmpty)
+                    {
                         if (this.Cell.Number >= 48)
                             availableMoves.Add(new Move { From = this.Cell.Number, To = this.Cell.Number - 16 });
-                        break;
+                    }
                 }
             }
-
-
-            return new List<Move>();
+            return availableMoves;
         }
     }
         

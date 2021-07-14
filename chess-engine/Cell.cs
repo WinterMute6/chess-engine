@@ -22,6 +22,21 @@
             get { return _piece; }
             set { value.Cell = this; _piece = value; }
         }
+        public bool IsEmpty
+        {
+            get
+            {
+                return Piece == null;
+            }
+        }
+
+        public bool IsOccupied
+        {
+            get
+            {
+                return Piece != null;
+            }
+        }
         public (char, int) Position
         {
             get
