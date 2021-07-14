@@ -20,9 +20,9 @@ namespace chess_engine.tests
             board.ResetBoard();
 
             //Act
-            board.GetCell('h', 5).Piece = new Piece(Color.White, Figure.Pawn);
-            board.GetCell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            var blackMoves = board.GetAvailableMoves(board.cells[48].Piece);
+            board.Cell('h', 5).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            var blackMoves = board.GetAvailableMoves(board.listOfCells[48].Piece);
 
             //Assert
             Assert.AreEqual(0, blackMoves.Count());
@@ -44,9 +44,9 @@ namespace chess_engine.tests
             var board = new Board();
 
             //Act
-            var a2 = board.GetCell('a', 2);
-            var b2 = board.GetCell('b', 2);
-            var h2 = board.GetCell('h', 2);
+            var a2 = board.Cell('a', 2);
+            var b2 = board.Cell('b', 2);
+            var h2 = board.Cell('h', 2);
             //Assert
             Assert.IsTrue(a2.IsLeftEdge);
             Assert.IsFalse(a2.IsRightEdge);
@@ -74,9 +74,9 @@ namespace chess_engine.tests
             // Act
             //var cell = board.GetCell('h', 8);
             //board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            board.GetCell('b', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            board.GetCell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            var blackMoves = board.GetAvailableMoves(board.GetCell('a',7).Piece);
+            board.Cell('b', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            var blackMoves = board.GetAvailableMoves(board.Cell('a',7).Piece);
 
 
             // Assert
@@ -99,9 +99,9 @@ namespace chess_engine.tests
             // Act
             //var cell = board.GetCell('h', 8);
             //board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            board.GetCell('a', 3).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.GetCell('b', 3).Piece = new Piece(Color.Black, Figure.Pawn);
-            var whiteMoves = board.GetAvailableMoves(board.cells[8].Piece);
+            board.Cell('a', 3).Piece = new Pawn(Color.Black);
+            board.Cell('b', 3).Piece = new Pawn(Color.Black);
+            var whiteMoves = board.GetAvailableMoves(board.Cell('a',2).Piece);
 
             // Assert
             Assert.AreEqual(1, whiteMoves.Count());
@@ -121,8 +121,8 @@ namespace chess_engine.tests
             board.ResetBoard();
 
             // Act
-            board.GetCell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            var blackMoves = board.GetAvailableMoves(board.cells[48].Piece);
+            board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            var blackMoves = board.GetAvailableMoves(board.listOfCells[48].Piece);
 
             // Assert
             Assert.AreEqual(0, blackMoves.Count());
@@ -145,8 +145,8 @@ namespace chess_engine.tests
             // Act
             //var cell = board.GetCell('h', 8);
             //board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            board.GetCell('a', 3).Piece = new Piece(Color.White, Figure.Pawn);
-            var whiteMoves = board.GetAvailableMoves(board.cells[8].Piece);
+            board.Cell('a', 3).Piece = new Piece(Color.White, Figure.Pawn);
+            var whiteMoves = board.GetAvailableMoves(board.listOfCells[8].Piece);
       
             // Assert
             Assert.AreEqual(0, whiteMoves.Count());
@@ -168,16 +168,16 @@ namespace chess_engine.tests
 
 
             // Act
-            var cell = board.GetCell('h', 8);
-            board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            var whiteMoves = board.GetAvailableMoves(board.cells[8].Piece);
-            var blackMoves = board.GetAvailableMoves(board.cells[49].Piece);
+            //var cell = board.Cell('h', 8);
+            board.Cell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
+            var whiteMoves = board.GetAvailableMoves(board.Cell('a',2).Piece);
+            //var blackMoves = board.GetAvailableMoves(board.listOfCells[49].Piece);
 
 
 
             // Assert
             Assert.AreEqual(1, whiteMoves.Count());
-            Assert.AreEqual(2, blackMoves.Count());
+            //Assert.AreEqual(2, blackMoves.Count());
         }
     }
     

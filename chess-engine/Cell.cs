@@ -18,7 +18,10 @@
         }
         public int Number { get; set; }
         private Piece _piece;
-        public Piece Piece { get { return _piece; } set { value.Cell = this; _piece = value; } }
+        public Piece Piece {
+            get { return _piece; }
+            set { value.Cell = this; _piece = value; }
+        }
         public (char, int) Position
         {
             get
