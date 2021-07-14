@@ -85,26 +85,33 @@ namespace chess_engine.tests
 
         /// <summary>
         /// Given a white pawn on A2
-        /// A black piece on A3
-        /// A black piece on B3
-        /// The White pawn has 1 available move
+        /// A black piece on A4
+        /// A white piece on B3
+        /// The White pawn has 1 available move to A3
         /// </summary>
         [TestMethod()]
-        public void PawnFromA2ToB3()
+        public void PawnFromA2ToA3()
         {
             // Arrange
             var board = new Board();
+            var expectedMoves = new List<Move>() { new Move { From = 8, To = 16 } };
+            
             board.ResetBoard();
 
             // Act
             //var cell = board.GetCell('h', 8);
             //board.GetCell('a', 4).Piece = new Piece(Color.White, Figure.Rook);
-            board.Cell('a', 3).Piece = new Pawn(Color.Black);
-            board.Cell('b', 3).Piece = new Pawn(Color.Black);
-            var whiteMoves = board.GetAvailableMoves(board.Cell('a',2).Piece);
+            board.Cell('a', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
+            var actualMoves = board.GetAvailableMoves(board.Cell('a',2).Piece);
 
             // Assert
-            Assert.AreEqual(1, whiteMoves.Count());
+            //Assert.AreEqual(1, actualMoves.Count());
+            //Assert.AreSame(expectedMoves, actualMoves);
+
+            //Assert.IsTrue(expectedMoves.All(x => actualMoves.Contains(x)));
+            Assert.IsTrue(actualMoves.Except(expectedMoves).Count() == 0);
+            Assert.IsTrue(expectedMoves.Except(actualMoves).Count() == 0);
         }
 
         /// <summary>

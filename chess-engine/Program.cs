@@ -10,8 +10,10 @@ namespace chess_engine
     {
         static void Main(string[] args)
         {
-            
-            
+
+            var expectedMoves = new List<Move>() { new Move { From = 8, To = 16 } };
+            Console.WriteLine($"{expectedMoves}");
+
             var board = new Board();
 
             var a8 = board.Cell('a', 8).Number;
@@ -32,7 +34,14 @@ namespace chess_engine
         
         public int From { get; set; }
         public int To { get; set; }
-        
+        public override bool Equals(object obj)
+        {
+            return obj.GetType() == typeof(Move) && ((Move)obj).From == this.From && ((Move)obj).To == this.To;
+        }
+        public override int GetHashCode()
+        {
+            return To*100+From;
+        }
     }
 }
 

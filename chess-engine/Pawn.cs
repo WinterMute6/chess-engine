@@ -6,6 +6,7 @@ namespace chess_engine
     {
         public Pawn(Color color) : base(color, Figure.Pawn)
         {
+
         }
 
         override public List<Move> GetAvailableMoves()
