@@ -15,6 +15,11 @@ namespace chess_engine
                 Cells[i].Number = i;
             }
         }
+        public static int PositionToNumber(char column, int row)
+        {
+             return "abcdefgh".IndexOf(column)+(row-1)*8;
+
+        }
         public Cell Cell(char column, int row)
         {
             var columnIndex = columns.IndexOf(column);
