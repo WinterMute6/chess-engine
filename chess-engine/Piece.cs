@@ -6,7 +6,20 @@ namespace chess_engine
     public class Piece
     {
         private Color _color;
-        
+
+       
+        public bool IsOppositeColor(Color color)
+        {
+            if (color == this.Color)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public Color Color
         {
             get

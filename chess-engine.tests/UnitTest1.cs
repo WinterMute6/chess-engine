@@ -80,6 +80,8 @@ namespace chess_engine.tests
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
 
             // Assert
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
             Assert.IsTrue(actualMoves.Except(expectedMoves).Count() == 0);
             Assert.IsTrue(expectedMoves.Except(actualMoves).Count() == 0);
         }
@@ -183,7 +185,24 @@ namespace chess_engine.tests
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
+
+        [TestMethod()]
+        public void WhitePawnFromA3ToA4()
+        {
+            var board = new Board();
+            board.ResetBoard();
+            var expectedMoves = new List<Move>()
+            {
+                new Move{From = Board.PositionToNumber('a',3), To = Board.PositionToNumber('a',4)}
+            };
+            board.Cell('a', 3).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('a', 3).Piece);
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
     }
+
     [TestClass]
     public class BlackPawnMovesTests
     {
@@ -344,29 +363,29 @@ namespace chess_engine.tests
             board.Cell('h', 6).Piece = new Piece(Color.Black, Figure.Pawn);
             board.Cell('g', 6).Piece = new Piece(Color.Black, Figure.Pawn);
             board.Cell('a', 7).Piece = new Piece(Color.White, Figure.Pawn);
+
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 7).Piece);
-            actualMoves.Except(expectedMoves);
-            expectedMoves.Except(actualMoves);
+            
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
 
         [TestMethod()]
-        public void WhitePawnFromA3ToA4()
+        public void BlackPawnFromH6ToH5()
         {
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>()
             {
-                new Move{From = Board.PositionToNumber('a',3), To = Board.PositionToNumber('a',4)}
+                new Move{From = Board.PositionToNumber('h',6), To = Board.PositionToNumber('h',5)}
             };
-            board.Cell('a', 3).Piece = new Pawn(Color.White);
+            board.Cell('h', 6).Piece = new Pawn(Color.Black);
 
-            var actualMoves = board.GetAvailableMoves(board.Cell('a', 3).Piece);
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 6).Piece);
+
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
-
     }
 
 
