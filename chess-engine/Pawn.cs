@@ -12,8 +12,13 @@ namespace chess_engine
 
         override public List<Move> GetAvailableMoves()
         {
+            // Refactored Material To Be set in Base Class
+
             var firstMove = new List<int>();
-            
+            bool leftEdge;
+            bool rightEdge;
+
+
             int moveUp;
             int moveDown;
             int moveUpLeft;
@@ -23,7 +28,9 @@ namespace chess_engine
             
             if (this.Color == Color.White)
             {
-                firstMove = new List<int>() {8,9,10,11,12,13,14,15};
+                firstMove = new List<int>() {8,9,10,11,12,13,14,15}; 
+                rightEdge = this.Cell.IsRightEdge;
+                leftEdge = this.Cell.IsLeftEdge;
                 moveUp = 8;
                 moveDown = -8;
                 moveUpLeft = 7;
@@ -34,6 +41,8 @@ namespace chess_engine
             else
             {
                 firstMove = new List<int>() {48,49,50,51,52,53,54,55};
+                leftEdge = this.Cell.IsRightEdge;
+                rightEdge = this.Cell.IsLeftEdge;
                 moveUp = -8;
                 moveDown = 8;
                 moveUpLeft = -7;
@@ -42,8 +51,7 @@ namespace chess_engine
                 moveDownRight = 7;
             }
 
-            var leftEdge = this.Color == Color.White ? this.Cell.IsLeftEdge : this.Cell.IsRightEdge;
-            var rightEdge = this.Color == Color.White ? this.Cell.IsRightEdge : this.Cell.IsLeftEdge;
+            //Pawn Move Logic
 
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();

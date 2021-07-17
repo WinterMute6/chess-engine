@@ -7,7 +7,7 @@ namespace chess_engine
     {
         private Color _color;
 
-       
+      
         public bool IsOppositeColor(Color color)
         {
             if (color == this.Color)
