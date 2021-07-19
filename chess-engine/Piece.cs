@@ -6,13 +6,8 @@ namespace chess_engine
     public class Piece
     {
         private Color _color;
-        public List<int> PawnFirstMove()
-        {
-            if (this.Color == Color.White)
-                return new List<int>() { 8, 9, 10, 11, 12, 13, 14, 15 };
-            else
-                return new List<int>() { 48, 49, 50, 51, 52, 53, 54, 55 };
-        }
+        public virtual bool IsFirstMove() => false;
+        
         public bool RightEdge()
         {
             if (this.Color == Color.White)
@@ -29,43 +24,23 @@ namespace chess_engine
         }
         public int MoveUp(int iterant)
         {
-            if (this.Color == Color.White)
-                return this.Cell.Number + (8 * iterant);
-            else
-                return this.Cell.Number - (8 * iterant);
+            return this.Cell.Number + (8 * iterant) * (this.Color == Color.White ? 1 : -1);
         }
         public int MoveUpLeft(int iterant)
         {
-            if (this.Color == Color.White)
-                return this.Cell.Number + (7 * iterant);
-            else
-                return this.Cell.Number - (7 * iterant);
+            return this.Cell.Number + (7 * iterant) * (this.Color == Color.White ? 1 : -1);
         }
         public int MoveUpRight(int iterant)
         {
-            if (this.Color == Color.White)
-                return this.Cell.Number + (9 * iterant);
-            else
-                return this.Cell.Number - (9 * iterant);
+            return this.Cell.Number + (9 * iterant) * (this.Color == Color.White ? 1 : -1);
         }
         public bool IsOppositeColor(Color color)
         {
-            if (color == this.Color)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return color == this.Color ? false : true;
         }
-
         public Color Color
         {
-            get
-            {
-                return _color;
-            }
+            get{ return _color; }
         }
         public Figure Figure { get; set; }
         public Cell Cell { get; set;}
@@ -74,11 +49,9 @@ namespace chess_engine
             _color = color;
             Figure = figure;
         }
-
         public virtual List<Move> GetAvailableMoves()
         {
             throw new Exception("Should not be called");
-            //return new List<Move>();
         }
     }
         

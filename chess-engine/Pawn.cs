@@ -4,12 +4,17 @@ namespace chess_engine
 {
     public class Pawn : Piece
     {
-        
         public Pawn(Color color) : base(color, Figure.Pawn)
         {
 
         }
-
+        public override bool IsFirstMove()
+        {
+            if (this.Color == Color.White)
+                return (new List<int>() { 8, 9, 10, 11, 12, 13, 14, 15 }).Contains(this.Cell.Number);
+            else
+                return (new List<int>() { 48, 49, 50, 51, 52, 53, 54, 55 }).Contains(this.Cell.Number);
+        }
         override public List<Move> GetAvailableMoves()
         {
             var board = this.Cell.Board;
@@ -26,7 +31,7 @@ namespace chess_engine
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(1) });
                 if (board.Cells[MoveUp(2)].IsEmpty)
                 {
-                    if (PawnFirstMove().Contains(this.Cell.Number))
+                    if (IsFirstMove())
                         availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(2) });
                 }
             }
