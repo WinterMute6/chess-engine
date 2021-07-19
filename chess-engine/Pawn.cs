@@ -38,6 +38,5 @@ namespace chess_engine
             return availableMoves;
         }
     }
-        
 }
 

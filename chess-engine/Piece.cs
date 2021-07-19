@@ -7,20 +7,13 @@ namespace chess_engine
     {
         private Color _color;
         public virtual bool IsFirstMove() => false;
-        
         public bool RightEdge()
         {
-            if (this.Color == Color.White)
-                return this.Cell.IsRightEdge;
-            else
-                return this.Cell.IsLeftEdge;
+            return this.Color == Color.White ? this.Cell.IsRightEdge : this.Cell.IsLeftEdge;
         }
         public bool LeftEdge()
         {
-            if (this.Color == Color.White)
-                return this.Cell.IsLeftEdge;
-            else
-                return this.Cell.IsRightEdge;
+            return this.Color == Color.White ? this.Cell.IsLeftEdge : this.Cell.IsRightEdge;
         }
         public int MoveUp(int iterant)
         {
