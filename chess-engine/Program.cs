@@ -27,7 +27,43 @@ namespace chess_engine
         }
     }
 
+    public class Rook : Piece
+    {
+        public Rook(Color color) : base(color, Figure.Rook) { }
 
+        public override bool IsFirstMove()
+        {
+            if (this.Color == Color.White)
+                return (new List<int>() { 0, 7 }).Contains(this.Cell.Number);
+            else
+                return (new List<int>() { 56, 63 }).Contains(this.Cell.Number);
+        }
+
+        public override List<Move> GetAvailableMoves()
+        {
+            var board = this.Cell.Board;
+            var availableMoves = new List<Move>();
+
+            for (int i = 1; i < 100; i++)
+            {
+                do
+                {
+                    if (board.Cells[MoveUp(i)].IsOccupied && IsOppositeColor(board.Cells[MoveUp(i)].Piece.Color))
+                    {
+                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(i) });
+                        break;
+                    }
+                    if (board.Cells[MoveUp(i)].IsOccupied)
+                    {
+                        break;
+                    }
+                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(i) });
+                }
+                while (board.Cells[MoveUp(i)].IsEmpty);
+            }
+            return availableMoves;
+        }
+    }
 
     public class Move
     {

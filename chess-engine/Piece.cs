@@ -15,9 +15,21 @@ namespace chess_engine
         {
             return this.Color == Color.White ? this.Cell.IsLeftEdge : this.Cell.IsRightEdge;
         }
+        public int MoveRight(int Iterant)
+        {
+            return this.Cell.Number + (1 * Iterant) * (this.Color == Color.White ? 1 : -1);
+        }
+        public int MoveLeft(int iterant)
+        {
+            return this.Cell.Number + (1 * iterant) * (this.Color == Color.White ? -1 : 1);
+        }
         public int MoveUp(int iterant)
         {
             return this.Cell.Number + (8 * iterant) * (this.Color == Color.White ? 1 : -1);
+        }
+        public int MoveDown(int iterant)
+        {
+            return this.Cell.Number + (8 * iterant) * (this.Color == Color.White ? -1 : 1);
         }
         public int MoveUpLeft(int iterant)
         {
@@ -26,6 +38,14 @@ namespace chess_engine
         public int MoveUpRight(int iterant)
         {
             return this.Cell.Number + (9 * iterant) * (this.Color == Color.White ? 1 : -1);
+        }
+        public int MoveDownLeft(int iterant)
+        {
+            return this.Cell.Number + (9 * iterant) * (this.Color == Color.White ? -1 : 1);
+        }
+        public int MoveDownRight(int iterant)
+        {
+            return this.Cell.Number + (7 * iterant) * (this.Color == Color.White ? -1 : 1);
         }
         public bool IsOppositeColor(Color color)
         {
@@ -47,6 +67,5 @@ namespace chess_engine
             throw new Exception("Should not be called");
         }
     }
-        
 }
 
