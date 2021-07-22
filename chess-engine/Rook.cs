@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace chess_engine
@@ -19,60 +20,58 @@ namespace chess_engine
         {
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();
-
-            for (int i = 1; i < 100; i++)
+            int offset = 0;
+            // Check for moves in up direction 
+            while (!IsTopEdge(MoveUp(offset)))
             {
-                if (board.Cells[MoveUp(i)].IsOccupied && IsOppositeColor(board.Cells[MoveUp(i)].Piece.Color))
+                offset++;
+                if (board.Cells[MoveUp(offset)].IsOccupied)
                 {
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(i) });
+                    if (IsOppositeColor(board.Cells[MoveUp(offset)].Piece.Color))
+                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(offset) });
                     break;
                 }
-                if (board.Cells[MoveUp(i)].IsOccupied)
-                {
-                    break;
-                }
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(i) });
+                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(offset) });
             }
-            for (int i = 1; i < 100; i++)
+            // Check for moves in down direcion
+            offset = 0;
+            while (!IsBottomEdge(MoveDown(offset)))
             {
-                if (board.Cells[MoveDown(i)].IsOccupied && IsOppositeColor(board.Cells[MoveDown(i)].Piece.Color))
+                offset++;
+                if (board.Cells[MoveDown(offset)].IsOccupied)
                 {
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(i) });
+                    if (IsOppositeColor(board.Cells[MoveDown(offset)].Piece.Color))
+                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(offset) });
                     break;
                 }
-                if (board.Cells[MoveDown(i)].IsOccupied)
-                {
-                    break;
-                }
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(i) });
+                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(offset) });
             }
-            for (int i = 1; i < 100; i++)
+            // Check for moves in right direction
+            offset = 0;
+            while (!IsRightEdge(MoveRight(offset)))
             {
-                if (board.Cells[MoveRight(i)].IsOccupied && IsOppositeColor(board.Cells[MoveRight(i)].Piece.Color))
+                offset++;
+                if (board.Cells[MoveRight(offset)].IsOccupied)
                 {
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(i) });
+                    if (IsOppositeColor(board.Cells[MoveRight(offset)].Piece.Color))
+                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(offset) });
                     break;
                 }
-                if (board.Cells[MoveRight(i)].IsOccupied)
-                {
-                    break;
-                }
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(i) });
+                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(offset) });
             }
-            for (int i = 1; i < 100; i++)
+            // Check for moves in left direction
+            offset = 0;
+            while (!IsLeftEdge(MoveLeft(offset)))
             {
-                if (board.Cells[MoveLeft(i)].IsOccupied && IsOppositeColor(board.Cells[MoveLeft(i)].Piece.Color))
+                offset++;
+                if (board.Cells[MoveLeft(offset)].IsOccupied)
                 {
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(i) });
+                    if (IsOppositeColor(board.Cells[MoveLeft(offset)].Piece.Color))
+                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(offset) });
                     break;
                 }
-                if (board.Cells[MoveLeft(i)].IsOccupied)
-                {
-                    break;
-                }
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(i) });
+                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(offset) });
             }
-
             return availableMoves;
         }
     }

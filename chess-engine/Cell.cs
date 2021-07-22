@@ -1,4 +1,6 @@
-﻿namespace chess_engine
+﻿using System.Collections.Generic;
+
+namespace chess_engine
 {
     /// <summary>
     /// Board Cell .
@@ -19,6 +21,22 @@
             get
             {
                 return (Number + 1) % 8 == 0;
+            }
+        }
+        public bool IsTopEdge
+        {
+            get
+            {
+                var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
+                return topNum.Contains(Number);
+            }
+        }
+        public bool IsBottomEdge
+        {
+            get
+            {
+                var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
+                return bottomNum.Contains(Number);
             }
         }
         public int Number { get; set; }

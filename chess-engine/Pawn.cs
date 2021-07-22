@@ -16,10 +16,10 @@ namespace chess_engine
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();
             
-            if (!LeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
+            if (!IsLeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
                 
-            if (!RightEdge() && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
+            if (!IsRightEdge() && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(1) });
 
             if (board.Cells[MoveUp(1)].IsEmpty)

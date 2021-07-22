@@ -6,7 +6,7 @@ namespace chess_engine
     public class Board
     {
         private static string columns = "abcdefgh";
-        public List<Cell> Cells { get; } = new Cell[64].ToList();
+        
         public Board()
         {
             for (int i = 0; i < 64; i++)
@@ -15,10 +15,10 @@ namespace chess_engine
                 Cells[i].Number = i;
             }
         }
+        public List<Cell> Cells { get; } = new Cell[64].ToList();
         public static int PositionToNumber(char column, int row)
         {
-             return "abcdefgh".IndexOf(column)+(row-1)*8;
-
+            return (row * 8) - 1 - (7 - ("abcdefgh".IndexOf(column))); //"absdefgh".IndexOf(column)+(row-1)*8;
         }
         public Cell Cell(char column, int row)
         {
@@ -29,57 +29,6 @@ namespace chess_engine
         public List<Move> GetAvailableMoves(Piece piece)
         {
             return piece.GetAvailableMoves();
-
-
-            /*int moveUp1;
-            int moveUp2;
-            int moveUpLeft;
-            int moveUpRight;
-            bool white;
-            
-            if (piece.Color == Color.White)
-            {
-                white = true;
-                moveUp1 = 1;
-                moveUp2 = 2;
-                moveUpLeft = 7;
-                moveUpRight = 9;
-            }
-            else
-            {
-                white = false;
-                moveUp1 = -1;
-                moveUp2 = -2;
-                moveUpLeft = -7;
-                moveUpRight = -9;
-            }
-
-            var leftEdge = white ? piece.Cell.IsLeftEdge : piece.Cell.IsRightEdge;
-            var rightEdge = white ? piece.Cell.IsRightEdge : piece.Cell.IsLeftEdge;
-
-            switch(piece.Figure)
-            {
-                case Figure.Pawn:
-                    if (!leftEdge && this.listOfCells[piece.Cell.Number + moveUpLeft].Piece != null && this.listOfCells[piece.Cell.Number + moveUpLeft].Piece.Color == Color.Black)
-                        availableMoves.Add(new Move { From = piece.Cell.Number, To = piece.Cell.Number + moveUpLeft });
-
-                    if (!rightEdge && this.listOfCells[piece.Cell.Number + moveUpRight].Piece != null && this.listOfCells[piece.Cell.Number + moveUpRight].Piece.Color == Color.Black)
-                        availableMoves.Add(new Move { From = piece.Cell.Number, To = piece.Cell.Number + moveUpRight });
-
-                    if (this.listOfCells[piece.Cell.Number + moveUp1].Piece != null)
-                        break;
-
-                    availableMoves.Add(new Move { From = piece.Cell.Number, To = piece.Cell.Number + moveUp1 });
-
-                    if (this.listOfCells[piece.Cell.Number + moveUp2].Piece != null)
-                        break;
-
-                    if (piece.Cell.Number <= 15)
-                        availableMoves.Add(new Move { From = piece.Cell.Number, To = piece.Cell.Number + moveUp2 });
-                    break;
-            }*/
-            
-           
         }
 
         public void ResetBoard()

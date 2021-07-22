@@ -4,6 +4,137 @@ using System.Linq;
 namespace chess_engine.tests
 {
     [TestClass]
+    public class WhiteRookMovesTests
+    {
+        /// <summary>
+        /// Given an empty board
+        /// a white rook on D3
+        /// a white pawn on G3
+        /// and a black rook on D5
+        /// White rook on D3 should have 7 available moves 
+        /// </summary>
+        [TestMethod()]
+        public void WhiteRookFromD3To7Available()
+        {
+            var board = new Board();
+            board.ResetBoard();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('b',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('a',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',4) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',5) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('f',3) }
+            };
+            board.Cell('d', 3).Piece = new Rook(Color.White);
+            board.Cell('d', 5).Piece = new Rook(Color.Black);
+            board.Cell('g', 3).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 3).Piece);
+
+            var extraMoves = actualMoves.Except(expectedMoves);
+            var movesNotFound = expectedMoves.Except(actualMoves);
+
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given an empty board 
+        /// A white rook on D3 
+        /// A white pawn on D1
+        /// A white pawn on C3
+        /// And a black rook on G3
+        /// White rook on D3 should have 9 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteRookFromD3To9Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',2) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',8) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',7) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',6) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',4) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',5) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('f',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('g',3) }
+            };
+            board.Cell('d', 1).Piece = new Pawn(Color.White);
+            board.Cell('c', 3).Piece = new Pawn(Color.White);
+            board.Cell('g', 3).Piece = new Rook(Color.Black);
+            board.Cell('d', 3).Piece = new Rook(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 3).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given an empty board
+        /// A White rook on D3
+        /// A white pawn on D4
+        /// A white pawn on B3
+        /// And a black rook on D2
+        /// White rook on D6 has 6 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteRookFromD3To6Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',2) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('f',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('g',3) },
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('h',3) },
+            };
+            board.Cell('d', 3).Piece = new Rook(Color.White);
+            board.Cell('d', 2).Piece = new Rook(Color.Black);
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 3).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void WhiteRookFromD3To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',4)},
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',2)},
+                new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',1)}
+            };
+            board.Cell('c', 3).Piece = new Rook(Color.Black);
+            board.Cell('d', 5).Piece = new Pawn(Color.White);
+            board.Cell('e', 3).Piece = new Pawn(Color.White);
+            board.Cell('d', 3).Piece = new Rook(Color.White);
+
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 3).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+
+    [TestClass]
     public class WhitePawnMovesTests
     {
         /// <summary>
