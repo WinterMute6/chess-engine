@@ -4,6 +4,274 @@ using System.Linq;
 namespace chess_engine.tests
 {
     [TestClass]
+    public class BlackBishopMovesTests
+    {
+        /// <summary>
+        /// Given a black bishop on D4 
+        /// A black pawn on F2 
+        /// A white pawn on F6 
+        /// Black bishop on D4 has 9 available Moves
+        /// </summary>
+        [TestMethod()]
+        public void BlackBishopFromD4To9Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1) }
+            };
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black bishop on D4
+        /// A black pawn on B2
+        /// A white pawn on F2
+        /// Black bishop on D4 has 10 available moves 
+        /// </summary>
+        [TestMethod()]
+        public void BlackBishopFromD4To10Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8) }
+            };
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+        /// <summary>
+        /// Given a black bishop on D4 
+        /// A white pawn on B2 
+        /// A black pawn on B6 
+        /// Black bishop on D4 has 10 available moves 
+        /// </summary>
+        [TestMethod()]
+        public void BlackBishopFromD4To10Available2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8) }
+            };
+            board.Cell('b', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black bishop on D4 
+        /// A white pawn on B6 
+        /// A black pawn on F6 
+        /// Black bishop on D4 has 9 available moves 
+        /// </summary>
+        [TestMethod()]
+        public void BlackBishopFromD4To9Available2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1) }
+            };
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+
+    [TestClass]
+    public class WhiteBishopMovesTests
+    {
+        /// <summary>
+        /// Given a white bishop on D4
+        /// A black pawn on B2
+        /// A white pawn on F2
+        /// White Bishop on D4 has 10 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteBishopFromD4To10Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7) }
+            };
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white bishop on D4
+        /// A white pawn on B2
+        /// A black pawn on B6
+        /// White bishop on D4 has 10 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteBishopFromD4To10Available2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) }
+            };
+            board.Cell('b', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white bishop on D4
+        /// A white pawn on B6
+        /// A black pawn on F6
+        /// White bishop on D4 has 9 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteBishopFromD4To9Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1) }
+            };
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a White Bishop on D4
+        /// A white pawn on F6
+        /// A black pawn on F2
+        /// White Bishop on D4 has 9 available moves
+        /// </summary>
+        [TestMethod()]
+        public void WhiteBishopFromD4To9Available2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1) },
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6) }
+            };
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+    }
+
+    [TestClass]
     public class WhiteRookMovesTests
     {
         /// <summary>

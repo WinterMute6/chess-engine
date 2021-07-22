@@ -5,8 +5,15 @@ namespace chess_engine
 {
     public class Piece
     {
+
         private Color _color;
         public virtual bool IsFirstMove() => false;
+
+        public Piece(Color color, Figure figure)
+        {
+            _color = color;
+            Figure = figure;
+        }
         public bool IsBottomEdge()
         {
             return this.Color == Color.White ? this.Cell.IsBottomEdge : this.Cell.IsTopEdge;
@@ -90,11 +97,7 @@ namespace chess_engine
         }
         public Figure Figure { get; set; }
         public Cell Cell { get; set;}
-        public Piece(Color color, Figure figure)
-        {
-            _color = color;
-            Figure = figure;
-        }
+       
         public virtual List<Move> GetAvailableMoves()
         {
             throw new Exception("Should not be called");
