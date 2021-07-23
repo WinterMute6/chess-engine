@@ -4,6 +4,322 @@ using System.Linq;
 namespace chess_engine.tests
 {
     [TestClass]
+    public class BlackQueenMovesTests
+    {
+        /// <summary>
+        /// Given a Black Queen on D4 
+        /// And 8 black pawns on B2,B4,B6,D2,D6,F2,F4,F6
+        /// Black queen on D4 has 8 available moves
+        /// </summary>
+        [TestMethod()]
+        public void QueenFromD4To8Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)}
+            };
+            board.Cell('d', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given A white queen on D4
+        /// And 8 black pawns on B2,B4,B6,D2,D6,F2,F4,F6
+        /// White queen on D4 has 16 available moves
+        /// </summary>
+        [TestMethod()]
+        public void QueenFromD4To16Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)},
+
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6)},
+            };
+            board.Cell('d', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void QueenFromD4To14Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)}
+            };
+            board.Cell('c', 3).Piece = new Pawn(Color.White);
+            board.Cell('c', 4).Piece = new Pawn(Color.White);
+            board.Cell('c', 5).Piece = new Pawn(Color.White);
+            board.Cell('d', 5).Piece = new Pawn(Color.White);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void QueenFromD4To()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',8)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)}
+            };
+            board.Cell('e', 3).Piece = new Pawn(Color.White);
+            board.Cell('e', 4).Piece = new Pawn(Color.White);
+            board.Cell('e', 5).Piece = new Pawn(Color.White);
+            board.Cell('d', 3).Piece = new Pawn(Color.White);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+    [TestClass]
+    public class WhiteQueenMoveTests
+    {
+        /// <summary>
+        /// Given a White Queen on D4 
+        /// And 8 white pawns on B2,B4,B6,D2,D6,F2,F4,F6
+        /// White queen on D4 has 8 available moves
+        /// </summary>
+        [TestMethod()]
+        public void QueenFromD4To8Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)}
+            };
+            board.Cell('d', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 4).Piece = new Pawn(Color.White);
+            board.Cell('b', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 4).Piece = new Pawn(Color.White);
+            board.Cell('f', 2).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given A white queen on D4
+        /// And 8 black pawns on B2,B4,B6,D2,D6,F2,F4,F6
+        /// White queen on D4 has 16 available moves
+        /// </summary>
+        [TestMethod()]
+        public void QueenFromD4To16Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)},
+
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6)},
+            };
+            board.Cell('d', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void QueenFromD4To14Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('g',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',8)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('h',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)}
+            };
+            board.Cell('c', 3).Piece = new Pawn(Color.White);
+            board.Cell('c', 4).Piece = new Pawn(Color.White);
+            board.Cell('c', 5).Piece = new Pawn(Color.White);
+            board.Cell('d', 5).Piece = new Pawn(Color.White);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+            board.Cell('b', 4).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void QueenFromD4To()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',8)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',7)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',4)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('a',1)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)}
+            };
+            board.Cell('e', 3).Piece = new Pawn(Color.White);
+            board.Cell('e', 4).Piece = new Pawn(Color.White);
+            board.Cell('e', 5).Piece = new Pawn(Color.White);
+            board.Cell('d', 3).Piece = new Pawn(Color.White);
+            board.Cell('f', 2).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.Black);
+            board.Cell('d', 2).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Queen(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+
+
+    [TestClass]
     public class BlackBishopMovesTests
     {
         /// <summary>

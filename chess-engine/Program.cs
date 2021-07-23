@@ -27,11 +27,6 @@ namespace chess_engine
         }
     }
 
-    public  class Queen : Piece
-    {
-        public Que
-    }
-
     public class Move
     {
         
