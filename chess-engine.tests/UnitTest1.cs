@@ -43,8 +43,8 @@ namespace chess_engine.tests
         }
 
         /// <summary>
-        /// Given A white queen on D4
-        /// And 8 black pawns on B2,B4,B6,D2,D6,F2,F4,F6
+        /// Given A Black queen on D4
+        /// And 8 White pawns on B2,B4,B6,D2,D6,F2,F4,F6
         /// White queen on D4 has 16 available moves
         /// </summary>
         [TestMethod()]
@@ -71,15 +71,15 @@ namespace chess_engine.tests
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',4)},
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',6)},
             };
-            board.Cell('d', 2).Piece = new Pawn(Color.Black);
-            board.Cell('b', 2).Piece = new Pawn(Color.Black);
-            board.Cell('b', 4).Piece = new Pawn(Color.Black);
-            board.Cell('b', 6).Piece = new Pawn(Color.Black);
-            board.Cell('d', 6).Piece = new Pawn(Color.Black);
-            board.Cell('f', 6).Piece = new Pawn(Color.Black);
-            board.Cell('f', 4).Piece = new Pawn(Color.Black);
-            board.Cell('f', 2).Piece = new Pawn(Color.Black);
-            board.Cell('d', 4).Piece = new Queen(Color.White);
+            board.Cell('d', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 4).Piece = new Pawn(Color.White);
+            board.Cell('b', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 4).Piece = new Pawn(Color.White);
+            board.Cell('f', 2).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Queen(Color.Black);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
 
@@ -87,6 +87,12 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
 
+        /// <summary>
+        /// Given A black queen on D4 
+        /// 4 white pawns on B2,B4,B6,D6
+        /// 4 black pawns on C3,C4,C5,D5
+        /// Black queen on D4 has 14 available moves
+        /// </summary>
         [TestMethod()]
         public void QueenFromD4To14Available()
         {
@@ -108,15 +114,15 @@ namespace chess_engine.tests
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)}
             };
-            board.Cell('c', 3).Piece = new Pawn(Color.White);
-            board.Cell('c', 4).Piece = new Pawn(Color.White);
-            board.Cell('c', 5).Piece = new Pawn(Color.White);
-            board.Cell('d', 5).Piece = new Pawn(Color.White);
-            board.Cell('b', 2).Piece = new Pawn(Color.Black);
-            board.Cell('b', 4).Piece = new Pawn(Color.Black);
-            board.Cell('b', 6).Piece = new Pawn(Color.Black);
-            board.Cell('d', 6).Piece = new Pawn(Color.Black);
-            board.Cell('d', 4).Piece = new Queen(Color.White);
+            board.Cell('c', 3).Piece = new Pawn(Color.Black);
+            board.Cell('c', 4).Piece = new Pawn(Color.Black);
+            board.Cell('c', 5).Piece = new Pawn(Color.Black);
+            board.Cell('d', 5).Piece = new Pawn(Color.Black);
+            board.Cell('b', 2).Piece = new Pawn(Color.White);
+            board.Cell('b', 4).Piece = new Pawn(Color.White);
+            board.Cell('b', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Queen(Color.Black);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
 
@@ -124,8 +130,14 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
 
+        /// <summary>
+        /// Given a black queen on D4
+        /// 4 black pawns on E3,E4,E5,D3
+        /// 4 white pawns on F2,F4,F6,D2
+        /// Black queen on D4 has 13 available moves
+        /// </summary>
         [TestMethod()]
-        public void QueenFromD4To()
+        public void QueenFromD4To13Available()
         {
             var board = new Board();
             var expectedMoves = new List<Move>()
@@ -144,15 +156,15 @@ namespace chess_engine.tests
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)}
             };
-            board.Cell('e', 3).Piece = new Pawn(Color.White);
-            board.Cell('e', 4).Piece = new Pawn(Color.White);
-            board.Cell('e', 5).Piece = new Pawn(Color.White);
-            board.Cell('d', 3).Piece = new Pawn(Color.White);
-            board.Cell('f', 2).Piece = new Pawn(Color.Black);
-            board.Cell('f', 4).Piece = new Pawn(Color.Black);
-            board.Cell('f', 6).Piece = new Pawn(Color.Black);
-            board.Cell('d', 2).Piece = new Pawn(Color.Black);
-            board.Cell('d', 4).Piece = new Queen(Color.White);
+            board.Cell('e', 3).Piece = new Pawn(Color.Black);
+            board.Cell('e', 4).Piece = new Pawn(Color.Black);
+            board.Cell('e', 5).Piece = new Pawn(Color.Black);
+            board.Cell('d', 3).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Pawn(Color.White);
+            board.Cell('f', 4).Piece = new Pawn(Color.White);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 2).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Queen(Color.Black);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
 
@@ -917,7 +929,330 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
     }
+    [TestClass]
 
+    public class BlackKnightMovesTests
+    {
+        /// <summary>
+        /// Given A black knight on D4
+        /// and eight white pawns on B5,C6,B3,C2,E6,F5,E2,F3
+        /// white knight on D4 has eight available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromD4To8Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',5)},
+            };
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
+            board.Cell('b', 5).Piece = new Pawn(Color.White);
+            board.Cell('c', 2).Piece = new Pawn(Color.White);
+            board.Cell('c', 6).Piece = new Pawn(Color.White);
+            board.Cell('e', 2).Piece = new Pawn(Color.White);
+            board.Cell('e', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 5).Piece = new Pawn(Color.White);
+            board.Cell('f', 3).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black knight on D4 
+        /// and eight black pawns on B5,C6,B3,C2,E6,F5,E2,F3
+        /// White knight has zero available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromD4To0Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>();
+            board.Cell('b', 3).Piece = new Pawn(Color.Black);
+            board.Cell('b', 5).Piece = new Pawn(Color.Black);
+            board.Cell('c', 2).Piece = new Pawn(Color.Black);
+            board.Cell('c', 6).Piece = new Pawn(Color.Black);
+            board.Cell('e', 2).Piece = new Pawn(Color.Black);
+            board.Cell('e', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 5).Piece = new Pawn(Color.Black);
+            board.Cell('f', 3).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black knight on G2
+        /// and no other pieces on the board
+        /// White knight on G2 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromG2To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',1)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',3)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('h',4)},
+            };
+            board.Cell('g', 2).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('g', 2).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black knight on B2
+        /// an empty board
+        /// White knight on B2 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromB2To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',1)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('a',4)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('c',4)},
+            };
+            board.Cell('b', 2).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('b', 2).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a black knight on B7
+        /// an empty board
+        /// White knight on B7 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromB7To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('a',5)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('d',8)},
+            };
+            board.Cell('b', 7).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('b', 7).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a Black knight on G7
+        /// an empty board
+        /// White knight on G7 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void BlackKnightFromG7To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',8)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',6)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('f',5)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('h',5)},
+            };
+            board.Cell('g', 7).Piece = new Knight(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('g', 7).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+    [TestClass]
+    public class WhiteKnightMovesTests
+    {
+        /// <summary>
+        /// Given A white knight on D4
+        /// and eight black pawns on B5,C6,B3,C2,E6,F5,E2,F3
+        /// white knight on D4 has eight available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromD4To8Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',5)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',2)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',6)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',3)},
+                new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('f',5)},
+            };
+            board.Cell('b', 3).Piece = new Pawn(Color.Black);
+            board.Cell('b', 5).Piece = new Pawn(Color.Black);
+            board.Cell('c', 2).Piece = new Pawn(Color.Black);
+            board.Cell('c', 6).Piece = new Pawn(Color.Black);
+            board.Cell('e', 2).Piece = new Pawn(Color.Black);
+            board.Cell('e', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 5).Piece = new Pawn(Color.Black);
+            board.Cell('f', 3).Piece = new Pawn(Color.Black);
+            board.Cell('d', 4).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white knight on D4 
+        /// and eight white pawns on B5,C6,B3,C2,E6,F5,E2,F3
+        /// White knight has zero available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromD4To0Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>();
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
+            board.Cell('b', 5).Piece = new Pawn(Color.White);
+            board.Cell('c', 2).Piece = new Pawn(Color.White);
+            board.Cell('c', 6).Piece = new Pawn(Color.White);
+            board.Cell('e', 2).Piece = new Pawn(Color.White);
+            board.Cell('e', 6).Piece = new Pawn(Color.White);
+            board.Cell('f', 5).Piece = new Pawn(Color.White);
+            board.Cell('f', 3).Piece = new Pawn(Color.White);
+            board.Cell('d', 4).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white knight on G2
+        /// and no other pieces on the board
+        /// White knight on G2 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromG2To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',1)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',3)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('f',4)},
+                new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('h',4)},
+            };
+            board.Cell('g', 2).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('g', 2).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white knight on B2
+        /// an empty board
+        /// White knight on B2 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromB2To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',1)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',3)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('a',4)},
+                new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('c',4)},
+            };
+            board.Cell('b', 2).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('b', 2).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white knight on B7
+        /// an empty board
+        /// White knight on B7 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromB7To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('a',5)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('c',5)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('d',6)},
+                new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('d',8)},
+            };
+            board.Cell('b', 7).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('b', 7).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        /// <summary>
+        /// Given a white knight on G7
+        /// an empty board
+        /// White knight on G7 has 4 available moves
+        /// </summary>
+        [TestMethod]
+        public void WhiteKnightFromG7To4Available()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',8)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',6)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('f',5)},
+                new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('h',5)},
+            };
+            board.Cell('g', 7).Piece = new Knight(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('g', 7).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+    }
+    
     [TestClass]
     public class BlackPawnMovesTests
     {
@@ -1080,7 +1415,7 @@ namespace chess_engine.tests
             board.Cell('a', 7).Piece = new Piece(Color.White, Figure.Pawn);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 7).Piece);
-            
+
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
@@ -1102,6 +1437,4 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
     }
-
-
 }

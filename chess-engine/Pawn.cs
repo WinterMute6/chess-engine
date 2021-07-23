@@ -3,7 +3,7 @@
 namespace chess_engine
 {
     public class Pawn : Piece
-    {
+    { 
         public Pawn(Color color) : base(color, Figure.Pawn){}
         public override bool IsFirstMove()
         {
