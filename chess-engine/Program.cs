@@ -26,7 +26,6 @@ namespace chess_engine
             var blackMoves = board.GetAvailableMoves(board.Cells[49].Piece);
         }
     }
-
     public class Move
     {
         
