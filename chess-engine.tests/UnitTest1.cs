@@ -745,7 +745,7 @@ namespace chess_engine.tests
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>();
-            board.Cell('e', 3).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('e', 3).Piece = new Pawn(Color.Black);
 
             //Act
             var actualMoves = board.GetAvailableMoves(board.Cell('e', 2).Piece);
@@ -771,8 +771,8 @@ namespace chess_engine.tests
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>();
-            board.Cell('g', 3).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('h', 3).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('g', 3).Piece = new Pawn(Color.White);
+            board.Cell('h', 3).Piece = new Pawn(Color.Black);
 
             //Act
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 2).Piece);
@@ -800,8 +800,8 @@ namespace chess_engine.tests
                 new Move{From = 11, To = 27},
                 new Move{From = 11, To = 20}
             };
-            board.Cell('c', 3).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('e', 3).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('c', 3).Piece = new Pawn(Color.Black);
+            board.Cell('e', 3).Piece = new Pawn(Color.Black);
 
             // Act
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
@@ -854,9 +854,9 @@ namespace chess_engine.tests
                 new Move{From = 13,To = 20},
                 new Move{From = 13,To = 21}
             };
-            board.Cell('e', 3).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('f', 4).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('g', 3).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('e', 3).Piece = new Pawn(Color.Black);
+            board.Cell('f', 4).Piece = new Pawn(Color.White);
+            board.Cell('g', 3).Piece = new Pawn(Color.White);
 
             // Act
             var actualMoves = board.GetAvailableMoves(board.Cells[13].Piece);
@@ -879,8 +879,8 @@ namespace chess_engine.tests
             var board = new Board();
             var expectedMoves = new List<Move>() { new Move { From = 9, To = 18 } };
             board.ResetBoard();
-            board.Cell('c', 3).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('b', 3).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('c', 3).Piece = new Pawn(Color.Black);
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
 
             // Act
             var actualMoves = board.GetAvailableMoves(board.Cell('b', 2).Piece);
@@ -903,9 +903,9 @@ namespace chess_engine.tests
             var board = new Board();
             var expectedMoves = new List<Move>();
             board.ResetBoard();
-            board.Cell('a', 3).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('b', 3).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('h', 2).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('a', 3).Piece = new Pawn(Color.White);
+            board.Cell('b', 3).Piece = new Pawn(Color.White);
+            board.Cell('h', 2).Piece = new Pawn(Color.Black);
             var actualMoves = board.GetAvailableMoves(board.Cell('a', 2).Piece);
             Assert.IsTrue(actualMoves.Except(expectedMoves).Count() == 0);
             Assert.IsTrue(expectedMoves.Except(actualMoves).Count() == 0);
@@ -1272,8 +1272,8 @@ namespace chess_engine.tests
             {
                 new Move{From = 55, To = 47}
             };
-            board.Cell('h', 5).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('g', 6).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('h', 5).Piece = new Pawn(Color.White);
+            board.Cell('g', 6).Piece = new Pawn(Color.Black);
 
             //Act
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 7).Piece);
@@ -1300,8 +1300,8 @@ namespace chess_engine.tests
             {
                 new Move{From = 54, To = 45}
             };
-            board.Cell('g', 6).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('f', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('g', 6).Piece = new Pawn(Color.Black);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
 
             //Act
             var actualMoves = board.GetAvailableMoves(board.Cell('g', 7).Piece);
@@ -1329,8 +1329,8 @@ namespace chess_engine.tests
                 new Move{From = 52, To = 36},
                 new Move{From = 52, To = 43}
             };
-            board.Cell('f', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('d', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('f', 6).Piece = new Pawn(Color.White);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
             var actualMoves = board.GetAvailableMoves(board.Cell('e', 7).Piece);
             Assert.IsTrue(actualMoves.Except(expectedMoves).Count() == 0);
             Assert.IsTrue(expectedMoves.Except(actualMoves).Count() == 0);
@@ -1349,7 +1349,7 @@ namespace chess_engine.tests
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>();
-            board.Cell('d', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 7).Piece);
             Assert.IsTrue(actualMoves.Except(expectedMoves).Count() == 0);
             Assert.IsTrue(expectedMoves.Except(actualMoves).Count() == 0);
@@ -1372,9 +1372,9 @@ namespace chess_engine.tests
                 new Move{From = 50, To = 43},
                 new Move{From = 50, To = 42}
             };
-            board.Cell('d', 6).Piece = new Piece(Color.White, Figure.Pawn);
-            board.Cell('c', 5).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('b', 6).Piece = new Piece(Color.Black, Figure.Pawn);
+            board.Cell('d', 6).Piece = new Pawn(Color.White);
+            board.Cell('c', 5).Piece = new Pawn(Color.Black);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
             var actualMoves = board.GetAvailableMoves(board.Cell('c', 7).Piece);
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
@@ -1392,8 +1392,8 @@ namespace chess_engine.tests
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>();
-            board.Cell('b', 6).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('a', 6).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('b', 6).Piece = new Pawn(Color.Black);
+            board.Cell('a', 6).Piece = new Pawn(Color.White);
             var actualMoves = board.GetAvailableMoves(board.Cell('a', 7).Piece);
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
@@ -1410,9 +1410,9 @@ namespace chess_engine.tests
             var board = new Board();
             board.ResetBoard();
             var expectedMoves = new List<Move>();
-            board.Cell('h', 6).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('g', 6).Piece = new Piece(Color.Black, Figure.Pawn);
-            board.Cell('a', 7).Piece = new Piece(Color.White, Figure.Pawn);
+            board.Cell('h', 6).Piece = new Pawn(Color.Black);
+            board.Cell('g', 6).Piece = new Pawn(Color.Black);
+            board.Cell('a', 7).Piece = new Pawn(Color.White);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 7).Piece);
 
@@ -1587,6 +1587,41 @@ namespace chess_engine.tests
 
             Assert.IsTrue(king.IsUnderCheck());
         }
+
+        [TestMethod()]
+        public void WhiteKingInCheck3()
+        {
+            var board = new Board();
+            var king = new King(Color.White);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('c', 5).Piece = new Pawn(Color.Black);
+            board.Cell('e', 5).Piece = new Pawn(Color.Black);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
+        [TestMethod()]
+        public void WhiteKingInCheck4()
+        {
+            var board = new Board();
+            var king = new King(Color.White);
+            board.Cell('a', 4).Piece = king;
+            board.Cell('b', 5).Piece = new Pawn(Color.Black);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
+        [TestMethod()]
+        public void White_king_in_check_on_H4_from_pawn_on_G5()
+        {
+            var board = new Board();
+            var king = new King(Color.White);
+            board.Cell('h', 4).Piece = king;
+            board.Cell('g', 5).Piece = new Pawn(Color.Black);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
         [TestMethod()]
         public void WhiteKingNotInCheckSameColor()
         {
@@ -1761,6 +1796,40 @@ namespace chess_engine.tests
 
             Assert.IsTrue(king.IsUnderCheck());
         }
+
+        [TestMethod()]
+        public void Black_King_In_Check_From_Pawn_On_Left()
+        {
+            var board = new Board();
+            var king = new King(Color.Black);
+            board.Cell('h', 5).Piece = king;
+            board.Cell('g', 4).Piece = new Pawn(Color.White);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
+        [TestMethod()]
+        public void Black_King_In_Check_From_Pawn_On_Right()
+        {
+            var board = new Board();
+            var king = new King(Color.Black);
+            board.Cell('a', 5).Piece = king;
+            board.Cell('b', 4).Piece = new Pawn(Color.White);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
+        [TestMethod()]
+        public void Black_king_in_check_on_A5_from_pawn_on_B4()
+        {
+            var board = new Board();
+            var king = new King(Color.Black);
+            board.Cell('a', 5).Piece = king;
+            board.Cell('b', 4).Piece = new Pawn(Color.White);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
         [TestMethod()]
         public void BlackKingNotInCheckSameColor()
         {

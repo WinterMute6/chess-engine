@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace chess_engine
 {
@@ -13,25 +14,7 @@ namespace chess_engine
                 return (new List<int>() { 48, 49, 50, 51, 52, 53, 54, 55 }).Contains(this.Cell.Number);        }
         public override List<Move> GetAvailableMoves()
         {
-            var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
-            
-            if (!IsLeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
-                
-            if (!IsRightEdge() && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(1) });
-
-            if (board.Cells[MoveUp(1)].IsEmpty)
-            {
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(1) });
-                if (board.Cells[MoveUp(2)].IsEmpty)
-                {
-                    if (IsFirstMove())
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(2) });
-                }
-            }
-            return availableMoves;
+            return GetPawnMoves();
         }
     }
 }
