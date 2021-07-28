@@ -7,7 +7,7 @@ namespace chess_engine
     {
         public Bishop(Color color) : base(color, Figure.Bishop) { }
 
-        public override List<Move> GetAvailableMoves()
+        protected override List<Move> GetPieceAvailableMoves()
         {
             return GetBishopMoves();
         }

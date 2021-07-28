@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace chess_engine
 {
     public class Board
     {
+        public bool IsPartialBoard { get; set; }
         private static string columns = "abcdefgh";
         public Board()
         {
@@ -57,6 +59,26 @@ namespace chess_engine
 
             this.Cell('e', 1).Piece = new King(Color.White);
             this.Cell('e', 8).Piece = new King(Color.Black);
+        }
+
+        public (Move Move,Piece OtherPiece) ApplyMove(Move move)
+        {
+            var pieceToMove = this.Cells[move.From].Piece;
+            this.Cells[move.From].RemovePiece();
+            var otherPiece = this.Cells[move.To].Piece;
+            this.Cells[move.To].Piece = pieceToMove;
+            return (move, otherPiece);
+        }
+
+        public void RollbackMove((Move Move, Piece OtherPiece) rollBack)
+        {
+            var pieceToMove = this.Cells[rollBack.Move.To].Piece;
+            this.Cells[rollBack.Move.To].RemovePiece();
+            this.Cells[rollBack.Move.From].Piece = pieceToMove;
+            if (rollBack.OtherPiece != null)
+            {
+                this.Cells[rollBack.Move.To].Piece = rollBack.OtherPiece;
+            }
         }
     }
 }

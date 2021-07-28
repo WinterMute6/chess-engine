@@ -47,6 +47,11 @@ namespace chess_engine
             get { return _piece; }
             set { value.Cell = this; _piece = value; }
         }
+        public void RemovePiece()
+        {
+            _piece.Cell = null;
+            _piece = null;
+        }
         public bool IsEmpty
         {
             get

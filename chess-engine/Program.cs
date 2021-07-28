@@ -8,21 +8,11 @@ namespace chess_engine
 {
     public class Program
     {
-         void Main(string[] args)
+        public static void Main(string[] args)
         {
             var board = new Board();
             board.ResetBoard();
-            BuildTree();
-
-
           
-        }
-
-        public void BuildTree()
-        {
-            /*var board = new Board();
-            board.ResetBoard();
-            foreach (Cell cell in board)*/
         }
     }
 

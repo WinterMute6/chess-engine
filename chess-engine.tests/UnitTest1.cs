@@ -344,6 +344,7 @@ namespace chess_engine.tests
         public void BlackBishopFromD4To9Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -376,6 +377,7 @@ namespace chess_engine.tests
         public void BlackBishopFromD4To10Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -408,6 +410,7 @@ namespace chess_engine.tests
         public void BlackBishopFromD4To10Available2()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -441,6 +444,7 @@ namespace chess_engine.tests
         public void BlackBishopFromD4To9Available2()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -1654,6 +1658,7 @@ namespace chess_engine.tests
         public void BlackKingFromD4To8Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
@@ -1708,12 +1713,10 @@ namespace chess_engine.tests
         public void BlackKingFromD4To4Available()
         {
             var board = new Board();
+            
             var expectedMoves = new List<Move>()
             {
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)}
             };
             board.Cell('c', 3).Piece = new Pawn(Color.Black);
             board.Cell('c', 4).Piece = new Pawn(Color.White);
@@ -1826,6 +1829,18 @@ namespace chess_engine.tests
             var king = new King(Color.Black);
             board.Cell('a', 5).Piece = king;
             board.Cell('b', 4).Piece = new Pawn(Color.White);
+
+            Assert.IsTrue(king.IsUnderCheck());
+        }
+
+        [TestMethod()]
+        public void Black_king_in_check_on_C4_from_pawn_on_D3()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var king = new King(Color.Black);
+            board.Cell('c', 4).Piece = king;
+            board.Cell('d', 3).Piece = new Pawn(Color.White);
 
             Assert.IsTrue(king.IsUnderCheck());
         }

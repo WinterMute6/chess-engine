@@ -12,7 +12,7 @@ namespace chess_engine
                 return (new List<int>() { 8, 9, 10, 11, 12, 13, 14, 15 }).Contains(this.Cell.Number);
             else
                 return (new List<int>() { 48, 49, 50, 51, 52, 53, 54, 55 }).Contains(this.Cell.Number);        }
-        public override List<Move> GetAvailableMoves()
+        protected override List<Move> GetPieceAvailableMoves()
         {
             return GetPawnMoves();
         }

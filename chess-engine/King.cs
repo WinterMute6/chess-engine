@@ -32,10 +32,9 @@ namespace chess_engine
                         && board.Cells[MoveUpRight(1)].Piece is Pawn;
         }
 
-        public override List<Move> GetAvailableMoves()
+        protected override List<Move> GetPieceAvailableMoves()
         {
-            var moves = GetKingMoves();
-            return Validate(moves);
+            return GetKingMoves();
         }
     }
 }

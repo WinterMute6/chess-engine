@@ -311,6 +311,8 @@ namespace chess_engine
 
         protected List<Move> Validate(List<Move> moves)
         {
+
+            
             // get the board
 
             // for each move apply the move
@@ -322,8 +324,35 @@ namespace chess_engine
             // roll back the move
 
             // next move
+            var validMoves = new List<Move>();
+            var board = this.Cell.Board;
+            foreach (var move in moves)
+            {
+                // move forward
 
-            return moves;
+                var rollbackData = board.ApplyMove(move);
+
+                
+
+                var myKing =  board.Cells.SingleOrDefault(c => c.IsOccupied && c.Piece is King && !c.Piece.IsOppositeColor(this.Color))?.Piece as King;
+                if(myKing == null && !board.IsPartialBoard)
+                {
+                    throw new Exception("No king on board!!!!");
+                }
+                if(myKing == null)
+                {
+                    validMoves.Add(move);
+                }
+                else if ( !myKing.IsUnderCheck())
+                {
+                    validMoves.Add(move);
+                }
+
+                // move back
+                board.RollbackMove(rollbackData);
+            }
+            //var invalidMoves = moves.Except(validMoves).ToArray();
+            return validMoves;
         }
         public int DoubleDownRight(int offset)
         {
@@ -441,10 +470,13 @@ namespace chess_engine
         public Figure Figure { get; set; }
         public Cell Cell { get; set;}
        
-        public virtual List<Move> GetAvailableMoves()
+        public List<Move> GetAvailableMoves()
         {
-            throw new Exception("Should not be called");
+            
+            return Validate(GetPieceAvailableMoves());
         }
+
+        protected abstract List<Move> GetPieceAvailableMoves();
     }
 }
 

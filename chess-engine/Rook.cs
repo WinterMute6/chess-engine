@@ -16,7 +16,7 @@ namespace chess_engine
                 return (new List<int>() { 56, 63 }).Contains(this.Cell.Number);
         }
 
-        public override List<Move> GetAvailableMoves()
+        protected override List<Move> GetPieceAvailableMoves()
         {
             return base.GetRookMoves();
         }
