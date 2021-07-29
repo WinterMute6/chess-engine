@@ -15,6 +15,7 @@ namespace chess_engine.tests
         public void QueenFromD4To8Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -51,6 +52,7 @@ namespace chess_engine.tests
         public void QueenFromD4To16Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -97,6 +99,7 @@ namespace chess_engine.tests
         public void QueenFromD4To14Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -140,6 +143,7 @@ namespace chess_engine.tests
         public void QueenFromD4To13Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
@@ -184,6 +188,7 @@ namespace chess_engine.tests
         public void QueenFromD4To8Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -220,6 +225,7 @@ namespace chess_engine.tests
         public void QueenFromD4To16Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -260,6 +266,7 @@ namespace chess_engine.tests
         public void QueenFromD4To14Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
@@ -297,6 +304,7 @@ namespace chess_engine.tests
         public void QueenFromD4To()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
@@ -481,6 +489,7 @@ namespace chess_engine.tests
         public void WhiteBishopFromD4To10Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -514,6 +523,7 @@ namespace chess_engine.tests
         public void WhiteBishopFromD4To10Available2()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -547,6 +557,7 @@ namespace chess_engine.tests
         public void WhiteBishopFromD4To9Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -579,6 +590,7 @@ namespace chess_engine.tests
         public void WhiteBishopFromD4To9Available2()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3) },
@@ -655,6 +667,7 @@ namespace chess_engine.tests
         public void WhiteRookFromD3To9Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('d',2) },
@@ -690,6 +703,7 @@ namespace chess_engine.tests
         public void WhiteRookFromD3To6Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('c',3) },
@@ -714,6 +728,7 @@ namespace chess_engine.tests
         public void WhiteRookFromD3To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',3), To = Board.PositionToNumber('c',3)},
@@ -946,6 +961,7 @@ namespace chess_engine.tests
         public void BlackKnightFromD4To8Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',5)},
@@ -1008,6 +1024,7 @@ namespace chess_engine.tests
         public void BlackKnightFromG2To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',1)},
@@ -1032,6 +1049,7 @@ namespace chess_engine.tests
         public void BlackKnightFromB2To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',1)},
@@ -1056,6 +1074,7 @@ namespace chess_engine.tests
         public void BlackKnightFromB7To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('a',5)},
@@ -1080,6 +1099,7 @@ namespace chess_engine.tests
         public void BlackKnightFromG7To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',8)},
@@ -1107,6 +1127,7 @@ namespace chess_engine.tests
         public void WhiteKnightFromD4To8Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('b',5)},
@@ -1169,6 +1190,7 @@ namespace chess_engine.tests
         public void WhiteKnightFromG2To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('g',2), To = Board.PositionToNumber('e',1)},
@@ -1193,6 +1215,7 @@ namespace chess_engine.tests
         public void WhiteKnightFromB2To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('b', 2), To = Board.PositionToNumber('d',1)},
@@ -1217,6 +1240,7 @@ namespace chess_engine.tests
         public void WhiteKnightFromB7To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('b', 7), To = Board.PositionToNumber('a',5)},
@@ -1241,6 +1265,7 @@ namespace chess_engine.tests
         public void WhiteKnightFromG7To4Available()
         {
             var board = new Board();
+            board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
                 new Move {From = Board.PositionToNumber('g', 7), To = Board.PositionToNumber('e',8)},
@@ -1452,12 +1477,9 @@ namespace chess_engine.tests
             var expectedMoves = new List<Move>()
             {
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)}
             };
             board.Cell('c', 3).Piece = new Pawn(Color.Black);
@@ -1532,10 +1554,7 @@ namespace chess_engine.tests
             var board = new Board();
             var expectedMoves = new List<Move>()
             {
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)}
             };
             board.Cell('c', 3).Piece = new Pawn(Color.White);
                 board.Cell('c', 4).Piece = new Pawn(Color.Black);
@@ -1548,6 +1567,9 @@ namespace chess_engine.tests
             board.Cell('d', 4).Piece = new King(Color.White);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
 
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
@@ -1649,6 +1671,77 @@ namespace chess_engine.tests
 
             Assert.IsFalse(king.IsUnderCheck());
         }
+
+
+        [TestMethod()]
+        public void White_King_Discovered_Self_Check_Not_An_AvailableMove()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('e',5), To = Board.PositionToNumber('f',6)}
+            };
+            var king = new King(Color.White);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 5).Piece = new Pawn(Color.White);
+            board.Cell('f', 6).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('e', 5).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void White_King_On_D4_Has_5_Available_Moves_To_Evade_Check_From_Bishop_on_F2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)}
+            };
+            var king = new King(Color.White);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 4).Piece = new Pawn(Color.White);
+            board.Cell('f', 6).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void White_Queen_on_E4_has_1_available_move_to_remove_check_from_Black_bishop()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('e',4), To = Board.PositionToNumber('e',5)},
+            };
+            var king = new King(Color.White);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 4).Piece = new Queen(Color.White);
+            board.Cell('f', 6).Piece = new Bishop(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('e', 4).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
     }
 
     [TestClass]
@@ -1661,14 +1754,11 @@ namespace chess_engine.tests
             board.IsPartialBoard = true;
             var expectedMoves = new List<Move>()
             {
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',5)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)},
                 new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',3)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',4)},
-                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)}
+                new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)}
             };
             board.Cell('c', 3).Piece = new Pawn(Color.White);
             board.Cell('c', 4).Piece = new Pawn(Color.White);
@@ -1867,6 +1957,82 @@ namespace chess_engine.tests
             board.Cell('a', 5).Piece = new Queen(Color.White);
 
             Assert.IsFalse(king.IsUnderCheck());
+        }
+
+        /// <summary>
+        /// Given A black King on D4
+        /// A black pawn on E5
+        /// A white Bishop on F6
+        /// black pawn must not be able to move forward and expose the black king to the white bishop
+        /// </summary>
+        [TestMethod()]
+        public void Black_King_Discovered_Self_Check_Not_An_AvailableMove()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('e',3), To = Board.PositionToNumber('f',2)}
+            };
+            var king = new King(Color.Black);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 3).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('e', 3).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void Black_King_On_D4_Has_5_Available_Moves_To_Evade_Check_From_Bishop_on_F2()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',4)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('c',3)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',3)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('d',5)},
+             new Move{From = Board.PositionToNumber('d',4), To = Board.PositionToNumber('e',5)}
+            };
+            var king = new King(Color.Black);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 4).Piece = new Pawn(Color.Black);
+            board.Cell('f', 2).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 4).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void Black_Queen_on_E4_has_1_available_move_to_remove_check_from_white_bishop()
+        {
+            var board = new Board();
+            var expectedMoves = new List<Move>
+            {
+             new Move{From = Board.PositionToNumber('e',4), To = Board.PositionToNumber('e',3)},
+            };
+            var king = new King(Color.Black);
+            board.Cell('d', 4).Piece = king;
+            board.Cell('e', 4).Piece = new Queen(Color.Black);
+            board.Cell('f', 2).Piece = new Bishop(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('e', 4).Piece);
+
+            actualMoves.Except(expectedMoves);
+            expectedMoves.Except(actualMoves);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
     }
 }
