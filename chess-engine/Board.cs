@@ -6,6 +6,7 @@ namespace chess_engine
 {
     public class Board
     {
+        public Color Turn { get; set; }
         public bool IsPartialBoard { get; set; }
         private static string columns = "abcdefgh";
         public Board()
@@ -31,8 +32,11 @@ namespace chess_engine
         {
             return piece.GetAvailableMoves();
         }
+
+
         public void ResetBoard()
         {
+            this.Turn = Color.White;
             foreach (var col in "abcdefgh")
             {
                 this.Cell(col, 2).Piece = new Pawn(Color.White);
@@ -61,12 +65,50 @@ namespace chess_engine
             this.Cell('e', 8).Piece = new King(Color.Black);
         }
 
+        public void PuzzleOne()
+        {
+            this.Turn = Color.White;
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('f', 7).Piece = new Pawn(Color.Black);
+            this.Cell('h', 7).Piece = new Pawn(Color.Black);
+            this.Cell('f', 6).Piece = new Rook(Color.White);
+            this.Cell('a', 8).Piece = new Rook(Color.Black);
+            this.Cell('g', 8).Piece = new Rook(Color.Black);
+            this.Cell('e', 5).Piece = new Bishop(Color.White);
+            this.Cell('h', 1).Piece = new King(Color.White);
+            this.Cell('h', 8).Piece = new King(Color.Black);
+        }
+
+        public void PuzzleTwo()
+        {
+            this.Turn = Color.Black;
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('g', 3).Piece = new Pawn(Color.White);
+            this.Cell('g', 7).Piece = new Pawn(Color.Black);
+            this.Cell('b', 2).Piece = new Pawn(Color.White);
+            this.Cell('d', 5).Piece = new Pawn(Color.Black);
+            this.Cell('c', 6).Piece = new Pawn(Color.Black);
+            this.Cell('a', 3).Piece = new Pawn(Color.White);
+            this.Cell('b', 7).Piece = new Pawn(Color.Black);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('d', 1).Piece = new Rook(Color.White);
+            this.Cell('e', 1).Piece = new Rook(Color.White);
+            this.Cell('g', 2).Piece = new Rook(Color.Black);
+            this.Cell('f', 2).Piece = new Rook(Color.Black);
+            this.Cell('c', 1).Piece = new Bishop(Color.White);
+            this.Cell('c', 5).Piece = new Bishop(Color.Black);
+            this.Cell('h', 3).Piece = new Bishop(Color.Black);
+            this.Cell('h', 1).Piece = new King(Color.White);
+            this.Cell('g', 8).Piece = new King(Color.Black);
+        }
+
         public (Move Move,Piece OtherPiece) ApplyMove(Move move)
         {
             var pieceToMove = this.Cells[move.From].Piece;
             this.Cells[move.From].RemovePiece();
             var otherPiece = this.Cells[move.To].Piece;
             this.Cells[move.To].Piece = pieceToMove;
+            this.Turn = pieceToMove.Color == Color.White ? Color.Black : Color.White;
             return (move, otherPiece);
         }
 
@@ -79,6 +121,7 @@ namespace chess_engine
             {
                 this.Cells[rollBack.Move.To].Piece = rollBack.OtherPiece;
             }
+            this.Turn = pieceToMove.Color;
         }
     }
 }

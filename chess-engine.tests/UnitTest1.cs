@@ -2035,6 +2035,184 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
     }
+    [TestClass]
+    public class ApplyMoveTests
+    {
+        [TestMethod]
+        public void WhitePawnMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Pawn(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('d', 3).Number);
+            board.ApplyMove(move);
+
+            Assert.IsTrue(board.Cell('d',3).Piece.Figure == Figure.Pawn && board.Cell('d', 3).Piece.Color == Color.White);
+            Assert.IsTrue(board.Turn == Color.Black);
+        }
+        [TestMethod]
+        public void WhiteRookMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Rook(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('d', 3).Number);
+            board.ApplyMove(move);
+            Assert.IsTrue(board.Turn == Color.Black);
+            Assert.IsTrue(board.Cell('d', 3).Piece.Figure == Figure.Rook && board.Cell('d', 3).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteKnightMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Knight(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('c', 4).Number);
+            board.ApplyMove(move);
+            Assert.IsTrue(board.Turn == Color.Black);
+            Assert.IsTrue(board.Cell('c', 4).Piece.Figure == Figure.Knight && board.Cell('c', 4).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteBishopMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Bishop(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('a', 5).Number);
+            board.ApplyMove(move);
+            Assert.IsTrue(board.Turn == Color.Black);
+            Assert.IsTrue(board.Cell('a', 5).Piece.Figure == Figure.Bishop && board.Cell('a', 5).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteQueenMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Queen(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('h', 6).Number);
+            board.ApplyMove(move);
+            Assert.IsTrue(board.Turn == Color.Black);
+            Assert.IsTrue(board.Cell('h', 6).Piece.Figure == Figure.Queen && board.Cell('h', 6).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteKingMoves()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new King(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('e', 3).Number);
+            board.ApplyMove(move);
+            Assert.IsTrue(board.Turn == Color.Black);
+            Assert.IsTrue(board.Cell('e', 3).Piece.Figure == Figure.King && board.Cell('e', 3).Piece.Color == Color.White);
+        }
+    }
+    [TestClass]
+    public class RollbackMoves
+    {
+        [TestMethod]
+        public void WhitePawnRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Pawn(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('d', 3).Number);
+            
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.Pawn && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteRookRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Rook(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('d', 3).Number);
+
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.Rook && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteKnightRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Knight(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('c', 4).Number);
+
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.Knight && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteBishopRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Bishop(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('a', 5).Number);
+
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.Bishop && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteQueenRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new Queen(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('h', 6).Number);
+
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.Queen && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+        [TestMethod]
+        public void WhiteKingRollback()
+        {
+            var board = new Board();
+            board.Turn = Color.White;
+            board.IsPartialBoard = true;
+            board.Cell('d', 2).Piece = new King(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('d', 2).Piece);
+            var move = moves.Single(x => x.To == board.Cell('e', 3).Number);
+
+            var rollbackData = board.ApplyMove(move);
+            board.RollbackMove(rollbackData);
+            Assert.IsTrue(board.Turn == Color.White);
+            Assert.IsTrue(board.Cell('d', 2).Piece.Figure == Figure.King && board.Cell('d', 2).Piece.Color == Color.White);
+        }
+
+    }
 }
     
 

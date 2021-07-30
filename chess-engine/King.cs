@@ -25,7 +25,7 @@ namespace chess_engine
                         && board.Cells[MoveUpLeft(1)].IsOccupied 
                         && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color) 
                         && board.Cells[MoveUpLeft(1)].Piece is Pawn
-                ||
+                ||      
                     !IsRightEdge() 
                         && board.Cells[MoveUpRight(1)].IsOccupied 
                         && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color) 

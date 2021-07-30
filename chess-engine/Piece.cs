@@ -99,7 +99,7 @@ namespace chess_engine
         {
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();
-
+            
             if (!IsLeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
 
