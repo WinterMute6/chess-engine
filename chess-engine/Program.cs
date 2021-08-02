@@ -25,8 +25,9 @@ namespace chess_engine
             var moves = AllMoves(parent.Board);
             if (moves.Count() == 0)
             {
-                if ((parent.Board.Cells.Where(x => x.Piece is King && x.Piece.Color == Color.White) as King).IsUnderCheck())
+                if ((parent.Board.Cells.Where(x => x.Piece is King && x.Piece.Color == parent.Board.Turn) as King).IsUnderCheck())
                 {
+                    parent.Score = parent.Board.Turn == Color.White? 1 : -1;
                     Console.WriteLine("CheckMate");
                     return;
                 }
@@ -42,6 +43,7 @@ namespace chess_engine
                 BuildBranches(childNode, maxLevel);
                 childNode.Board.RollbackMove(rollbackData);
             }
+            parent.Score = parent.Board.Turn == Color.White ? parent.Children.Max(x => x.Score) : parent.Children.Min(x => x.Score);
         }
         public static List<Move> AllMoves(Board board, Color? color = null)
         {
@@ -50,6 +52,29 @@ namespace chess_engine
         }
         public class Node
         {
+            public int Score { get; set; } = 0;
+          /*public int Score
+            {
+                get
+                {
+                    if (Board.Cells[Move.To].Piece != null)
+                    {
+                        if (Board.Cells[Move.To].Piece is Pawn)
+                            return 1;
+                        if (Board.Cells[Move.To].Piece is Knight)
+                            return 3;
+                        if (Board.Cells[Move.To].Piece is Bishop)
+                            return 3;
+                        if (Board.Cells[Move.To].Piece is Rook)
+                            return 5;
+                        if (Board.Cells[Move.To].Piece is Queen)
+                            return 9;
+                        return 0;
+                    }
+                    else
+                        return 0;
+                }
+            }*/
             public static long Counter = 0;
             public Node()
             {
@@ -70,30 +95,8 @@ namespace chess_engine
             public Move Move { get; set; }
         }
     }
-    public class Move : Board
+    public class Move 
     {
-        public int Score
-        {
-            get
-            {
-                if (Cells[To].Piece != null)
-                {
-                    if (Cells[To].Piece is Pawn)
-                        return 1;
-                    if (Cells[To].Piece is Knight)
-                        return 3;
-                    if (Cells[To].Piece is Bishop)
-                        return 3;
-                    if (Cells[To].Piece is Rook)
-                        return 5;
-                    if (Cells[To].Piece is Queen)
-                        return 9;
-                    return 0;
-                }
-                else
-                    return 0;
-            }
-        }
         public int From { get; set; }
         public int To { get; set; }
         public override bool Equals(object obj)
