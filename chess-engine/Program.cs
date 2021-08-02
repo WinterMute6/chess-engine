@@ -27,7 +27,7 @@ namespace chess_engine
             {
                 if ((parent.Board.Cells.Where(x => x.Piece is King && x.Piece.Color == parent.Board.Turn) as King).IsUnderCheck())
                 {
-                    parent.Score = parent.Board.Turn == Color.White? 1 : -1;
+                    parent.Score = parent.Board.Turn == Color.Black? 1 : -1;
                     Console.WriteLine("CheckMate");
                     return;
                 }
