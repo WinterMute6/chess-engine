@@ -13,19 +13,32 @@ namespace chess_engine
             var allNodes = new List<Node>();
             var board = new Board();
             board.PuzzleTwo();
+            King whiteKing = board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == Color.White)?.Piece as King;
+            King blackKing = board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == Color.Black)?.Piece as King;
             Node root = new Node();
             root.Level = 0;
             root.Board = board;
+            
             BuildBranches(root, 3);
+            List<Node> firstChildLevelNeg = root.Children.Where(x => x.Score == -1).ToList();
+            List<Node> firstChildLevelPos = root.Children.Where(x => x.Score == 1).ToList();
+            var firstBlackMove = root.Children.Where(x => x.Move == new Move { From = 13, To = 14 });
+            var firstWhiteMove = firstBlackMove.Where(x => x.Move == new Move { From = 6, To = 7 });
+            var secondBlackMove = firstWhiteMove.Where(x => x.Move == new Move { From = 14, To = 6 });
+
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {
             if (parent.Level > maxLevel)
                 return;
+            
             var moves = AllMoves(parent.Board);
+            
             if (moves.Count() == 0)
             {
-                if ((parent.Board.Cells.Where(x => x.Piece is King && x.Piece.Color == parent.Board.Turn) as King).IsUnderCheck())
+                var king = parent.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == parent.Board.Turn)?.Piece as King;
+               
+                if (king.IsUnderCheck())
                 {
                     parent.Score = parent.Board.Turn == Color.Black? 1 : -1;
                     Console.WriteLine("CheckMate");
@@ -41,9 +54,20 @@ namespace chess_engine
                 childNode.Move = move;
                 var rollbackData = parent.Board.ApplyMove(move);
                 BuildBranches(childNode, maxLevel);
+                if(childNode.Score != 0)
+                {
+                    var childScore = childNode.Score;
+                }
                 childNode.Board.RollbackMove(rollbackData);
             }
-            parent.Score = parent.Board.Turn == Color.White ? parent.Children.Max(x => x.Score) : parent.Children.Min(x => x.Score);
+            
+            var minScore = parent.Children.Min(x => x.Score);
+            var maxScore = parent.Children.Max(x => x.Score);
+            if (minScore != 0 || maxScore != 0)
+            {
+                Console.WriteLine($"not zero, Level: {parent.Level}");
+            }
+                parent.Score = parent.Board.Turn == Color.Black ? parent.Children.Min(x => x.Score) : parent.Children.Max(x => x.Score);
         }
         public static List<Move> AllMoves(Board board, Color? color = null)
         {

@@ -64,7 +64,7 @@ namespace chess_engine
             this.Cell('e', 1).Piece = new King(Color.White);
             this.Cell('e', 8).Piece = new King(Color.Black);
         }
-
+        // Mate in 3
         public void PuzzleOne()
         {
             this.Turn = Color.White;
@@ -79,6 +79,7 @@ namespace chess_engine
             this.Cell('h', 8).Piece = new King(Color.Black);
         }
 
+        //Mate in 2
         public void PuzzleTwo()
         {
             this.Turn = Color.Black;
@@ -93,12 +94,11 @@ namespace chess_engine
             this.Cell('a', 7).Piece = new Pawn(Color.Black);
             this.Cell('d', 1).Piece = new Rook(Color.White);
             this.Cell('e', 1).Piece = new Rook(Color.White);
-            this.Cell('g', 2).Piece = new Rook(Color.Black);
             this.Cell('f', 2).Piece = new Rook(Color.Black);
             this.Cell('c', 1).Piece = new Bishop(Color.White);
             this.Cell('c', 5).Piece = new Bishop(Color.Black);
             this.Cell('h', 3).Piece = new Bishop(Color.Black);
-            this.Cell('h', 1).Piece = new King(Color.White);
+            this.Cell('g', 1).Piece = new King(Color.White);
             this.Cell('g', 8).Piece = new King(Color.Black);
         }
 
