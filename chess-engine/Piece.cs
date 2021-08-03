@@ -99,11 +99,13 @@ namespace chess_engine
         {
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();
-            
-            if (!IsLeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
+            if (IsTopEdge(MoveUp(0)))
+                return availableMoves;
 
-            if (!IsRightEdge() && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
+            if (!IsLeftEdge(MoveUpLeft(0)) && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
+                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
+            
+            if (!IsRightEdge(MoveUpRight(0)) && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(1) });
 
             if (board.Cells[MoveUp(1)].IsEmpty)
@@ -187,52 +189,7 @@ namespace chess_engine
             var board = this.Cell.Board;
             var availableMoves = new List<Move>();
             var offset = 0;
-            /*
-            bool Condition(int direction, int _offset)
-            {
-                switch(direction)
-                {
-                    case 1:
-                        return !(IsLeftEdge(MoveUpLeft(_offset)) || IsTopEdge(MoveUpLeft(_offset)));
-                    case 2:
-                        return !(IsTopEdge(MoveUpRight(_offset)) || IsRightEdge(MoveUpRight(_offset)));
-                    case 3:
-                        return !(IsRightEdge(MoveDownRight(_offset)) || IsBottomEdge(MoveDownRight(_offset)));
-                    case 4:
-                        return !(IsBottomEdge(MoveDownLeft(_offset)) || IsLeftEdge(MoveDownLeft(_offset)));
-                    default:
-                        return false;
-                }
-            }
-            int CellLocation(int direction, int _offset)
-            {
-                switch(direction)
-                {
-                    case 1:
-                        return MoveUpLeft(_offset);
-                    case 2:
-                        return MoveUpRight(_offset);
-                    case 3:
-                        return MoveDownRight(_offset);
-                    case 4:
-                        return MoveDownLeft(_offset);
-                    default:
-                        return 0;
-                }
-            }
-            for (int i = 1; i < 5; i++)
-            {
-                int offset = 0;
-                while (Condition(i, offset))
-                {
-                    offset++;
-                    if (board.Cells[CellLocation(i, offset)].IsEmpty || IsOppositeColor(board.Cells[CellLocation(i, offset)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = CellLocation(i, offset)});
-                    if (board.Cells[CellLocation(i, offset)].IsOccupied) break;
-                }
-            }
-            */
-
+           
             while (!(IsLeftEdge(MoveUpLeft(offset)) || IsTopEdge(MoveUpLeft(offset))))
             {
                 offset++;
