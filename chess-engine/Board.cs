@@ -100,6 +100,30 @@ namespace chess_engine
             this.Cell('h', 3).Piece = new Bishop(Color.Black);
             this.Cell('g', 1).Piece = new King(Color.White);
             this.Cell('g', 8).Piece = new King(Color.Black);
+            this.Cell('f', 1).Piece = new Knight(Color.White);
+        }
+
+        public void PuzzleThree()
+        {
+            this.Turn = Color.White;
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('g', 3).Piece = new Pawn(Color.White);
+            this.Cell('g', 7).Piece = new Pawn(Color.Black);
+            this.Cell('b', 2).Piece = new Pawn(Color.White);
+            this.Cell('d', 5).Piece = new Pawn(Color.Black);
+            this.Cell('c', 6).Piece = new Pawn(Color.Black);
+            this.Cell('a', 3).Piece = new Pawn(Color.White);
+            this.Cell('b', 7).Piece = new Pawn(Color.Black);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('d', 1).Piece = new Rook(Color.White);
+            this.Cell('e', 1).Piece = new Rook(Color.White);
+            this.Cell('f', 2).Piece = new Rook(Color.Black);
+            this.Cell('c', 1).Piece = new Bishop(Color.White);
+            this.Cell('c', 5).Piece = new Bishop(Color.Black);
+            this.Cell('h', 3).Piece = new Bishop(Color.Black);
+            this.Cell('g', 1).Piece = new King(Color.White);
+            this.Cell('g', 8).Piece = new King(Color.Black);
+            this.Cell('f', 1).Piece = new Knight(Color.White);
         }
 
         public (Move Move,Piece OtherPiece) ApplyMove(Move move)

@@ -22,10 +22,9 @@ namespace chess_engine
             BuildBranches(root, 3);
             List<Node> firstChildLevelNeg = root.Children.Where(x => x.Score == -1).ToList();
             List<Node> firstChildLevelPos = root.Children.Where(x => x.Score == 1).ToList();
-            var firstBlackMove = root.Children.Where(x => x.Move == new Move { From = 13, To = 14 });
-            var firstWhiteMove = firstBlackMove.Where(x => x.Move == new Move { From = 6, To = 7 });
-            var secondBlackMove = firstWhiteMove.Where(x => x.Move == new Move { From = 14, To = 6 });
-
+            var firstBlackMove = root.Children.Single(x => x.Move == new Move { From = 13, To = 14 });
+            var firstWhiteMove = firstBlackMove.Children.Single(x => x.Move == new Move { From = 6, To = 7 });
+            var secondBlackMove = firstWhiteMove.Children.Single(x => x.Move == new Move { From = 14, To = 6 });
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {
@@ -48,6 +47,7 @@ namespace chess_engine
                 Console.WriteLine("StaleMate, No winner.");
                 return;
             }
+
             foreach(Move move in moves)
             {
                 var childNode = new Node(parent);
@@ -63,17 +63,21 @@ namespace chess_engine
             
             var minScore = parent.Children.Min(x => x.Score);
             var maxScore = parent.Children.Max(x => x.Score);
+
             if (minScore != 0 || maxScore != 0)
             {
                 Console.WriteLine($"not zero, Level: {parent.Level}");
             }
+
                 parent.Score = parent.Board.Turn == Color.Black ? parent.Children.Min(x => x.Score) : parent.Children.Max(x => x.Score);
         }
+
         public static List<Move> AllMoves(Board board, Color? color = null)
         {
             return board.Cells.Where(x => x.Piece != null && x.Piece.Color == color.GetValueOrDefault(board.Turn))
                 .SelectMany(x => x.Piece.GetAvailableMoves()).ToList();
         }
+
         public class Node
         {
             public int Score { get; set; } = 0;
@@ -119,7 +123,7 @@ namespace chess_engine
             public Move Move { get; set; }
         }
     }
-    public class Move 
+    public class Move
     {
         public int From { get; set; }
         public int To { get; set; }
@@ -129,7 +133,15 @@ namespace chess_engine
         }
         public override int GetHashCode()
         {
-            return To*100+From;
+            return To * 100 + From;
+        }
+        public static bool operator == (Move a, Move b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(Move a, Move b)
+        {
+            return !a.Equals(b);
         }
     }
 }

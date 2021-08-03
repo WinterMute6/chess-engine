@@ -2213,8 +2213,26 @@ namespace chess_engine.tests
         }
 
     }
+    [TestClass]
+    public class MovesTests
+    {
+        [TestMethod]
+        public void MoveCompair()
+        {
+            var moveOne = new Move { From = 1, To = 2 };
+            var moveTwo = new Move { From = 1, To = 2 };
 
-    
+            Assert.AreEqual(moveOne, moveTwo);
+        }
+        [TestMethod]
+        public void MoveCompair1()
+        {
+            var moveOne = new Move { From = 1, To = 2 };
+            var moveTwo = new Move { From = 1, To = 2 };
+
+            Assert.IsTrue(moveOne == moveTwo);
+        }
+    }
 }
     
 
