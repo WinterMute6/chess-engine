@@ -10,21 +10,21 @@ namespace chess_engine
     {
         public static void Main(string[] args)
         {
-            var allNodes = new List<Node>();
             var board = new Board();
-            board.PuzzleTwo();
-            King whiteKing = board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == Color.White)?.Piece as King;
-            King blackKing = board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == Color.Black)?.Piece as King;
+            board.PuzzleThree();
+            
             Node root = new Node();
+
             root.Level = 0;
             root.Board = board;
             
-            BuildBranches(root, 3);
-            List<Node> firstChildLevelNeg = root.Children.Where(x => x.Score == -1).ToList();
-            List<Node> firstChildLevelPos = root.Children.Where(x => x.Score == 1).ToList();
-            var firstBlackMove = root.Children.Single(x => x.Move == new Move { From = 13, To = 14 });
-            var firstWhiteMove = firstBlackMove.Children.Single(x => x.Move == new Move { From = 6, To = 7 });
-            var secondBlackMove = firstWhiteMove.Children.Single(x => x.Move == new Move { From = 14, To = 6 });
+            BuildBranches(root, 4);
+
+            var firstWhiteMove = root.Children.Single(x => x.Move == new Move { From = board.Cell('c', 5).Number, To = board.Cell('a', 6).Number });
+            var firstBlackMove = firstWhiteMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 8).Number, To = board.Cell('b', 7).Number });
+            var secondWhitekMove = firstBlackMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 5).Number, To = board.Cell('d', 7).Number });
+            var secondBlackMove = secondWhitekMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 7).Number, To = board.Cell('a', 6).Number });
+            var thirdWhiteMove = secondBlackMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 4).Number, To = board.Cell('b', 5).Number });
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {

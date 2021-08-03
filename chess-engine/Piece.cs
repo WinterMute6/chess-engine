@@ -109,9 +109,9 @@ namespace chess_engine
             if (board.Cells[MoveUp(1)].IsEmpty)
             {
                 availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(1) });
-                if (board.Cells[MoveUp(2)].IsEmpty)
+                if (IsFirstMove())
                 {
-                    if (IsFirstMove())
+                    if (board.Cells[MoveUp(2)].IsEmpty)
                         availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(2) });
                 }
             }

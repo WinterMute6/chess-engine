@@ -947,6 +947,51 @@ namespace chess_engine.tests
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
+        [TestMethod()]
+        public void WhitePawnFromA7ToA8()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>()
+            {
+                new Move{From = Board.PositionToNumber('a',7), To = Board.PositionToNumber('a',8)}
+            };
+            board.Cell('a', 7).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('a', 7).Piece);
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void WhitePawnFromH7ToH8()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>()
+            {
+                new Move{From = Board.PositionToNumber('h',7), To = Board.PositionToNumber('h',8)}
+            };
+            board.Cell('h', 7).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 7).Piece);
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void WhitePawnFromH8ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('h', 8).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 8).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
     }
     [TestClass]
 
