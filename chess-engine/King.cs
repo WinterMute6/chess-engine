@@ -6,6 +6,10 @@ namespace chess_engine
 {
     public class King : Piece
     {
+        protected override int GetPieceValue()
+        {
+            return KingValue;
+        }
         public King(Color color) : base(color, Figure.King) { }
         public bool IsUnderCheck()
         {

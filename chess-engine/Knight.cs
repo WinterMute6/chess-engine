@@ -5,6 +5,10 @@ namespace chess_engine
 {
     public class Knight : Piece
     {
+        protected override int GetPieceValue()
+        {
+            return KnightValue;
+        }
         public Knight(Color color) : base(color, Figure.Knight) { }
 
         protected override List<Move> GetPieceAvailableMoves()

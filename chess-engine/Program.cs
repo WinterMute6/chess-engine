@@ -36,14 +36,15 @@ namespace chess_engine
             if (moves.Count() == 0)
             {
                 var king = parent.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == parent.Board.Turn)?.Piece as King;
-               
+
                 if (king.IsUnderCheck())
                 {
-                    parent.Score = parent.Board.Turn == Color.Black? 1 : -1;
-                    Console.WriteLine("CheckMate");
+                    //parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
+                    var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
+                    Console.WriteLine($"CheckMate, {winner} is the winner");
                     return;
                 }
-                var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
+                
                 Console.WriteLine("StaleMate, No winner.");
                 return;
             }
@@ -54,22 +55,10 @@ namespace chess_engine
                 childNode.Move = move;
                 var rollbackData = parent.Board.ApplyMove(move);
                 BuildBranches(childNode, maxLevel);
-                if(childNode.Score != 0)
-                {
-                    var childScore = childNode.Score;
-                }
                 childNode.Board.RollbackMove(rollbackData);
             }
-            
-            var minScore = parent.Children.Min(x => x.Score);
-            var maxScore = parent.Children.Max(x => x.Score);
-
-            if (minScore != 0 || maxScore != 0)
-            {
-                Console.WriteLine($"not zero, Level: {parent.Level}");
-            }
-
-                parent.Score = parent.Board.Turn == Color.Black ? parent.Children.Min(x => x.Score) : parent.Children.Max(x => x.Score);
+       
+            parent.Score = parent.Board.Turn == Color.White ? parent.Children.Max(x => x.Score) : parent.Children.Min(x => x.Score);
         }
 
         public static List<Move> AllMoves(Board board, Color? color = null)
@@ -80,33 +69,12 @@ namespace chess_engine
 
         public class Node
         {
-            public int Score { get; set; } = 0;
-          /*public int Score
-            {
-                get
-                {
-                    if (Board.Cells[Move.To].Piece != null)
-                    {
-                        if (Board.Cells[Move.To].Piece is Pawn)
-                            return 1;
-                        if (Board.Cells[Move.To].Piece is Knight)
-                            return 3;
-                        if (Board.Cells[Move.To].Piece is Bishop)
-                            return 3;
-                        if (Board.Cells[Move.To].Piece is Rook)
-                            return 5;
-                        if (Board.Cells[Move.To].Piece is Queen)
-                            return 9;
-                        return 0;
-                    }
-                    else
-                        return 0;
-                }
-            }*/
+            public int Score { get; set; }
+           
             public static long Counter = 0;
-            public Node()
+            public Node() 
             {
-
+                Score = GetScore();
             }
             public Node(Node parent)
             {
@@ -116,6 +84,12 @@ namespace chess_engine
                 Counter++;
                 if(Counter % 100000 == 0)
                     Console.WriteLine( DateTime.Now +" : " + Counter);
+            }
+            private int GetScore()
+            {
+                if (Board.Cells[Move.To].Piece != null)
+                    return (Board.Turn == Color.White ? 1 : -1) * (Board.Cells[Move.To].Piece.GetValue() - Board.Cells[Move.From].Piece.GetValue());
+                return 0;
             }
             public List<Node> Children { get; set; } = new List<Node>();
             public int Level { get; set; }

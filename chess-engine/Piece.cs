@@ -6,6 +6,12 @@ namespace chess_engine
 {
     public abstract class Piece
     {
+        public int PawnValue = 1;
+        public int KnightValue = 3;
+        public int BishopValue = 3;
+        public int RookValue = 5;
+        public int QueenValue = 9;
+        public int KingValue = 15;
 
         private Color _color;
         public virtual bool IsFirstMove() => false;
@@ -434,6 +440,13 @@ namespace chess_engine
         }
 
         protected abstract List<Move> GetPieceAvailableMoves();
+
+        public int GetValue()
+        {
+            return GetPieceValue();
+        }
+
+        protected abstract int GetPieceValue();
     }
 }
 

@@ -6,6 +6,10 @@ namespace chess_engine
 {
     public class Rook : Piece
     {
+        protected override int GetPieceValue()
+        {
+            return RookValue;
+        }
         public Rook(Color color) : base(color, Figure.Rook) { }
 
         public override bool IsFirstMove()

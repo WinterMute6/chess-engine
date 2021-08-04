@@ -4,7 +4,11 @@ using System.Collections.Generic;
 namespace chess_engine
 {
     public class Pawn : Piece
-    { 
+    {
+        protected override int GetPieceValue()
+        {
+            return PawnValue;
+        }
         public Pawn(Color color) : base(color, Figure.Pawn){}
         public override bool IsFirstMove()
         {
