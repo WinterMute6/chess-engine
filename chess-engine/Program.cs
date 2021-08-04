@@ -76,6 +76,7 @@ namespace chess_engine
             {
                 Score = GetScore();
             }
+
             public Node(Node parent)
             {
                 parent.Children.Add(this);
