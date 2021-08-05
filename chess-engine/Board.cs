@@ -80,6 +80,7 @@ namespace chess_engine
         }
 
         //Mate in 2
+        //Black goes first F2 -> G2, White goes G1 -> H1, And black wins with G2 -> G1
         public void PuzzleTwo()
         {
             this.Turn = Color.Black;
@@ -95,10 +96,11 @@ namespace chess_engine
             this.Cell('d', 1).Piece = new Rook(Color.White);
             this.Cell('e', 1).Piece = new Rook(Color.White);
             this.Cell('f', 2).Piece = new Rook(Color.Black);
+            this.Cell('g', 2).Piece = new Rook(Color.Black);
             this.Cell('c', 1).Piece = new Bishop(Color.White);
             this.Cell('c', 5).Piece = new Bishop(Color.Black);
             this.Cell('h', 3).Piece = new Bishop(Color.Black);
-            this.Cell('g', 1).Piece = new King(Color.White);
+            this.Cell('h', 1).Piece = new King(Color.White);
             this.Cell('g', 8).Piece = new King(Color.Black);
             this.Cell('f', 1).Piece = new Knight(Color.White);
         }

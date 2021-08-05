@@ -11,20 +11,16 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var board = new Board();
-            board.PuzzleThree();
-            
+            board.PuzzleTwo();
+            var pathway = new List<Node>();
             Node root = new Node();
 
-            root.Level = 0;
+            root.Level = 1;
             root.Board = board;
             
             BuildBranches(root, 4);
+           
 
-            var firstWhiteMove = root.Children.Single(x => x.Move == new Move { From = board.Cell('c', 5).Number, To = board.Cell('a', 6).Number });
-            var firstBlackMove = firstWhiteMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 8).Number, To = board.Cell('b', 7).Number });
-            var secondWhitekMove = firstBlackMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 5).Number, To = board.Cell('d', 7).Number });
-            var secondBlackMove = secondWhitekMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 7).Number, To = board.Cell('a', 6).Number });
-            var thirdWhiteMove = secondBlackMove.Children.Single(x => x.Move == new Move { From = board.Cell('b', 4).Number, To = board.Cell('b', 5).Number });
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {
@@ -36,12 +32,21 @@ namespace chess_engine
             if (moves.Count() == 0)
             {
                 var king = parent.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == parent.Board.Turn)?.Piece as King;
-
                 if (king.IsUnderCheck())
                 {
-                    //parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
+                    parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
                     var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
-                    Console.WriteLine($"CheckMate, {winner} is the winner");
+                    Console.WriteLine($"CheckMate, {winner} is the winner at depth {parent.Parent.Level}");
+                    GoBack(parent);
+                    void GoBack(Node node)
+                    {
+                        if (node.Parent == null)
+                        {
+                            return;
+                        }
+                        Console.WriteLine($"{node.Board.Cells[node.Move.From].Position} To {node.Board.Cells[node.Move.To].Position}");
+                        GoBack(node.Parent);
+                    }
                     return;
                 }
                 
@@ -74,16 +79,19 @@ namespace chess_engine
             public static long Counter = 0;
             public Node() 
             {
-                Score = GetScore();
+                Move = null;
+                Parent = null;
+                //Score = GetScore();
             }
 
             public Node(Node parent)
             {
                 parent.Children.Add(this);
+                this.Parent = parent;
                 Level = parent.Level + 1;
                 Board = parent.Board;
                 Counter++;
-                if(Counter % 100000 == 0)
+                if(Counter % 500 == 0)
                     Console.WriteLine( DateTime.Now +" : " + Counter);
             }
             private int GetScore()
@@ -93,6 +101,7 @@ namespace chess_engine
                 return 0;
             }
             public List<Node> Children { get; set; } = new List<Node>();
+            public Node Parent { get; set; }
             public int Level { get; set; }
             public Board Board { get; set; }
             public Move Move { get; set; }
