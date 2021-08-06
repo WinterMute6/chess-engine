@@ -47,9 +47,10 @@ namespace chess_engine
             {
                 var childNode = new Node(parent);
                 childNode.Move = move;
-                var rollbackData = parent.Board.ApplyMove(move);
-                BuildBranches(childNode, maxLevel);
-                childNode.Board.RollbackMove(rollbackData);
+                using (parent.Board.With(move))
+                {
+                    BuildBranches(childNode, maxLevel);
+                }
             }
             parent.Score = parent.Board.Turn == Color.White ? parent.Children.Max(x => x.Score) : parent.Children.Min(x => x.Score);
         }

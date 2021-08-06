@@ -290,28 +290,24 @@ namespace chess_engine
             var board = this.Cell.Board;
             foreach (var move in moves)
             {
-                // move forward
+                using (board.With(move))
+                {
 
-                var rollbackData = board.ApplyMove(move);
-
+                    var myKing = board.Cells.SingleOrDefault(c => c.IsOccupied && c.Piece is King && !c.Piece.IsOppositeColor(this.Color))?.Piece as King;
+                    if (myKing == null && !board.IsPartialBoard)
+                    {
+                        throw new Exception("No king on board!!!!");
+                    }
+                    if (myKing == null)
+                    {
+                        validMoves.Add(move);
+                    }
+                    else if (!myKing.IsUnderCheck())
+                    {
+                        validMoves.Add(move);
+                    }
+                }
                 
-
-                var myKing =  board.Cells.SingleOrDefault(c => c.IsOccupied && c.Piece is King && !c.Piece.IsOppositeColor(this.Color))?.Piece as King;
-                if(myKing == null && !board.IsPartialBoard)
-                {
-                    throw new Exception("No king on board!!!!");
-                }
-                if(myKing == null)
-                {
-                    validMoves.Add(move);
-                }
-                else if ( !myKing.IsUnderCheck())
-                {
-                    validMoves.Add(move);
-                }
-
-                // move back
-                board.RollbackMove(rollbackData);
             }
             //var invalidMoves = moves.Except(validMoves).ToArray();
             return validMoves;
