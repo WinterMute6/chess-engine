@@ -28,7 +28,7 @@ namespace chess_engine
                 return;
             
             var moves = AllMoves(parent.Board);
-            
+             
             if (moves.Count() == 0)
             {
                 var king = parent.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == parent.Board.Turn)?.Piece as King;
@@ -36,20 +36,9 @@ namespace chess_engine
                 {
                     parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
                     var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
-                    Console.WriteLine($"CheckMate, {winner} is the winner at depth {parent.Parent.Level}");
-                    GoBack(parent);
-                    void GoBack(Node node)
-                    {
-                        if (node.Parent == null)
-                        {
-                            return;
-                        }
-                        Console.WriteLine($"{node.Board.Cells[node.Move.From].Position} To {node.Board.Cells[node.Move.To].Position}");
-                        GoBack(node.Parent);
-                    }
+                    Console.WriteLine($"CheckMate, {winner} is the winner");
                     return;
                 }
-                
                 Console.WriteLine("StaleMate, No winner.");
                 return;
             }
@@ -62,7 +51,6 @@ namespace chess_engine
                 BuildBranches(childNode, maxLevel);
                 childNode.Board.RollbackMove(rollbackData);
             }
-       
             parent.Score = parent.Board.Turn == Color.White ? parent.Children.Max(x => x.Score) : parent.Children.Min(x => x.Score);
         }
 
@@ -78,16 +66,13 @@ namespace chess_engine
            
             public static long Counter = 0;
             public Node() 
-            {
-                Move = null;
-                Parent = null;
+            {   
                 //Score = GetScore();
             }
 
             public Node(Node parent)
             {
                 parent.Children.Add(this);
-                this.Parent = parent;
                 Level = parent.Level + 1;
                 Board = parent.Board;
                 Counter++;
@@ -101,7 +86,6 @@ namespace chess_engine
                 return 0;
             }
             public List<Node> Children { get; set; } = new List<Node>();
-            public Node Parent { get; set; }
             public int Level { get; set; }
             public Board Board { get; set; }
             public Move Move { get; set; }
