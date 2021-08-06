@@ -97,7 +97,7 @@ namespace chess_engine
         public int To { get; set; }
         public override bool Equals(object obj)
         {
-            return obj.GetType() == typeof(Move) && ((Move)obj).From == From && ((Move)obj).To == To;
+            return (obj is Move) && ((Move)obj).From == From && ((Move)obj).To == To;
         }
         public override int GetHashCode()
         {
