@@ -20,7 +20,7 @@ namespace chess_engine
         public List<Cell> Cells { get; } = new Cell[64].ToList();
         public static int PositionToNumber(char column, int row)
         {
-            return (row * 8) - 1 - (7 - ("abcdefgh".IndexOf(column))); 
+            return (row * 8) - 1 - (7 - ("abcdefgh".IndexOf(column)));
         }
         public Cell Cell(char column, int row)
         {
@@ -47,17 +47,17 @@ namespace chess_engine
             this.Cell('h', 1).Piece = new Rook(Color.White);
             this.Cell('a', 8).Piece = new Rook(Color.Black);
             this.Cell('h', 8).Piece = new Rook(Color.Black);
-            
+
             this.Cell('b', 1).Piece = new Knight(Color.White);
             this.Cell('g', 1).Piece = new Knight(Color.White);
             this.Cell('b', 8).Piece = new Knight(Color.Black);
             this.Cell('g', 8).Piece = new Knight(Color.Black);
-            
+
             this.Cell('c', 1).Piece = new Bishop(Color.White);
             this.Cell('f', 1).Piece = new Bishop(Color.White);
             this.Cell('c', 8).Piece = new Bishop(Color.Black);
             this.Cell('f', 8).Piece = new Bishop(Color.Black);
-            
+
             this.Cell('d', 1).Piece = new Queen(Color.White);
             this.Cell('d', 8).Piece = new Queen(Color.Black);
 
@@ -104,7 +104,7 @@ namespace chess_engine
             this.Cell('g', 8).Piece = new King(Color.Black);
             this.Cell('f', 1).Piece = new Knight(Color.White);
         }
-        
+
         //Mate in 3
         public void PuzzleThree()
         {
@@ -132,7 +132,7 @@ namespace chess_engine
             this.Cell('h', 8).Piece = new Rook(Color.Black);
         }
 
-        public (Move Move,Piece OtherPiece) ApplyMove(Move move)
+        public (Move Move, Piece OtherPiece) ApplyMove(Move move)
         {
             var pieceToMove = this.Cells[move.From].Piece;
             this.Cells[move.From].RemovePiece();
@@ -153,6 +153,25 @@ namespace chess_engine
             }
             this.Turn = pieceToMove.Color;
         }
+
+        public BoardScope With(Move move)
+        {
+            return new BoardScope(this,move);
+        }
+
+        public class BoardScope : IDisposable
+        {
+            private (Move move, Piece otherPiece) rollbackData;
+            private Board board;
+            public BoardScope(Board board, Move move)
+            {
+                this.rollbackData = board.ApplyMove(move);
+                this.board = board;
+            }
+            public void Dispose()
+            {
+                board.RollbackMove(rollbackData);
+            }
+        }
     }
 }
-
