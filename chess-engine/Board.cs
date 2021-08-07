@@ -64,23 +64,11 @@ namespace chess_engine
             this.Cell('e', 1).Piece = new King(Color.White);
             this.Cell('e', 8).Piece = new King(Color.Black);
         }
-        // Mate in 3
-        public void PuzzleOne()
-        {
-            this.Turn = Color.White;
-            this.Cell('h', 2).Piece = new Pawn(Color.White);
-            this.Cell('f', 7).Piece = new Pawn(Color.Black);
-            this.Cell('h', 7).Piece = new Pawn(Color.Black);
-            this.Cell('f', 6).Piece = new Rook(Color.White);
-            this.Cell('a', 8).Piece = new Rook(Color.Black);
-            this.Cell('g', 8).Piece = new Rook(Color.Black);
-            this.Cell('e', 5).Piece = new Bishop(Color.White);
-            this.Cell('h', 1).Piece = new King(Color.White);
-            this.Cell('h', 8).Piece = new King(Color.Black);
-        }
+    
+    
 
         //Mate in 2
-        //Black goes first F2 -> G2, White goes G1 -> H1, And black wins with G2 -> G1
+        //Black goes first G2 -> G1, White goes H1 -> G1, And black wins with F2 -> F1
         public void PuzzleTwo()
         {
             this.Turn = Color.Black;
@@ -131,7 +119,7 @@ namespace chess_engine
             this.Cell('e', 5).Piece = new Knight(Color.Black);
             this.Cell('h', 8).Piece = new Rook(Color.Black);
         }
-
+       
         public (Move Move, Piece OtherPiece) ApplyMove(Move move)
         {
             var pieceToMove = this.Cells[move.From].Piece;
@@ -140,6 +128,14 @@ namespace chess_engine
             this.Cells[move.To].Piece = pieceToMove;
             this.Turn = pieceToMove.Color == Color.White ? Color.Black : Color.White;
             return (move, otherPiece);
+        }
+
+        public void PlayMove(Move move)
+        {
+            var pieceToMove = this.Cells[move.From].Piece;
+            this.Cells[move.From].RemovePiece();
+            this.Cells[move.To].Piece = pieceToMove;
+            this.Turn = pieceToMove.Color == Color.White ? Color.Black : Color.White;
         }
 
         public void RollbackMove((Move Move, Piece OtherPiece) rollBack)
