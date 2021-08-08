@@ -16,7 +16,7 @@ namespace chess_engine
             Node root = new Node();
             root.Level = 1;
             root.Board = board;
-            BuildBranches(root, 3);
+            BuildBranches(root, 4);
             char fromColumn;
             int fromRow;
             char toColumn;
@@ -26,82 +26,115 @@ namespace chess_engine
             {
                 currentLevel = GetNextMove(currentLevel);
                 Console.WriteLine($"My move is {board.Cells[currentLevel.Move.From].Piece} from {board.Cells[currentLevel.Move.From].Position}  to {board.Cells[currentLevel.Move.To].Position}.");
-                board.ApplyMove(currentLevel.Move);
-                
-                while (true)
+                board.PlayMove(currentLevel.Move);
+                var king = currentLevel.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == currentLevel.Board.Turn)?.Piece as King;
+                if (king.IsUnderCheck())
                 {
-                    Console.WriteLine("Please enter the piece Column location you wish to move from:");
-                    var column = Console.ReadLine();
-                    char col;
-                    
-                    if (Char.TryParse(column, out col))
+                    if (currentLevel.Children.Count() == 0)
                     {
-                        var charList = new List<Char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-                        if (charList.Contains(col))
-                        {
-                            fromColumn = col;
-                            break;
-                        }
-                        Console.WriteLine("Column is not within the bounds of the chess board.");
-                        continue;
+                        var winner = currentLevel.Board.Turn == Color.White ? Color.Black : Color.White;
+                        Console.WriteLine($"Check mate, {winner} is the winner!");
+                        break;
                     }
-                    Console.WriteLine("Invalid Column specifiaction type, must be a letter.");
+                    Console.WriteLine("Check");
                 }
                 while (true)
                 {
-                    Console.WriteLine("Please enter the piece Row location you wish to move from:");
-                    var row = Console.ReadLine();
-                    int number;
-                    if (Int32.TryParse(row, out number))
+                    while (true)
                     {
-                        if (number <= 8 && number >= 1 )
-                        {
-                            fromRow = number;
-                            break;
-                        }
-                        Console.WriteLine("Row is not within the bounds of the chess board.");
-                        continue;
-                    }
-                    Console.WriteLine("Invalid Row specification type, must be a number.");
-                }
-                while (true)
-                {
-                    Console.WriteLine("Please enter the piece Column location you wish to move to:");
-                    var column = Console.ReadLine();
-                    char col;
+                        Console.WriteLine("Please enter the piece Column location you wish to move from:");
+                        var column = Console.ReadLine();
+                        char col;
 
-                    if (Char.TryParse(column, out col))
-                    {
-                        var charList = new List<Char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-                        if (charList.Contains(col))
+                        if (Char.TryParse(column, out col))
                         {
-                            toColumn = col;
-                            break;
+                            var charList = new List<Char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+                            if (charList.Contains(col))
+                            {
+                                fromColumn = col;
+                                break;
+                            }
+                            Console.WriteLine("Column is not within the bounds of the chess board.");
+                            continue;
                         }
-                        Console.WriteLine("Column is not within the bounds of the chess board.");
-                        continue;
+                        Console.WriteLine("Invalid Column specifiaction type, must be a letter.");
                     }
-                    Console.WriteLine("Invalid Column specifiaction type, must be a letter.");
-                }
-                while (true)
-                {
-                    Console.WriteLine("Please enter the piece Row location you wish to move to:");
-                    var row = Console.ReadLine();
-                    int number;
-                    if (Int32.TryParse(row, out number))
+                    while (true)
                     {
-                        if (number <= 8 && number >= 1)
+                        Console.WriteLine("Please enter the piece Row location you wish to move from:");
+                        var row = Console.ReadLine();
+                        int number;
+                        if (Int32.TryParse(row, out number))
                         {
-                            toRow = number;
-                            break;
+                            if (number <= 8 && number >= 1)
+                            {
+                                fromRow = number;
+                                break;
+                            }
+                            Console.WriteLine("Row is not within the bounds of the chess board.");
+                            continue;
                         }
-                        Console.WriteLine("Row is not within the bounds of the chess board.");
-                        continue;
+                        Console.WriteLine("Invalid Row specification type, must be a number.");
                     }
-                    Console.WriteLine("Invalid Row specification type, must be a number.");
+                    if (currentLevel.Board.Cells[Board.PositionToNumber(fromColumn, fromRow)].Piece == null)
+                    {
+                        Console.WriteLine("There is no chess piece in that location, pick another location.");
+                        continue; 
+                    }
+                    while (true)
+                    {
+                        Console.WriteLine("Please enter the piece Column location you wish to move to:");
+                        var column = Console.ReadLine();
+                        char col;
+
+                        if (Char.TryParse(column, out col))
+                        {
+                            var charList = new List<Char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+                            if (charList.Contains(col))
+                            {
+                                toColumn = col;
+                                break;
+                            }
+                            Console.WriteLine("Column is not within the bounds of the chess board.");
+                            continue;
+                        }
+                        Console.WriteLine("Invalid Column specifiaction type, must be a letter.");
+                    }
+                    while (true)
+                    {
+                        Console.WriteLine("Please enter the piece Row location you wish to move to:");
+                        var row = Console.ReadLine();
+                        int number;
+                        if (Int32.TryParse(row, out number))
+                        {
+                            if (number <= 8 && number >= 1)
+                            {
+                                toRow = number;
+                                break;
+                            }
+                            Console.WriteLine("Row is not within the bounds of the chess board.");
+                            continue;
+                        }
+                        Console.WriteLine("Invalid Row specification type, must be a number.");
+                    }
+                    currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(fromColumn, fromRow) && x.Move.To == Board.PositionToNumber(toColumn, toRow)).SingleOrDefault();
+                    if (currentLevel == null && king.IsUnderCheck())
+                    { Console.WriteLine("Illegal Move, your king is still under check. Pick another move."); continue; }
+                    break;
                 }
                 
-                currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(fromColumn, fromRow) && x.Move.To == Board.PositionToNumber(toColumn, toRow)).SingleOrDefault();
+                if (currentLevel.Children == null)
+                {
+                    king = currentLevel.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color != currentLevel.Board.Turn)?.Piece as King;
+                    if (king.IsUnderCheck())
+                    {
+                        var winner = currentLevel.Board.Turn;
+                        Console.WriteLine($"CheckMate, {winner} is the winner!");
+                        break;
+                    }
+                    Console.WriteLine("Stalemate, no winner");
+                    break;
+                }
                 currentLevel.Board.PlayMove(currentLevel.Move);
             }
             Node GetNextMove(Node node)
@@ -114,7 +147,6 @@ namespace chess_engine
                 int index = random.Next(nodeList.Count);
                 return nodeList[index];
             }
-            
 
         }
         public static void BuildBranches(Node parent, int maxLevel)
