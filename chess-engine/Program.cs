@@ -11,7 +11,7 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var board = new Board();
-            board.PuzzleTwo();
+            board.WhiteMateInTwo5();
             var pathway = new List<Node>();
             Node root = new Node();
             root.Level = 1;
@@ -117,9 +117,11 @@ namespace chess_engine
                         }
                         Console.WriteLine("Invalid Row specification type, must be a number.");
                     }
-                    currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(fromColumn, fromRow) && x.Move.To == Board.PositionToNumber(toColumn, toRow)).SingleOrDefault();
-                    if (currentLevel == null && king.IsUnderCheck())
+                    if (currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(fromColumn, fromRow) 
+                        && x.Move.To == Board.PositionToNumber(toColumn, toRow)).SingleOrDefault() == null 
+                        && king.IsUnderCheck())
                     { Console.WriteLine("Illegal Move, your king is still under check. Pick another move."); continue; }
+                    currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(fromColumn, fromRow) && x.Move.To == Board.PositionToNumber(toColumn, toRow)).SingleOrDefault();
                     break;
                 }
                 
@@ -147,7 +149,6 @@ namespace chess_engine
                 int index = random.Next(nodeList.Count);
                 return nodeList[index];
             }
-
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {

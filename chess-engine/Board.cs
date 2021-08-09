@@ -32,8 +32,6 @@ namespace chess_engine
         {
             return piece.GetAvailableMoves();
         }
-
-
         public void ResetBoard()
         {
             this.Turn = Color.White;
@@ -64,12 +62,10 @@ namespace chess_engine
             this.Cell('e', 1).Piece = new King(Color.White);
             this.Cell('e', 8).Piece = new King(Color.Black);
         }
-    
-    
 
         //Mate in 2
-        //Black goes first G2 -> G1, White goes H1 -> G1, And black wins with F2 -> F1
-        public void PuzzleTwo()
+        //Black goes rook G2 -> G1, White goes king H1 -> G1, And black wins with rook F2 -> F1
+        public void BlackMateInTwo()
         {
             this.Turn = Color.Black;
             this.Cell('h', 2).Piece = new Pawn(Color.White);
@@ -93,33 +89,130 @@ namespace chess_engine
             this.Cell('f', 1).Piece = new Knight(Color.White);
         }
 
-        //Mate in 3
-        public void PuzzleThree()
+        //Mate in 2
+        //White goes queen from a3 to F8, blach goes king from g8 to f8, white goes rook from d1 to d8 for checkmate.
+        public void WhiteMateInTwo1()
         {
             this.Turn = Color.White;
-            this.Cell('a', 3).Piece = new Pawn(Color.White);
+            this.Cell('a', 2).Piece = new Pawn(Color.White);
+            this.Cell('a', 3).Piece = new Queen(Color.White);
+            this.Cell('a', 5).Piece = new Pawn(Color.Black);
             this.Cell('b', 2).Piece = new Pawn(Color.White);
-            this.Cell('b', 7).Piece = new Pawn(Color.White);
-            this.Cell('e', 4).Piece = new Pawn(Color.White);
-            this.Cell('f', 2).Piece = new Pawn(Color.White);
-            this.Cell('h', 2).Piece = new Pawn(Color.White);
-            this.Cell('a', 7).Piece = new Pawn(Color.Black);
-            this.Cell('d', 6).Piece = new Pawn(Color.Black);
+            this.Cell('b', 6).Piece = new Pawn(Color.Black);
+            this.Cell('c', 2).Piece = new Rook(Color.Black);
+            this.Cell('d', 1).Piece = new Rook(Color.White);
+            this.Cell('f', 4).Piece = new Queen(Color.Black);
+            this.Cell('f', 5).Piece = new Knight(Color.White);
             this.Cell('f', 7).Piece = new Pawn(Color.Black);
-            this.Cell('g', 7).Piece = new Pawn(Color.Black);
-            this.Cell('h', 7).Piece = new Pawn(Color.Black);
-            this.Cell('b', 5).Piece = new Bishop(Color.White);
-            this.Cell('c', 3).Piece = new Bishop(Color.White);
-            this.Cell('g', 6).Piece = new Bishop(Color.Black);
-            this.Cell('a', 2).Piece = new King(Color.White);
-            this.Cell('b', 8).Piece = new King(Color.Black);
-            this.Cell('b', 4).Piece = new Queen(Color.White);
-            this.Cell('h', 1).Piece = new Queen(Color.Black);
-            this.Cell('c', 5).Piece = new Knight(Color.White);
-            this.Cell('e', 5).Piece = new Knight(Color.Black);
+            this.Cell('g', 5).Piece = new Pawn(Color.Black);
+            this.Cell('g', 8).Piece = new King(Color.Black);
+            this.Cell('h', 1).Piece = new King(Color.White);
+            this.Cell('h', 3).Piece = new Pawn(Color.White);
+            this.Cell('h', 6).Piece = new Pawn(Color.Black);
+        }
+        //Mate in 2
+        //White goes queen From H5 to H6, black goes rook from h8 to h6, white goes rook g1 to g8 for checkmate.
+        public void WhiteMateInTwo2()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 1).Piece = new Knight(Color.Black);
+            this.Cell('a', 2).Piece = new Pawn(Color.White);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('a', 8).Piece = new Rook(Color.Black);
+            this.Cell('b', 2).Piece = new Pawn(Color.White);
+            this.Cell('b', 3).Piece = new Bishop(Color.White);
+            this.Cell('b', 7).Piece = new Pawn(Color.Black);
+            this.Cell('c', 7).Piece = new Pawn(Color.Black);
+            this.Cell('c', 8).Piece = new Bishop(Color.Black);
+            this.Cell('d', 1).Piece = new King(Color.White);
+            this.Cell('d', 7).Piece = new Pawn(Color.Black);
+            this.Cell('e', 4).Piece = new Pawn(Color.White);
+            this.Cell('e', 5).Piece = new Pawn(Color.White);
+            this.Cell('e', 7).Piece = new Queen(Color.Black);
+            this.Cell('f', 4).Piece = new Pawn(Color.White);
+            this.Cell('f', 6).Piece = new Knight(Color.White);
+            this.Cell('f', 8).Piece = new King(Color.Black);
+            this.Cell('g', 1).Piece = new Rook(Color.White);
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('h', 5).Piece = new Queen(Color.White);
+            this.Cell('h', 6).Piece = new Pawn(Color.Black);
             this.Cell('h', 8).Piece = new Rook(Color.Black);
         }
-       
+
+        //Mate in 2
+        //White goes queen from d5 to d8, black goes bishop from e7 to d8, white goes rook from e1 to e8 with checkmate
+        public void WhiteMateInTwo3()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 1).Piece = new Rook(Color.White);
+            this.Cell('a', 2).Piece = new Pawn(Color.White);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('a', 8).Piece = new Rook(Color.Black);
+            this.Cell('b', 2).Piece = new Pawn(Color.White);
+            this.Cell('b', 5).Piece = new Bishop(Color.White);
+            this.Cell('b', 7).Piece = new Pawn(Color.Black);
+            this.Cell('c', 2).Piece = new Pawn(Color.White);
+            this.Cell('c', 3).Piece = new Pawn(Color.White);
+            this.Cell('c', 7).Piece = new Pawn(Color.Black);
+            this.Cell('c', 8).Piece = new Bishop(Color.Black);
+            this.Cell('d', 5).Piece = new Queen(Color.White);
+            this.Cell('e', 1).Piece = new Rook(Color.White);
+            this.Cell('e', 7).Piece = new Bishop(Color.Black);
+            this.Cell('f', 2).Piece = new Pawn(Color.White);
+            this.Cell('f', 4).Piece = new Queen(Color.Black);
+            this.Cell('f', 7).Piece = new Pawn(Color.Black);
+            this.Cell('f', 8).Piece = new King(Color.Black);
+            this.Cell('g', 1).Piece = new King(Color.White);
+            this.Cell('g', 2).Piece = new Pawn(Color.White);
+            this.Cell('g', 7).Piece = new Pawn(Color.Black);
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('h', 7).Piece = new Pawn(Color.Black);
+            this.Cell('h', 8).Piece = new Rook(Color.Black);
+        }
+
+        //Mate in 2
+        //White goes rook a1 to a6, black goes pawn b7 to a6, white goes pawn b6 to b7 with checkmate
+        public void WhiteMateInTwo4()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 1).Piece = new Rook(Color.White);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('a', 8).Piece = new King(Color.Black);
+            this.Cell('b', 6).Piece = new Pawn(Color.White);
+            this.Cell('b', 7).Piece = new Pawn(Color.Black);
+            this.Cell('b', 8).Piece = new Bishop(Color.Black);
+            this.Cell('c', 8).Piece = new King(Color.White);
+        }
+
+        //Mate in 2
+        //White goes rook from f2 to f6, black goes knight d7 to f6, white goes pawn g4 to g5 with checkmate
+        public void WhiteMateInTwo5()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 1).Piece = new Rook(Color.White);
+            this.Cell('a', 3).Piece = new Pawn(Color.White);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('b', 6).Piece = new Pawn(Color.Black);
+            this.Cell('b', 7).Piece = new Bishop(Color.Black);
+            this.Cell('c', 2).Piece = new Bishop(Color.White);
+            this.Cell('c', 4).Piece = new Pawn(Color.White);
+            this.Cell('c', 7).Piece = new Pawn(Color.Black);
+            this.Cell('d', 4).Piece = new Pawn(Color.White);
+            this.Cell('d', 6).Piece = new Pawn(Color.Black);
+            this.Cell('d', 7).Piece = new Knight(Color.Black);
+            this.Cell('e', 6).Piece = new Rook(Color.Black);
+            this.Cell('e', 8).Piece = new Rook(Color.Black);     ;
+            this.Cell('f', 2).Piece = new Rook(Color.White);
+            this.Cell('f', 6).Piece = new Pawn(Color.Black);
+            this.Cell('g', 1).Piece = new King(Color.White);
+            this.Cell('g', 3).Piece = new Knight(Color.White);
+            this.Cell('g', 4).Piece = new Pawn(Color.White);
+            this.Cell('g', 7).Piece = new Knight(Color.Black);
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('h', 4).Piece = new Bishop(Color.White);
+            this.Cell('h', 6).Piece = new King(Color.Black);
+        }
+
         public (Move Move, Piece OtherPiece) ApplyMove(Move move)
         {
             var pieceToMove = this.Cells[move.From].Piece;

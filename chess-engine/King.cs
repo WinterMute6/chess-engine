@@ -25,15 +25,23 @@ namespace chess_engine
         private bool IsPawnCheck()
         {
             var board = this.Cell.Board;
-            return  !IsLeftEdge() 
-                        && board.Cells[MoveUpLeft(1)].IsOccupied 
-                        && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color) 
-                        && board.Cells[MoveUpLeft(1)].Piece is Pawn
-                ||      
-                    !IsRightEdge() 
-                        && board.Cells[MoveUpRight(1)].IsOccupied 
-                        && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color) 
-                        && board.Cells[MoveUpRight(1)].Piece is Pawn;
+            if (IsTopEdge())
+                return false;
+            if (IsRightEdge())
+                return board.Cells[MoveUpLeft(1)].IsOccupied
+                    && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color)
+                    && board.Cells[MoveUpLeft(1)].Piece is Pawn;
+            if (IsLeftEdge())
+                return board.Cells[MoveUpRight(1)].IsOccupied
+                    && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color)
+                    && board.Cells[MoveUpRight(1)].Piece is Pawn; 
+            return  board.Cells[MoveUpLeft(1)].IsOccupied
+                    && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color)
+                    && board.Cells[MoveUpLeft(1)].Piece is Pawn
+                 ||
+                     board.Cells[MoveUpRight(1)].IsOccupied
+                     && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color)
+                     && board.Cells[MoveUpRight(1)].Piece is Pawn; 
         }
 
         protected override List<Move> GetPieceAvailableMoves()
