@@ -23,12 +23,9 @@ namespace chess_engine
                 currentLevel = GetNextMove(currentLevel);
                 Console.WriteLine($"My move is {board.Cells[currentLevel.Move.From].Piece} from {board.Cells[currentLevel.Move.From].Position}  to {board.Cells[currentLevel.Move.To].Position}.");
                 board.PlayMove(currentLevel.Move);
-                var king = currentLevel.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == currentLevel.Board.Turn)?.Piece as King;
-                if (IsWin(currentLevel))
-                {
-                    Console.WriteLine("Computer wins with checkmate.");
+                if (GameOver(currentLevel))
                     break;
-                }
+                var king = currentLevel.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == currentLevel.Board.Turn)?.Piece as King;
                 while (true)
                 {
                     Console.WriteLine("Enter ther coordinates of your move, for example: b2d4");
@@ -47,26 +44,30 @@ namespace chess_engine
                     if (currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(move[0], Convert.ToInt32(move[1].ToString()))
                     && x.Move.To == Board.PositionToNumber(move[2], Convert.ToInt32(move[3].ToString()))).SingleOrDefault() == null
                     && king.IsUnderCheck())
-                    { Console.WriteLine("Illegal Move, your king is still under check. Pick another move."); continue; }
+                    { Console.WriteLine("Illegal Move and/or your king is still under check. Pick another move."); continue; }
 
                     currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(move[0], Convert.ToInt32(move[1].ToString())) && x.Move.To == Board.PositionToNumber(move[2], Convert.ToInt32(move[3].ToString()))).SingleOrDefault();
                     break;
                 }
-                
                 currentLevel.Board.PlayMove(currentLevel.Move);
-                if (IsWin(currentLevel))
-                {
-                    Console.WriteLine("User wins with checkmate.");
+                if (GameOver(currentLevel))
                     break;
-                }
             }
-            bool IsWin(Node _currentLevel)
+            bool GameOver(Node _currentLevel)
             {
                 var king = _currentLevel.Board.Cells.SingleOrDefault(x => x.Piece != null && x.Piece is King && x.Piece.Color == _currentLevel.Board.Turn)?.Piece as King;
-                if (king.IsUnderCheck())
-                    return _currentLevel.Children.Count == 0 ? true : false;
-                else
-                    return false;
+                if (_currentLevel.Children.Count == 0)
+                {
+                    var winner = _currentLevel.Board.Turn == Color.White ? Color.Black : Color.White;
+                    if (king.IsUnderCheck())
+                    {
+                        Console.WriteLine($"Gameover, {winner} won win checkmate.");
+                        return true;
+                    }
+                    Console.WriteLine($"Stalemate, no winner.");
+                    return true;
+                }
+                return false;
             }
             Node GetNextMove(Node node)
             {
