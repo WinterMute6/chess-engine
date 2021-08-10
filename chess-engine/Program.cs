@@ -43,7 +43,7 @@ namespace chess_engine
 
                     if (currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(move[0], Convert.ToInt32(move[1].ToString()))
                     && x.Move.To == Board.PositionToNumber(move[2], Convert.ToInt32(move[3].ToString()))).SingleOrDefault() == null
-                    && king.IsUnderCheck())
+                    || king.IsUnderCheck())
                     { Console.WriteLine("Illegal Move and/or your king is still under check. Pick another move."); continue; }
 
                     currentLevel = currentLevel.Children.Where(x => x.Move.From == Board.PositionToNumber(move[0], Convert.ToInt32(move[1].ToString())) && x.Move.To == Board.PositionToNumber(move[2], Convert.ToInt32(move[3].ToString()))).SingleOrDefault();
