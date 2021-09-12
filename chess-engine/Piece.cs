@@ -26,75 +26,67 @@ namespace chess_engine
             var board = this.Cell.Board;
 
             // Check for moves in up direction 
-            while (!IsTopEdge(MoveUp(0)))
+            if (!IsTopEdge(this.Cell.Number))
             {
-
-                if (board.Cells[MoveUp(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUp(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveUp(1) };
-                break;
+                var cellAbove = board.Cells[MoveUp(1)];
+                if (cellAbove.IsEmpty || IsOppositeColor(cellAbove.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellAbove.Number };
             }
             // Check for moves in down direcion
 
-            while (!IsBottomEdge(MoveDown(0)))
+            if (!IsBottomEdge(this.Cell.Number))
             {
-
-                if (board.Cells[MoveDown(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDown(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveDown(1) };
-                break;
+                var cellBelow = board.Cells[MoveDown(1)];
+                if (cellBelow.IsEmpty || IsOppositeColor(cellBelow.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellBelow.Number };
             }
             // Check for moves in right direction
 
-            while (!IsRightEdge(MoveRight(0)))
+            if (!IsRightEdge(this.Cell.Number))
             {
-
-                if (board.Cells[MoveRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveRight(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveRight(1) };
-                break;
+                var cellOnTheRight = board.Cells[MoveRight(1)];
+                if (cellOnTheRight.IsEmpty || IsOppositeColor(cellOnTheRight.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellOnTheRight.Number };
             }
             // Check for moves in left direction
 
-            while (!IsLeftEdge(MoveLeft(0)))
+            if (!IsLeftEdge(this.Cell.Number))
             {
-
-                if (board.Cells[MoveLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveLeft(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveLeft(1) };
-                break;
+                var cellOnTheLeft = board.Cells[MoveLeft(1)];
+                if (cellOnTheLeft.IsEmpty || IsOppositeColor(cellOnTheLeft.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellOnTheLeft.Number };
             }
             // Check For Moves in MoveUpLeft direction
 
-            while (!(IsLeftEdge(MoveUpLeft(0)) || IsTopEdge(MoveUpLeft(0))))
+            if (!(IsLeftEdge(this.Cell.Number) || IsTopEdge(this.Cell.Number)))
             {
-
-                if (board.Cells[MoveUpLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveUpLeft(1) };
-                break;
+                var cellUpLeft = board.Cells[MoveUpLeft(1)];
+                if (cellUpLeft.IsEmpty || IsOppositeColor(cellUpLeft.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellUpLeft.Number };
             }
             // Check for moves in the MoveUpRight direction
 
-            while (!(IsTopEdge(MoveUpRight(0)) || IsRightEdge(MoveUpRight(0))))
+            if (!(IsTopEdge(this.Cell.Number) || IsRightEdge(this.Cell.Number)))
             {
-
-                if (board.Cells[MoveUpRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveUpRight(1) };
-                break;
+                var cellUpRight = board.Cells[MoveUpRight(1)];
+                if (cellUpRight.IsEmpty || IsOppositeColor(cellUpRight.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellUpRight.Number };
             }
             // Check for moves in the MoveDownRight direction 
 
-            while (!(IsRightEdge(MoveDownRight(0)) || IsBottomEdge(MoveDownRight(0))))
+            if (!(IsRightEdge(this.Cell.Number) || IsBottomEdge(this.Cell.Number)))
             {
-
-                if (board.Cells[MoveDownRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDownRight(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveDownRight(1) };
-                break;
+                var cellDownRight = board.Cells[MoveDownRight(1)];
+                if (cellDownRight.IsEmpty || IsOppositeColor(cellDownRight.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellDownRight.Number };
             }
             // Check for moves in the MoveDownLeft direction
 
-            while (!(IsBottomEdge(MoveDownLeft(0)) || IsLeftEdge(MoveDownLeft(0))))
+            if (!(IsBottomEdge(this.Cell.Number) || IsLeftEdge(this.Cell.Number)))
             {
-
-                if (board.Cells[MoveDownLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDownLeft(1)].Piece.Color))
-                    yield return new Move { From = this.Cell.Number, To = MoveDownLeft(1) };
-                break;
+                var cellDownLeft = board.Cells[MoveDownLeft(1)];
+                if (cellDownLeft.IsEmpty || IsOppositeColor(cellDownLeft.Piece.Color))
+                    yield return new Move { From = this.Cell.Number, To = cellDownLeft.Number };
             }
             //var itemsToRemove = availableMoves.Where(x => board.Cells[x.To].Piece is King).ToList();
         }
@@ -127,7 +119,7 @@ namespace chess_engine
 
             // this.Cell.Number modifications to be put in separate functions
 
-            while (!(IsLeftEdge(MoveUpLeft(0)) || IsTopEdge(MoveUpLeft(0))))
+            if (!(IsLeftEdge(MoveUpLeft(0)) || IsTopEdge(MoveUpLeft(0))))
             {
                 if (!IsLeftEdge(MoveUpLeft(1)))
                 {
@@ -139,9 +131,8 @@ namespace chess_engine
                     if (board.Cells[DoubleUpLeft(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleUpLeft(1)].Piece.Color))
                         yield return  new Move { From = this.Cell.Number, To = DoubleUpLeft(1) };
                 }
-                break;
             }
-            while (!(IsTopEdge(MoveUpRight(0)) || IsRightEdge(MoveUpRight(0))))
+            if (!(IsTopEdge(MoveUpRight(0)) || IsRightEdge(MoveUpRight(0))))
             {
                 if (!IsRightEdge(MoveUpRight(1)))
                 {
@@ -153,9 +144,8 @@ namespace chess_engine
                     if (board.Cells[DoubleUpRight(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleUpRight(1)].Piece.Color))
                         yield return new Move { From = this.Cell.Number, To = DoubleUpRight(1) };
                 }
-                break;
             }
-            while (!(IsRightEdge(MoveDownRight(0)) || IsBottomEdge(MoveDownRight(0))))
+            if (!(IsRightEdge(MoveDownRight(0)) || IsBottomEdge(MoveDownRight(0))))
             {
                 if (!IsBottomEdge(MoveDownRight(1)))
                 {
@@ -167,9 +157,8 @@ namespace chess_engine
                     if (board.Cells[DoubleRightDown(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleRightDown(1)].Piece.Color))
                         yield return new Move { From = this.Cell.Number, To = DoubleRightDown(1) };
                 }
-                break;
             }
-            while (!(IsBottomEdge(MoveDownLeft(0)) || IsLeftEdge(MoveDownLeft(0))))
+            if (!(IsBottomEdge(MoveDownLeft(0)) || IsLeftEdge(MoveDownLeft(0))))
             {
                 if (!IsLeftEdge(MoveDownLeft(1)))
                 {
@@ -181,7 +170,6 @@ namespace chess_engine
                     if (board.Cells[DoubleDownLeft(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleDownLeft(1)].Piece.Color))
                         yield return new Move { From = this.Cell.Number, To = DoubleDownLeft(1) };
                 }
-                break;
             }
         }
         internal IEnumerable<Move> GetBishopMoves()
