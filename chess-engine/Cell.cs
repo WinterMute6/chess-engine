@@ -27,16 +27,18 @@ namespace chess_engine
         {
             get
             {
-                var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
-                return topNum.Contains(Number);
+                //var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
+                //return topNum.Contains(Number);
+                return Number >= 56;
             }
         }
         public bool IsBottomEdge
         {
             get
             {
-                var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
-                return bottomNum.Contains(Number);
+                //var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
+                //return bottomNum.Contains(Number);
+                return Number <= 7;
             }
         }
         public int Number { get; set; }

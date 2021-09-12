@@ -28,7 +28,7 @@ namespace chess_engine
             var cellIndex = (row - 1) * 8 + columnIndex;
             return Cells[cellIndex];
         }
-        public List<Move> GetAvailableMoves(Piece piece)
+        public IEnumerable<Move> GetAvailableMoves(Piece piece)
         {
             return piece.GetAvailableMoves();
         }

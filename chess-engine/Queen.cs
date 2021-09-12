@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 
 namespace chess_engine
 {
@@ -11,12 +11,9 @@ namespace chess_engine
         }
         public Queen(Color color) : base(color, Figure.Queen) { }
 
-        protected override List<Move> GetPieceAvailableMoves()
+        protected override IEnumerable<Move> GetPieceAvailableMoves()
         {
-
-            var queenMoves = GetRookMoves();
-            queenMoves.AddRange(GetBishopMoves());
-            return queenMoves;
+            return GetRookMoves().Concat(GetBishopMoves());
         }
     }
 }

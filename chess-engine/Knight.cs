@@ -11,7 +11,7 @@ namespace chess_engine
         }
         public Knight(Color color) : base(color, Figure.Knight) { }
 
-        protected override List<Move> GetPieceAvailableMoves()
+        protected override IEnumerable<Move> GetPieceAvailableMoves()
         {
             return GetKnightMoves();
             

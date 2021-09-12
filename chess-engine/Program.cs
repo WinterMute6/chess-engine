@@ -11,12 +11,14 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var board = new Board();
-            board.WhiteMateInTwo4();
+            board.WhiteMateInTwo5();
             Node root = new Node();
             root.Level = 1;
             root.Board = board;
+            var startTime = DateTime.Now;
             BuildBranches(root, 4);
-          
+            var timeLength = new TimeSpan(DateTime.Now.Ticks-startTime.Ticks);
+            Console.WriteLine($"Time {timeLength.TotalSeconds}");
             var currentLevel = root;
             while (true)
             {
@@ -94,10 +96,10 @@ namespace chess_engine
                 {
                     parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
                     var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
-                    Console.WriteLine($"CheckMate, {winner} is the winner");
+                    //Console.WriteLine($"CheckMate, {winner} is the winner");
                     return;
                 }
-                Console.WriteLine("StaleMate, No winner.");
+                //Console.WriteLine("StaleMate, No winner.");
                 return;
             }
 
@@ -135,9 +137,9 @@ namespace chess_engine
                 Level = parent.Level + 1;
                 Board = parent.Board;
                 Counter++;
-                if(Counter % 500 == 0)
+/*                if(Counter % 500 == 0)
                     Console.WriteLine( DateTime.Now +" : " + Counter);
-            }
+*/            }
             private int GetScore()
             {
                 if (Board.Cells[Move.To].Piece != null)
