@@ -7,6 +7,25 @@ namespace chess_engine
     /// </summary>
     public class Cell
     {
+
+        private static int[][][] PawnMoves = new[] {
+            new[] {  // white
+                new[]{1 }, // 0
+                new[]{1 }, // 1
+                new[]{1 }, // 2
+                new[]{1 }, // 3
+                new[]{1 }, // 4
+                new[]{1 }, // 5
+                new[]{1 }, // 6
+                new[]{1 }, // 7
+                new[]{1 }, // 8
+                new[]{1 }  // 9 - 63
+            },
+            new[] {  // black
+                new[] {1 }, //0
+                new[]{1 } // 1
+            }
+        };                     
         public Cell(Board board)
         {
             this.board = board;
