@@ -11,12 +11,21 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var board = new Board();
-            board.WhiteMateInTwo4();
+            board.IsPartialBoard = true;
+            board.Cell('a', 2).Piece = new Pawn(Color.White);
+            var moves = board.GetAvailableMoves(board.Cell('a', 2).Piece).ToArray();
+            Console.WriteLine("end");
+
+            /*var board = new Board();
+            board.WhiteMateInTwo1();
             Node root = new Node();
             root.Level = 1;
             root.Board = board;
+            var timeStart = DateTime.Now;
             BuildBranches(root, 4);
-          
+            var timeEnd = DateTime.Now;
+            var lengthSeconds = new TimeSpan(timeEnd.Ticks - timeStart.Ticks).TotalSeconds;
+            Console.WriteLine(lengthSeconds);
             var currentLevel = root;
             while (true)
             {
@@ -78,7 +87,7 @@ namespace chess_engine
                 var random = new System.Random();
                 int index = random.Next(nodeList.Count);
                 return nodeList[index];
-            }
+            }*/
         }
         public static void BuildBranches(Node parent, int maxLevel)
         {
@@ -94,10 +103,10 @@ namespace chess_engine
                 {
                     parent.Score = parent.Board.Turn == Color.White ? -1 : 1;
                     var winner = parent.Board.Turn == Color.White ? Color.Black : Color.White;
-                    Console.WriteLine($"CheckMate, {winner} is the winner");
+                    //Console.WriteLine($"CheckMate, {winner} is the winner");
                     return;
                 }
-                Console.WriteLine("StaleMate, No winner.");
+                //Console.WriteLine("StaleMate, No winner.");
                 return;
             }
 
@@ -135,8 +144,8 @@ namespace chess_engine
                 Level = parent.Level + 1;
                 Board = parent.Board;
                 Counter++;
-                if(Counter % 500 == 0)
-                    Console.WriteLine( DateTime.Now +" : " + Counter);
+                //if(Counter % 500 == 0)
+                    //Console.WriteLine( DateTime.Now +" : " + Counter);
             }
             private int GetScore()
             {

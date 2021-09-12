@@ -44,7 +44,7 @@ namespace chess_engine
                      && board.Cells[MoveUpRight(1)].Piece is Pawn; 
         }
 
-        protected override List<Move> GetPieceAvailableMoves()
+        protected override IEnumerable<Move> GetPieceAvailableMoves()
         {
             return GetKingMoves();
         }

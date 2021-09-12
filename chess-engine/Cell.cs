@@ -74,6 +74,33 @@ namespace chess_engine
                 return ("abcdefgh"[this.Number % 8], this.Number / 8 + 1);
             }
         }
+
+        public IEnumerable<int> GetPawnMoves(Color color)
+        {
+            return PawnMoves[(int)color][this.Number];
+        }
+        public IEnumerable<int> GetRookMoves(Color color)
+        {
+            return RookMoves[(int)color][this.Number];
+        }
+        public IEnumerable<int> GetKnightMoves(Color color)
+        {
+            return KnightMoves[(int)color][this.Number];
+        }
+        public IEnumerable<int> GetBishopMoves(Color color)
+        {
+            return BishopMoves[(int)color][this.Number];
+        }
+        public IEnumerable<int> GetKingMoves(Color color)
+        {
+            return KingMoves[(int)color][this.Number];
+        }
+        public int[][][] PawnMoves { get; set; }
+        public int[][][] RookMoves { get; set; }
+        public int[][][] KnightMoves { get; set; }
+        public int[][][] BishopMoves { get; set; }
+        public int[][][] KingMoves { get; set; }
+        
     }
 }
 

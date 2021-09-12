@@ -1,9 +1,9 @@
 ﻿namespace chess_engine
 {
-    public enum Color
+    public enum Color:int
     {
-        White,
-        Black
+        White = 0,
+        Black = 1
     }
 }
 

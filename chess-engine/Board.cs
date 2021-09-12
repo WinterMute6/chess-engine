@@ -28,7 +28,7 @@ namespace chess_engine
             var cellIndex = (row - 1) * 8 + columnIndex;
             return Cells[cellIndex];
         }
-        public List<Move> GetAvailableMoves(Piece piece)
+        public IEnumerable<Move> GetAvailableMoves(Piece piece)
         {
             return piece.GetAvailableMoves();
         }
@@ -211,6 +211,56 @@ namespace chess_engine
             this.Cell('h', 2).Piece = new Pawn(Color.White);
             this.Cell('h', 4).Piece = new Bishop(Color.White);
             this.Cell('h', 6).Piece = new King(Color.Black);
+        }
+
+        //White goes rook e4 to e3, black goes king h3 to h2, white goes bishop g5 to f4,
+        //black goes king h2 to h1, and white goes rook e3 to h3 with checkmate
+        // Adolf Anderssen vs. Ernst Karl Falkbeer
+        public void WhiteMateInThree()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 2).Piece = new Pawn(Color.White);
+            this.Cell('a', 4).Piece = new Pawn(Color.Black);
+            this.Cell('b', 4).Piece = new Pawn(Color.Black);
+            this.Cell('c', 2).Piece = new Pawn(Color.Black);
+            this.Cell('c', 7).Piece = new Pawn(Color.Black);
+            this.Cell('d', 1).Piece = new Rook(Color.Black);
+            this.Cell('e', 4).Piece = new Rook(Color.White);
+            this.Cell('f', 2).Piece = new King(Color.White);
+            this.Cell('f', 4).Piece = new Knight(Color.Black);
+            this.Cell('f', 5).Piece = new Pawn(Color.White);
+            this.Cell('g', 5).Piece = new Bishop(Color.White);
+            this.Cell('g', 6).Piece = new Pawn(Color.Black);
+            this.Cell('g', 7).Piece = new Knight(Color.White);
+            this.Cell('h', 2).Piece = new Pawn(Color.White);
+            this.Cell('h', 3).Piece = new King(Color.Black);
+        }
+
+        //White goes queen from g3 to d6
+        //black goes rook e8 to e7
+        //white goes queen d6 to d8
+        //black goes rook e7 to e8
+        //white goes pawn e6 to e7, checkmate
+        //Vassily Ivanchuk vs. Josif Dorfman
+        public void WhiteMateinThree2()
+        {
+            this.Turn = Color.White;
+            this.Cell('a', 1).Piece = new Queen(Color.Black);
+            this.Cell('a', 2).Piece = new Bishop(Color.Black);
+            this.Cell('a', 4).Piece = new Knight(Color.Black);
+            this.Cell('a', 7).Piece = new Pawn(Color.Black);
+            this.Cell('b', 4).Piece = new Pawn(Color.White);
+            this.Cell('b', 6).Piece = new Pawn(Color.Black);
+            this.Cell('e', 6).Piece = new Pawn(Color.White);
+            this.Cell('e', 8).Piece = new Rook(Color.Black);
+            this.Cell('f', 3).Piece = new Pawn(Color.White);
+            this.Cell('f', 8).Piece = new King(Color.Black);
+            this.Cell('g', 3).Piece = new Queen(Color.White);
+            this.Cell('g', 7).Piece = new Pawn(Color.Black);
+            this.Cell('h', 2).Piece = new King(Color.White);
+            this.Cell('h', 4).Piece = new Pawn(Color.White);
+            this.Cell('h', 5).Piece = new Rook(Color.White);
+            this.Cell('h', 6).Piece = new Knight(Color.White);
         }
 
         public (Move Move, Piece OtherPiece) ApplyMove(Move move)

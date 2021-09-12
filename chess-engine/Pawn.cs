@@ -13,10 +13,11 @@ namespace chess_engine
         public override bool IsFirstMove()
         {
             if (this.Color == Color.White)
-                return (new List<int>() { 8, 9, 10, 11, 12, 13, 14, 15 }).Contains(this.Cell.Number);
+                return this.Cell.Number > 7 && this.Cell.Number < 16;
             else
-                return (new List<int>() { 48, 49, 50, 51, 52, 53, 54, 55 }).Contains(this.Cell.Number);        }
-        protected override List<Move> GetPieceAvailableMoves()
+                return this.Cell.Number > 47 && this.Cell.Number < 56;
+        }
+        protected override IEnumerable<Move> GetPieceAvailableMoves()
         {
             return GetPawnMoves();
         }

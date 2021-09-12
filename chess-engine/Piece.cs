@@ -21,113 +21,111 @@ namespace chess_engine
             _color = color;
             Figure = figure;
         }
-        public List<Move> GetKingMoves()
+        public IEnumerable<Move> GetKingMoves()
         {
             var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
+            //var availableMoves = new List<Move>();
+
 
             // Check for moves in up direction 
-            while (!IsTopEdge(MoveUp(0)))
+            if (!IsTopEdge(this.Cell.Number))
             {
 
                 if (board.Cells[MoveUp(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUp(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(1) });
-                break;
+                    yield return new Move { From = this.Cell.Number, To = MoveUp(1) };
             }
             // Check for moves in down direcion
 
-            while (!IsBottomEdge(MoveDown(0)))
+            if (!IsBottomEdge(this.Cell.Number))
             {
 
                 if (board.Cells[MoveDown(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDown(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveDown(1) });
             }
             // Check for moves in right direction
 
-            while (!IsRightEdge(MoveRight(0)))
+            if (!IsRightEdge(this.Cell.Number))
             {
 
                 if (board.Cells[MoveRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveRight(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveRight(1) });
             }
             // Check for moves in left direction
 
-            while (!IsLeftEdge(MoveLeft(0)))
+            if (!IsLeftEdge(this.Cell.Number))
             {
 
                 if (board.Cells[MoveLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveLeft(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveLeft(1) });
+                
             }
             // Check For Moves in MoveUpLeft direction
 
-            while (!(IsLeftEdge(MoveUpLeft(0)) || IsTopEdge(MoveUpLeft(0))))
+            if (!(IsLeftEdge(this.Cell.Number) || IsTopEdge(this.Cell.Number)))
             {
 
                 if (board.Cells[MoveUpLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
+                
             }
             // Check for moves in the MoveUpRight direction
 
-            while (!(IsTopEdge(MoveUpRight(0)) || IsRightEdge(MoveUpRight(0))))
+            if (!(IsTopEdge(this.Cell.Number) || IsRightEdge(this.Cell.Number)))
             {
 
                 if (board.Cells[MoveUpRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveUpRight(1) });
+                
             }
             // Check for moves in the MoveDownRight direction 
 
-            while (!(IsRightEdge(MoveDownRight(0)) || IsBottomEdge(MoveDownRight(0))))
+            if (!(IsRightEdge(this.Cell.Number) || IsBottomEdge(this.Cell.Number)))
             {
 
                 if (board.Cells[MoveDownRight(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDownRight(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDownRight(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveDownRight(1) });
+                
             }
             // Check for moves in the MoveDownLeft direction
 
-            while (!(IsBottomEdge(MoveDownLeft(0)) || IsLeftEdge(MoveDownLeft(0))))
+            if (!(IsBottomEdge(this.Cell.Number) || IsLeftEdge(this.Cell.Number)))
             {
 
                 if (board.Cells[MoveDownLeft(1)].IsEmpty || IsOppositeColor(board.Cells[MoveDownLeft(1)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDownLeft(1) });
-                break;
+                    yield return (new Move { From = this.Cell.Number, To = MoveDownLeft(1) });
+                
             }
             //var itemsToRemove = availableMoves.Where(x => board.Cells[x.To].Piece is King).ToList();
 
-            return availableMoves;
+            
         }
-        public List<Move> GetPawnMoves()
+        public IEnumerable<Move> GetPawnMoves()
         {
             var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
+            //var availableMoves = new List<Move>();
             if (IsTopEdge())
-                return availableMoves;
+                yield break;
 
             if (!IsLeftEdge() && board.Cells[MoveUpLeft(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpLeft(1)].Piece.Color))
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
+                yield return (new Move { From = this.Cell.Number, To = MoveUpLeft(1) });
 
             if (!IsRightEdge() && board.Cells[MoveUpRight(1)].IsOccupied && IsOppositeColor(board.Cells[MoveUpRight(1)].Piece.Color))
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(1) });
+                yield return (new Move { From = this.Cell.Number, To = MoveUpRight(1) });
 
             if (board.Cells[MoveUp(1)].IsEmpty)
             {
-                availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(1) });
+                yield return (new Move { From = this.Cell.Number, To = MoveUp(1) });
                 if (IsFirstMove() && board.Cells[MoveUp(2)].IsEmpty)
                 {
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(2) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveUp(2) });
                 }
             }
-            return availableMoves;
+            
         }
-        public List<Move> GetKnightMoves()
+        public IEnumerable<Move> GetKnightMoves()
         {
             var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
+            //var availableMoves = new List<Move>();
 
             // this.Cell.Number modifications to be put in separate functions
 
@@ -136,12 +134,12 @@ namespace chess_engine
                 if (!IsLeftEdge(MoveUpLeft(1)))
                 {
                     if (board.Cells[DoubleLeftUp(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleLeftUp(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleLeftUp(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleLeftUp(1) });
                 }
                 if (!IsTopEdge(MoveUpLeft(1)))
                 {
                     if (board.Cells[DoubleUpLeft(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleUpLeft(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleUpLeft(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleUpLeft(1) });
                 }
                 break;
             }
@@ -150,12 +148,12 @@ namespace chess_engine
                 if (!IsRightEdge(MoveUpRight(1)))
                 {
                     if (board.Cells[DoubleRightUp(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleRightUp(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleRightUp(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleRightUp(1) });
                 }
                 if (!IsTopEdge(MoveUpRight(1)))
                 {
                     if (board.Cells[DoubleUpRight(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleUpRight(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleUpRight(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleUpRight(1) });
                 }
                 break;
             }
@@ -164,12 +162,12 @@ namespace chess_engine
                 if (!IsBottomEdge(MoveDownRight(1)))
                 {
                     if (board.Cells[DoubleDownRight(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleDownRight(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleDownRight(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleDownRight(1) });
                 }
                 if (!IsRightEdge(MoveDownRight(1)))
                 {
                     if (board.Cells[DoubleRightDown(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleRightDown(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleRightDown(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleRightDown(1) });
                 }
                 break;
             }
@@ -178,28 +176,28 @@ namespace chess_engine
                 if (!IsLeftEdge(MoveDownLeft(1)))
                 {
                     if (board.Cells[DoubleLeftDown(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleLeftDown(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleLeftDown(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleLeftDown(1) });
                 }
                 if (!IsBottomEdge(MoveDownLeft(1)))
                 {
                     if (board.Cells[DoubleDownLeft(1)].IsEmpty || IsOppositeColor(board.Cells[DoubleDownLeft(1)].Piece.Color))
-                        availableMoves.Add(new Move { From = this.Cell.Number, To = DoubleDownLeft(1) });
+                        yield return (new Move { From = this.Cell.Number, To = DoubleDownLeft(1) });
                 }
                 break;
             }
-            return availableMoves;
+            
         }
-        internal List<Move> GetBishopMoves()
+        internal IEnumerable<Move> GetBishopMoves()
         {
             var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
+            //var availableMoves = new List<Move>();
             var offset = 0;
            
             while (!(IsLeftEdge(MoveUpLeft(offset)) || IsTopEdge(MoveUpLeft(offset))))
             {
                 offset++;
                 if (board.Cells[MoveUpLeft(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveUpLeft(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpLeft(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveUpLeft(offset) });
                 if (board.Cells[MoveUpLeft(offset)].IsOccupied) break;
             }
             offset = 0;
@@ -207,7 +205,7 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveUpRight(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveUpRight(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUpRight(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveUpRight(offset) });
                 if (board.Cells[MoveUpRight(offset)].IsOccupied) break;
             }
             offset = 0;
@@ -215,7 +213,7 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveDownRight(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveDownRight(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDownRight(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveDownRight(offset) });
                 if (board.Cells[MoveDownRight(offset)].IsOccupied) break;
             }
             offset = 0;
@@ -223,22 +221,22 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveDownLeft(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveDownLeft(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDownLeft(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveDownLeft(offset) });
                 if (board.Cells[MoveDownLeft(offset)].IsOccupied) break;
             }
-            return availableMoves;
+            
         }
-        public List<Move> GetRookMoves()
+        public IEnumerable<Move> GetRookMoves()
         {
             var board = this.Cell.Board;
-            var availableMoves = new List<Move>();
+            //var availableMoves = new List<Move>();
             int offset = 0;
             // Check for moves in up direction 
             while (!IsTopEdge(MoveUp(offset)))
             {
                 offset++;
                 if (board.Cells[MoveUp(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveUp(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveUp(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveUp(offset) });
                 if (board.Cells[MoveUp(offset)].IsOccupied) break;
             }
             // Check for moves in down direcion
@@ -247,7 +245,7 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveDown(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveDown(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveDown(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveDown(offset) });
                 if (board.Cells[MoveDown(offset)].IsOccupied) break;
             }
             // Check for moves in right direction
@@ -256,7 +254,7 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveRight(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveRight(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveRight(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveRight(offset) });
                 if (board.Cells[MoveRight(offset)].IsOccupied) break;
             }
             // Check for moves in left direction
@@ -265,13 +263,13 @@ namespace chess_engine
             {
                 offset++;
                 if (board.Cells[MoveLeft(offset)].IsEmpty || IsOppositeColor(board.Cells[MoveLeft(offset)].Piece.Color))
-                    availableMoves.Add(new Move { From = this.Cell.Number, To = MoveLeft(offset) });
+                    yield return (new Move { From = this.Cell.Number, To = MoveLeft(offset) });
                 if (board.Cells[MoveLeft(offset)].IsOccupied) break;
             }
-            return availableMoves;
+             
         }
 
-        protected List<Move> Validate(List<Move> moves)
+        protected IEnumerable<Move> Validate(IEnumerable<Move> moves)
         {
 
             
@@ -286,7 +284,7 @@ namespace chess_engine
             // roll back the move
 
             // next move
-            var validMoves = new List<Move>();
+            //var validMoves = new List<Move>();
             var board = this.Cell.Board;
             foreach (var move in moves)
             {
@@ -300,17 +298,17 @@ namespace chess_engine
                     }
                     if (myKing == null)
                     {
-                        validMoves.Add(move);
+                        yield return move;
                     }
                     else if (!myKing.IsUnderCheck())
                     {
-                        validMoves.Add(move);
+                        yield return move;
                     }
                 }
                 
             }
             //var invalidMoves = moves.Except(validMoves).ToArray();
-            return validMoves;
+            
         }
         public int DoubleDownRight(int offset)
         {
@@ -350,9 +348,10 @@ namespace chess_engine
         }
         public bool IsBottomEdge(int cellNumber)
         {
-            var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
-            var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
-            return (this.Color == Color.White ? bottomNum : topNum).Contains(cellNumber);
+            //var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
+            //var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
+            //return (this.Color == Color.White ? bottomNum : topNum).Contains(cellNumber);
+            return (this.Color == Color.White ? cellNumber <= 7 : cellNumber >= 56);
         }
         public bool IsTopEdge()
         {
@@ -360,9 +359,10 @@ namespace chess_engine
         }
         public bool IsTopEdge(int cellNumber)
         {
-            var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
-            var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
-            return (this.Color == Color.White ? topNum : bottomNum).Contains(cellNumber);
+            //var topNum = new List<int>() { 56, 57, 58, 59, 60, 61, 62, 63 };
+            //var bottomNum = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
+            //return (this.Color == Color.White ? topNum : bottomNum).Contains(cellNumber);
+            return (this.Color == Color.White ? cellNumber >= 56 : cellNumber <= 7);
         }
         public bool IsRightEdge()
         {
@@ -371,9 +371,9 @@ namespace chess_engine
         }
         public bool IsRightEdge(int cellNumber)
         {
-            var leftNum = new List<int>() { 0, 8, 16, 24, 32, 40, 48, 56 };
-            var rightNum = new List<int>() { 7, 15, 23, 31, 39, 47, 55, 63 };
-            return (this.Color == Color.White ? rightNum : leftNum).Contains(cellNumber);
+            //var leftNum = new List<int>() { 0, 8, 16, 24, 32, 40, 48, 56 };
+            //var rightNum = new List<int>() { 7, 15, 23, 31, 39, 47, 55, 63 };
+            return this.Color == Color.White ? (cellNumber + 1)%8 == 0 : cellNumber%8 == 0;
         }
         public bool IsLeftEdge()
         {
@@ -381,9 +381,9 @@ namespace chess_engine
         }
         public bool IsLeftEdge(int cellNumber)
         {
-            var leftNum = new List<int>() { 0, 8, 16, 24, 32, 40, 48, 56 };
-            var rightNum = new List<int>() { 7, 15, 23, 31, 39, 47, 55, 63 };
-            return (this.Color == Color.White ? leftNum : rightNum).Contains(cellNumber);
+            //var leftNum = new List<int>() { 0, 8, 16, 24, 32, 40, 48, 56 };
+            //var rightNum = new List<int>() { 7, 15, 23, 31, 39, 47, 55, 63 };
+            return this.Color == Color.White ? cellNumber % 8 == 0 : (cellNumber + 1) % 8 == 0;
         }
         public int MoveRight(int offset)
         {
@@ -428,13 +428,12 @@ namespace chess_engine
         public Figure Figure { get; set; }
         public Cell Cell { get; set;}
        
-        public List<Move> GetAvailableMoves()
+        public IEnumerable<Move> GetAvailableMoves()
         {
-            
             return Validate(GetPieceAvailableMoves());
         }
 
-        protected abstract List<Move> GetPieceAvailableMoves();
+        protected abstract IEnumerable<Move> GetPieceAvailableMoves();
 
         public int GetValue()
         {
