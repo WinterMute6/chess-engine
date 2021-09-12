@@ -95,12 +95,31 @@ namespace chess_engine
         {
             return KingMoves[(int)color][this.Number];
         }
-        public int[][][] PawnMoves { get; set; }
+        //public int[][][] PawnMoves { get; set; }
         public int[][][] RookMoves { get; set; }
         public int[][][] KnightMoves { get; set; }
         public int[][][] BishopMoves { get; set; }
         public int[][][] KingMoves { get; set; }
-        
+
+        private static int[][][] PawnMoves = new[] {
+            new[] {  // white
+                new[]{1 }, // 0
+                new[]{1 }, // 1
+                new[]{1 }, // 2
+                new[]{1 }, // 3
+                new[]{1 }, // 4
+                new[]{1 }, // 5
+                new[]{1 }, // 6
+                new[]{1 }, // 7
+                new[]{1 }, // 8
+                new[]{1 }  // 9 - 63
+            },
+            new[] {  // black
+                new[] {1 }, //0
+                new[]{1 } // 1
+            }
+        };
+
     }
 }
 
