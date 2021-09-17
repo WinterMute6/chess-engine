@@ -992,6 +992,48 @@ namespace chess_engine.tests
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
+
+        [TestMethod()]
+        public void WhitePawnFromA1ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('a', 1).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('a', 1).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void WhitePawnFromD1ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('d', 1).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 1).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void WhitePawnFromH1ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('h', 1).Piece = new Pawn(Color.White);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 1).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
     }
     [TestClass]
 
@@ -1506,6 +1548,48 @@ namespace chess_engine.tests
             board.Cell('h', 6).Piece = new Pawn(Color.Black);
 
             var actualMoves = board.GetAvailableMoves(board.Cell('h', 6).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void BlackPawnFromH8ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('h', 8).Piece = new Pawn(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 8).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void BlackPawnFromD8ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('d', 8).Piece = new Pawn(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('d', 8).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
+        [TestMethod()]
+        public void BlackPawnFromA8ToZeroAvailableMoves()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>();
+            board.Cell('a', 8).Piece = new Pawn(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('a', 8).Piece);
 
             Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());

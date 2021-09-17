@@ -10,12 +10,19 @@ namespace chess_engine
     {
         public static void Main(string[] args)
         {
-            var board = new Board();
-            board.IsPartialBoard = true;
-            board.Cell('a', 2).Piece = new Pawn(Color.White);
-            var moves = board.GetAvailableMoves(board.Cell('a', 2).Piece).ToArray();
-            Console.WriteLine("end");
-
+            for(int i = 0; i < 64; i++)
+            {
+                var board = new Board();
+                board.IsPartialBoard = true;
+                board.Cells[i].Piece = new Pawn(Color.White);
+                if (i < 56)
+                {
+                    board.Cells[(i + 9) > 63 ? 0 : i + 9].Piece = new Pawn(Color.Black);
+                    board.Cells[i + 7].Piece = new Pawn(Color.Black);
+                }
+                var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
+                Console.WriteLine("end");
+            }
             /*var board = new Board();
             board.WhiteMateInTwo1();
             Node root = new Node();

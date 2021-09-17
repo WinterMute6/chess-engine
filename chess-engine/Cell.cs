@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace chess_engine
 {
@@ -101,20 +102,27 @@ namespace chess_engine
         public int[][][] BishopMoves { get; set; }
         public int[][][] KingMoves { get; set; }
 
-        private static int[][][] PawnMoves = new[] {
-            new[] {  // white
-                new[]{1 }, // 0
-                new[]{1 }, // 1
-                new[]{1 }, // 2
-                new[]{1 }, // 3
-                new[]{1 }, // 4
-                new[]{1 }, // 5
-                new[]{1 }, // 6
-                new[]{1 }, // 7
-                new[]{1 }, // 8
-                new[]{1 }  // 9 - 63
+        // Move to a separate file
+        private static int[][][] PawnMoves = new[] 
+        {
+            new[] 
+            {  // white
+                Array.Empty<int>(), // 00
+                Array.Empty<int>(), // 01
+                Array.Empty<int>(), // 02
+                Array.Empty<int>(), // 03
+                Array.Empty<int>(), // 04
+                Array.Empty<int>(), // 05
+                Array.Empty<int>(), // 06
+                Array.Empty<int>(), // 07
+
+                new[]{16, 24, 17 },  // 08
+                new[]{17, 25, 16, 18 },  // 09
+                new[]{18, 26, 17, 19 },  // 10
+
             },
-            new[] {  // black
+            new[] 
+            {  // black
                 new[] {1 }, //0
                 new[]{1 } // 1
             }
