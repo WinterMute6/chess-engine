@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.IO;
 
 
 namespace chess_engine
@@ -10,6 +11,14 @@ namespace chess_engine
     {
         public static void Main(string[] args)
         {
+            var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
+            availableMovesFile.WriteLine("private static int[][][] PawnMoves = new[]");
+            availableMovesFile.WriteLine("{");
+            availableMovesFile.WriteLine("\tnew[]");
+            availableMovesFile.WriteLine("\t{  // white");
+            
+               
+         
             for(int i = 0; i < 64; i++)
             {
                 var board = new Board();
@@ -21,8 +30,92 @@ namespace chess_engine
                     board.Cells[i + 7].Piece = new Pawn(Color.Black);
                 }
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-                Console.WriteLine("end");
+                if (moves.Length == 0)
+                {
+                    availableMovesFile.Write("\t\tArray.Empty<int>()");
+                   
+                }
+
+                else
+                {
+                    availableMovesFile.Write("\t\tnew[]{");
+                    var firstTime = true;
+
+                    foreach (Move move in moves)
+                    {
+                        
+                        if(!firstTime)
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTime = false;
+                        availableMovesFile.Write($"{move.To}");
+                        
+                    }
+                    availableMovesFile.Write("}");
+                    
+                    
+                }
+                if (i != 63)
+                {
+                    availableMovesFile.Write(",");
+                }
+                availableMovesFile.WriteLine($"\t//{i}");
             }
+            availableMovesFile.WriteLine("},");
+            availableMovesFile.WriteLine("new[]");
+            availableMovesFile.WriteLine("\t{  // black");
+
+            for (int i = 0; i < 64; i++)
+            {
+                var board = new Board();
+                board.IsPartialBoard = true;
+                board.Cells[i].Piece = new Pawn(Color.Black);
+                if (i > 7)
+                {
+                    board.Cells[(i - 9) < 0 ? 63 : i - 9].Piece = new Pawn(Color.White);
+                    board.Cells[i - 7].Piece = new Pawn(Color.White);
+                }
+                var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
+                if (moves.Length == 0)
+                {
+                    availableMovesFile.Write("\t\tArray.Empty<int>()");
+               
+                }
+                else
+                {
+                    availableMovesFile.Write("\t\tnew[]{");
+                    var firstTime = true;
+
+                    foreach (Move move in moves)
+                    {
+
+                        if (!firstTime)
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTime = false;
+                        availableMovesFile.Write($"{move.To}");
+
+                    }
+                    availableMovesFile.Write("}");
+
+                }
+                if (i != 63)
+                {
+                    availableMovesFile.Write(",");
+                }
+                availableMovesFile.WriteLine($"\t//{i}");
+            }
+            availableMovesFile.WriteLine("}");
+
+
+
+
+            availableMovesFile.WriteLine("};");
+            availableMovesFile.Close();
+            Console.WriteLine("end");
+            Console.ReadLine();
             /*var board = new Board();
             board.WhiteMateInTwo1();
             Node root = new Node();
