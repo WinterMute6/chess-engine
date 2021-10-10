@@ -9,10 +9,11 @@ namespace chess_engine
 {
     public class Program
     {
+        
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("private static int[][][] PawnMoves = new[]");
+            availableMovesFile.WriteLine("private static int[][][] KingMoves = new[]");
             availableMovesFile.WriteLine("{");
             availableMovesFile.WriteLine("\tnew[]");
             availableMovesFile.WriteLine("\t{  // white");
@@ -23,39 +24,26 @@ namespace chess_engine
             {
                 var board = new Board();
                 board.IsPartialBoard = true;
-                board.Cells[i].Piece = new Pawn(Color.White);
-                if (i < 56)
-                {
-                    board.Cells[(i + 9) > 63 ? 0 : i + 9].Piece = new Pawn(Color.Black);
-                    board.Cells[i + 7].Piece = new Pawn(Color.Black);
-                }
+                board.Cells[i].Piece = new King(Color.White);
+           
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-                if (moves.Length == 0)
-                {
-                    availableMovesFile.Write("\t\tArray.Empty<int>()");
-                   
-                }
+               
+                availableMovesFile.Write("\t\tnew[]{");
+                var firstTime = true;
 
-                else
+                foreach (Move move in moves)
                 {
-                    availableMovesFile.Write("\t\tnew[]{");
-                    var firstTime = true;
-
-                    foreach (Move move in moves)
+                        
+                    if(!firstTime)
                     {
-                        
-                        if(!firstTime)
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTime = false;
-                        availableMovesFile.Write($"{move.To}");
-                        
+                        availableMovesFile.Write(",");
                     }
-                    availableMovesFile.Write("}");
-                    
-                    
+                    firstTime = false;
+                    availableMovesFile.Write($"{move.To}");
+                        
                 }
+                availableMovesFile.Write("}");
+                   
                 if (i != 63)
                 {
                     availableMovesFile.Write(",");
@@ -63,6 +51,7 @@ namespace chess_engine
                 availableMovesFile.WriteLine($"\t//{i}");
             }
             availableMovesFile.WriteLine("},");
+
             availableMovesFile.WriteLine("new[]");
             availableMovesFile.WriteLine("\t{  // black");
 
@@ -70,37 +59,26 @@ namespace chess_engine
             {
                 var board = new Board();
                 board.IsPartialBoard = true;
-                board.Cells[i].Piece = new Pawn(Color.Black);
-                if (i > 7)
-                {
-                    board.Cells[(i - 9) < 0 ? 63 : i - 9].Piece = new Pawn(Color.White);
-                    board.Cells[i - 7].Piece = new Pawn(Color.White);
-                }
+                board.Cells[i].Piece = new King(Color.Black);
+                
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-                if (moves.Length == 0)
-                {
-                    availableMovesFile.Write("\t\tArray.Empty<int>()");
-               
-                }
-                else
-                {
-                    availableMovesFile.Write("\t\tnew[]{");
-                    var firstTime = true;
+                
+                availableMovesFile.Write("\t\tnew[]{");
+                var firstTime = true;
 
-                    foreach (Move move in moves)
+                foreach (Move move in moves)
+                {
+
+                    if (!firstTime)
                     {
-
-                        if (!firstTime)
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTime = false;
-                        availableMovesFile.Write($"{move.To}");
-
+                        availableMovesFile.Write(",");
                     }
-                    availableMovesFile.Write("}");
+                    firstTime = false;
+                    availableMovesFile.Write($"{move.To}");
 
                 }
+                availableMovesFile.Write("}");
+
                 if (i != 63)
                 {
                     availableMovesFile.Write(",");
@@ -108,9 +86,6 @@ namespace chess_engine
                 availableMovesFile.WriteLine($"\t//{i}");
             }
             availableMovesFile.WriteLine("}");
-
-
-
 
             availableMovesFile.WriteLine("};");
             availableMovesFile.Close();
@@ -263,6 +238,7 @@ namespace chess_engine
     {
         public int From { get; set; }
         public int To { get; set; }
+        
         public override bool Equals(object obj)
         {
             return (obj is Move) && ((Move)obj).From == From && ((Move)obj).To == To;
