@@ -99,7 +99,10 @@ namespace chess_engine
 
             
         }
+
         public IEnumerable<Move> GetPawnMoves()
+
+//        public IEnumerable<Move> GetPawnMovesOld()
         {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
@@ -122,6 +125,42 @@ namespace chess_engine
             }
             
         }
+        public IEnumerable<Move> GetPawnMovesNew()
+
+//        public IEnumerable<Move> GetPawnMoves()
+        {
+            //List<Move> moves = new List<Move>();
+            var board = Cell.Board;
+            var currentPosition = Cell.Number;
+            const int RegularMoves = 0;
+            const int TakeMoves = 1;
+
+            var regularMoves = Rules.PawnMoves[(int)Color][currentPosition][RegularMoves];
+            var takeMoves = Rules.PawnMoves[(int)Color][currentPosition][TakeMoves];
+
+
+            foreach (var potentialMove in regularMoves)
+            {
+                if (!board.Cells[potentialMove].IsEmpty)
+                {
+                    break;
+                }
+                yield return new Move { From = currentPosition, To = potentialMove };
+                //moves.Add(new Move { From = currentPosition, To = position });
+            }
+
+            foreach (var potentialMove in takeMoves)
+            {
+                if(board.Cells[potentialMove].IsOccupied && board.Cells[potentialMove].Piece.IsOppositeColor(Color))
+                {
+                    yield return new Move { From = currentPosition, To = potentialMove };
+                    //moves.Add(new Move { From = currentPosition, To = position });
+                }
+            }
+            //return moves;
+        }
+
+
         public IEnumerable<Move> GetKnightMoves()
         {
             var board = this.Cell.Board;

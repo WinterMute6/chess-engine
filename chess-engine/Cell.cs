@@ -76,10 +76,7 @@ namespace chess_engine
             }
         }
 
-        public IEnumerable<int> GetPawnMoves(Color color)
-        {
-            return PawnMoves[(int)color][this.Number];
-        }
+
         public IEnumerable<int> GetRookMoves(Color color)
         {
             return RookMoves[(int)color][this.Number];
@@ -102,32 +99,6 @@ namespace chess_engine
         public int[][][] BishopMoves { get; set; }
         public int[][][] KingMoves { get; set; }
 
-        // Move to a separate file
-        private static int[][][] PawnMoves = new[] 
-        {
-            new[] 
-            {  // white
-                Array.Empty<int>(), // 00
-                Array.Empty<int>(), // 01
-                Array.Empty<int>(), // 02
-                Array.Empty<int>(), // 03
-                Array.Empty<int>(), // 04
-                Array.Empty<int>(), // 05
-                Array.Empty<int>(), // 06
-                Array.Empty<int>(), // 07
-
-                new[]{16, 24, 17 },  // 08
-                new[]{17, 25, 16, 18 },  // 09
-                new[]{18, 26, 17, 19 },  // 10
-
-            },
-            new[] 
-            {  // black
-                new[] {1 }, //0
-                new[]{1 } // 1
-            }
-        };
-
-    }
+	}
 }
 

@@ -9,15 +9,24 @@ namespace chess_engine
 {
     public class Program
     {
+        public static string GetSequence(IEnumerable<Move> moves)
+        {
+            if (moves.Count() == 0)
+            {
+                return "Array.Empty<int>()";
+            }
+            else
+            {
+                return  "new[] { "+string.Join(",", moves.Select(m => m.To))+" }";
+            }
+        }
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("private static int[][][] PawnMoves = new[]");
+            availableMovesFile.WriteLine("private static int[][][][] PawnMoves = new[]");
             availableMovesFile.WriteLine("{");
             availableMovesFile.WriteLine("\tnew[]");
             availableMovesFile.WriteLine("\t{  // white");
-            
-               
          
             for(int i = 0; i < 64; i++)
             {
@@ -30,32 +39,12 @@ namespace chess_engine
                     board.Cells[i + 7].Piece = new Pawn(Color.Black);
                 }
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-                if (moves.Length == 0)
-                {
-                    availableMovesFile.Write("\t\tArray.Empty<int>()");
-                   
-                }
+                
+                var forwardMoves = moves.Where(m=> (i- m.To) % 8==0).ToArray();
+                var takes = moves.Where(m => (i - m.To) % 8 != 0).ToArray();
 
-                else
-                {
-                    availableMovesFile.Write("\t\tnew[]{");
-                    var firstTime = true;
-
-                    foreach (Move move in moves)
-                    {
-                        
-                        if(!firstTime)
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTime = false;
-                        availableMovesFile.Write($"{move.To}");
-                        
-                    }
-                    availableMovesFile.Write("}");
-                    
-                    
-                }
+                availableMovesFile.Write("\t\tnew[]{ "+ GetSequence(forwardMoves)+", "+ GetSequence(takes) + " }");
+        
                 if (i != 63)
                 {
                     availableMovesFile.Write(",");
@@ -77,30 +66,12 @@ namespace chess_engine
                     board.Cells[i - 7].Piece = new Pawn(Color.White);
                 }
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-                if (moves.Length == 0)
-                {
-                    availableMovesFile.Write("\t\tArray.Empty<int>()");
-               
-                }
-                else
-                {
-                    availableMovesFile.Write("\t\tnew[]{");
-                    var firstTime = true;
 
-                    foreach (Move move in moves)
-                    {
+                var forwardMoves = moves.Where(m => (i - m.To) % 8 == 0).ToArray();
+                var takes = moves.Where(m => (i - m.To) % 8 != 0).ToArray();
 
-                        if (!firstTime)
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTime = false;
-                        availableMovesFile.Write($"{move.To}");
+                availableMovesFile.Write("\t\tnew[]{ " + GetSequence(forwardMoves) + ", " + GetSequence(takes) + " }");
 
-                    }
-                    availableMovesFile.Write("}");
-
-                }
                 if (i != 63)
                 {
                     availableMovesFile.Write(",");
@@ -108,9 +79,6 @@ namespace chess_engine
                 availableMovesFile.WriteLine($"\t//{i}");
             }
             availableMovesFile.WriteLine("}");
-
-
-
 
             availableMovesFile.WriteLine("};");
             availableMovesFile.Close();
