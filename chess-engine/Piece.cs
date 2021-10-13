@@ -100,9 +100,9 @@ namespace chess_engine
             
         }
 
-        public IEnumerable<Move> GetPawnMoves()
+       // public IEnumerable<Move> GetPawnMoves()
 
-//        public IEnumerable<Move> GetPawnMovesOld()
+        public IEnumerable<Move> GetPawnMovesOld()
         {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
@@ -125,9 +125,9 @@ namespace chess_engine
             }
             
         }
-        public IEnumerable<Move> GetPawnMovesNew()
+        //public IEnumerable<Move> GetPawnMovesNew()
 
-//        public IEnumerable<Move> GetPawnMoves()
+        public IEnumerable<Move> GetPawnMoves()
         {
             //List<Move> moves = new List<Move>();
             var board = Cell.Board;
