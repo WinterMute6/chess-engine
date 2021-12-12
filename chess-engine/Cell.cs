@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace chess_engine
@@ -76,10 +76,7 @@ namespace chess_engine
             }
         }
 
-        public IEnumerable<int> GetPawnMoves(Color color)
-        {
-            return PawnMoves[(int)color][this.Number];
-        }
+
         public IEnumerable<int> GetRookMoves(Color color)
         {
             return RookMoves[(int)color][this.Number];
@@ -98,144 +95,7 @@ namespace chess_engine
         }
         
 
-		// Move to a separate file
-		private static int[][][] PawnMoves = new[]
-  {
-	new[]
-	{  // white
-		Array.Empty<int>(),	//0
-		Array.Empty<int>(),	//1
-		Array.Empty<int>(),	//2
-		Array.Empty<int>(),	//3
-		Array.Empty<int>(),	//4
-		Array.Empty<int>(),	//5
-		Array.Empty<int>(),	//6
-		Array.Empty<int>(),	//7
-		new[]{17,16,24},	//8
-		new[]{16,18,17,25},	//9
-		new[]{17,19,18,26},	//10
-		new[]{18,20,19,27},	//11
-		new[]{19,21,20,28},	//12
-		new[]{20,22,21,29},	//13
-		new[]{21,23,22,30},	//14
-		new[]{22,23,31},	//15
-		new[]{25,24},	//16
-		new[]{24,26,25},	//17
-		new[]{25,27,26},	//18
-		new[]{26,28,27},	//19
-		new[]{27,29,28},	//20
-		new[]{28,30,29},	//21
-		new[]{29,31,30},	//22
-		new[]{30,31},	//23
-		new[]{33,32},	//24
-		new[]{32,34,33},	//25
-		new[]{33,35,34},	//26
-		new[]{34,36,35},	//27
-		new[]{35,37,36},	//28
-		new[]{36,38,37},	//29
-		new[]{37,39,38},	//30
-		new[]{38,39},	//31
-		new[]{41,40},	//32
-		new[]{40,42,41},	//33
-		new[]{41,43,42},	//34
-		new[]{42,44,43},	//35
-		new[]{43,45,44},	//36
-		new[]{44,46,45},	//37
-		new[]{45,47,46},	//38
-		new[]{46,47},	//39
-		new[]{49,48},	//40
-		new[]{48,50,49},	//41
-		new[]{49,51,50},	//42
-		new[]{50,52,51},	//43
-		new[]{51,53,52},	//44
-		new[]{52,54,53},	//45
-		new[]{53,55,54},	//46
-		new[]{54,55},	//47
-		new[]{57,56},	//48
-		new[]{56,58,57},	//49
-		new[]{57,59,58},	//50
-		new[]{58,60,59},	//51
-		new[]{59,61,60},	//52
-		new[]{60,62,61},	//53
-		new[]{61,63,62},	//54
-		new[]{62,63},	//55
-		Array.Empty<int>(),	//56
-		Array.Empty<int>(),	//57
-		Array.Empty<int>(),	//58
-		Array.Empty<int>(),	//59
-		Array.Empty<int>(),	//60
-		Array.Empty<int>(),	//61
-		Array.Empty<int>(),	//62
-		Array.Empty<int>()	//63
-},
-new[]
-	{  // black
-		Array.Empty<int>(),	//0
-		Array.Empty<int>(),	//1
-		Array.Empty<int>(),	//2
-		Array.Empty<int>(),	//3
-		Array.Empty<int>(),	//4
-		Array.Empty<int>(),	//5
-		Array.Empty<int>(),	//6
-		Array.Empty<int>(),	//7
-		new[]{1,0},	//8
-		new[]{2,0,1},	//9
-		new[]{3,1,2},	//10
-		new[]{4,2,3},	//11
-		new[]{5,3,4},	//12
-		new[]{6,4,5},	//13
-		new[]{7,5,6},	//14
-		new[]{6,7},	//15
-		new[]{9,8},	//16
-		new[]{10,8,9},	//17
-		new[]{11,9,10},	//18
-		new[]{12,10,11},	//19
-		new[]{13,11,12},	//20
-		new[]{14,12,13},	//21
-		new[]{15,13,14},	//22
-		new[]{14,15},	//23
-		new[]{17,16},	//24
-		new[]{18,16,17},	//25
-		new[]{19,17,18},	//26
-		new[]{20,18,19},	//27
-		new[]{21,19,20},	//28
-		new[]{22,20,21},	//29
-		new[]{23,21,22},	//30
-		new[]{22,23},	//31
-		new[]{25,24},	//32
-		new[]{26,24,25},	//33
-		new[]{27,25,26},	//34
-		new[]{28,26,27},	//35
-		new[]{29,27,28},	//36
-		new[]{30,28,29},	//37
-		new[]{31,29,30},	//38
-		new[]{30,31},	//39
-		new[]{33,32},	//40
-		new[]{34,32,33},	//41
-		new[]{35,33,34},	//42
-		new[]{36,34,35},	//43
-		new[]{37,35,36},	//44
-		new[]{38,36,37},	//45
-		new[]{39,37,38},	//46
-		new[]{38,39},	//47
-		new[]{41,40,32},	//48
-		new[]{42,40,41,33},	//49
-		new[]{43,41,42,34},	//50
-		new[]{44,42,43,35},	//51
-		new[]{45,43,44,36},	//52
-		new[]{46,44,45,37},	//53
-		new[]{47,45,46,38},	//54
-		new[]{46,47,39},	//55
-		Array.Empty<int>(),	//56
-		Array.Empty<int>(),	//57
-		Array.Empty<int>(),	//58
-		Array.Empty<int>(),	//59
-		Array.Empty<int>(),	//60
-		Array.Empty<int>(),	//61
-		Array.Empty<int>(),	//62
-		Array.Empty<int>()	//63
-}
-};
+
 
 		private static int[][][] RookMoves = new[]
 {

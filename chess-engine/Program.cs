@@ -9,16 +9,16 @@ namespace chess_engine
 {
     public class Program
     {
+
         
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
             availableMovesFile.WriteLine("private static int[][][] KingMoves = new[]");
+
             availableMovesFile.WriteLine("{");
             availableMovesFile.WriteLine("\tnew[]");
             availableMovesFile.WriteLine("\t{  // white");
-            
-               
          
             for(int i = 0; i < 64; i++)
             {
@@ -27,6 +27,7 @@ namespace chess_engine
                 board.Cells[i].Piece = new King(Color.White);
            
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
+
                
                 availableMovesFile.Write("\t\tnew[]{");
                 var firstTime = true;
@@ -44,6 +45,7 @@ namespace chess_engine
                 }
                 availableMovesFile.Write("}");
                    
+
                 if (i != 63)
                 {
                     availableMovesFile.Write(",");
@@ -62,6 +64,7 @@ namespace chess_engine
                 board.Cells[i].Piece = new King(Color.Black);
                 
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
+
                 
                 availableMovesFile.Write("\t\tnew[]{");
                 var firstTime = true;
@@ -78,6 +81,7 @@ namespace chess_engine
 
                 }
                 availableMovesFile.Write("}");
+
 
                 if (i != 63)
                 {
