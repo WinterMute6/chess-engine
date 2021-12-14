@@ -14,82 +14,101 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("private static int[][][] KingMoves = new[]");
-
+            availableMovesFile.WriteLine("public static int[][][] RookMoves = new[]");
             availableMovesFile.WriteLine("{");
-            availableMovesFile.WriteLine("\tnew[]");
-            availableMovesFile.WriteLine("\t{  // white");
-         
-            for(int i = 0; i < 64; i++)
-            {
-                var board = new Board();
-                board.IsPartialBoard = true;
-                board.Cells[i].Piece = new King(Color.White);
-           
-                var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
-
-               
-                availableMovesFile.Write("\t\tnew[]{");
-                var firstTime = true;
-
-                foreach (Move move in moves)
-                {
-                        
-                    if(!firstTime)
-                    {
-                        availableMovesFile.Write(",");
-                    }
-                    firstTime = false;
-                    availableMovesFile.Write($"{move.To}");
-                        
-                }
-                availableMovesFile.Write("}");
-                   
-
-                if (i != 63)
-                {
-                    availableMovesFile.Write(",");
-                }
-                availableMovesFile.WriteLine($"\t//{i}");
-            }
-            availableMovesFile.WriteLine("},");
-
-            availableMovesFile.WriteLine("new[]");
-            availableMovesFile.WriteLine("\t{  // black");
-
+            var firstTime = true;
             for (int i = 0; i < 64; i++)
             {
                 var board = new Board();
                 board.IsPartialBoard = true;
-                board.Cells[i].Piece = new King(Color.Black);
-                
+                board.Cells[i].Piece = new Rook(Color.White);
+           
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
 
-                
-                availableMovesFile.Write("\t\tnew[]{");
-                var firstTime = true;
-
-                foreach (Move move in moves)
-                {
-
-                    if (!firstTime)
-                    {
-                        availableMovesFile.Write(",");
-                    }
-                    firstTime = false;
-                    availableMovesFile.Write($"{move.To}");
-
-                }
-                availableMovesFile.Write("}");
-
-
-                if (i != 63)
+                if (!firstTime)
                 {
                     availableMovesFile.Write(",");
                 }
+                firstTime = false;
+
+                availableMovesFile.WriteLine("\t\tnew[]{");
+                
+                var firstTimeUp = true;
+                var firstTimeDown = true;
+                var firstTimeRight = true;
+                var firstTimeLeft = true;
+                var top = new[] { 56, 57, 58, 59, 60, 61, 62, 63 };
+                var bottom = new[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+                var right = new[] { 7, 15, 23, 31, 39, 47, 55, 63 };
+                var left = new[] { 0, 8, 16, 24, 32, 40, 48, 56 };
+                foreach (Move move in moves)
+                {
+                    if((move.To - i) % 8 == 0 && move.To > i)
+                    {
+                        if(firstTimeUp) 
+                        {
+                            availableMovesFile.Write("new[]{");
+                        }
+                        else
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTimeUp = false;
+                        availableMovesFile.Write($"{move.To}");
+                        if (top.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        continue;
+                    }
+                    if((move.To - i) % 8 == 0 && move.To < i)
+                    {
+                        if (firstTimeDown)
+                        {
+                            availableMovesFile.Write("new[]{");
+                        }
+                        else
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTimeDown = false;
+                        availableMovesFile.Write($"{move.To}");
+                        if (bottom.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        continue;
+                    }
+                    if((move.To - i) % 8 != 0 && move.To > i)
+                    {
+                        if (firstTimeRight)
+                        {
+                            availableMovesFile.Write("new[]{");
+                        }
+                        else
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTimeRight = false;
+                        availableMovesFile.Write($"{move.To}");
+                        if (right.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        continue;
+                    }
+                    if ((move.To - i) % 8 != 0 && move.To < i)
+                    {
+                        if (firstTimeLeft)
+                        {
+                            availableMovesFile.Write("new[]{");
+                        }
+                        else
+                        {
+                            availableMovesFile.Write(",");
+                        }
+                        firstTimeLeft = false;
+                        availableMovesFile.Write($"{move.To}");
+                        if (left.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        continue;
+                    }
+                }
+                availableMovesFile.Write("}");
+
                 availableMovesFile.WriteLine($"\t//{i}");
             }
-            availableMovesFile.WriteLine("}");
+            availableMovesFile.WriteLine("},");
 
             availableMovesFile.WriteLine("};");
             availableMovesFile.Close();
