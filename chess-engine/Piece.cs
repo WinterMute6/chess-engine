@@ -278,14 +278,13 @@ namespace chess_engine
                     if (board.Cells[potentialMove].IsEmpty)
                     {
                         yield return new Move { From = currentPosition, To = potentialMove };
+                        continue;
                     }
                     else if (board.Cells[potentialMove].Piece.IsOppositeColor(Color))
                     {
                         yield return new Move { From = currentPosition, To = potentialMove };
-                        break;
                     }
-                    else
-                        break;
+                    break;
                 }
             }
         }
