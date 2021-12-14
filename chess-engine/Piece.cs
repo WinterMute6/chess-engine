@@ -266,32 +266,32 @@ namespace chess_engine
             
         }
 
-        public IEnumerable<Move> GetRookMovesNew()
+        public IEnumerable<Move> GetRookMoves()
         {
             var board = Cell.Board;
             var currentPosition = Cell.Number;
-            for (int i = 0; i < 4; i++)
+            var directions = Rules.RookMoves[currentPosition];
+            foreach(var direction in directions)
             {
-                var potentialMoves = Rules.RookMoves[currentPosition][i];
-
-                foreach (var potentialMove in potentialMoves)
+                foreach (var potentialMove in direction)
                 {
                     if (board.Cells[potentialMove].IsEmpty)
                     {
                         yield return new Move { From = currentPosition, To = potentialMove };
                     }
-
-                    //moves.Add(new Move { From = currentPosition, To = position });
-
                     if (board.Cells[potentialMove].IsOccupied && board.Cells[potentialMove].Piece.IsOppositeColor(Color))
                     {
                         yield return new Move { From = currentPosition, To = potentialMove };
-                        //moves.Add(new Move { From = currentPosition, To = position });
+                        break;
+                    }
+                    if (board.Cells[potentialMove].IsOccupied && !board.Cells[potentialMove].Piece.IsOppositeColor(Color))
+                    {
+                        break;
                     }
                 }
             }
         }
-        public IEnumerable<Move> GetRookMoves()
+        public IEnumerable<Move> GetRookMovesOld()
         {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
