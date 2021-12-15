@@ -14,38 +14,38 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("public static int[][][] RookMoves = new[]");
+            availableMovesFile.WriteLine("public static int[][][] BishopMoves = new[]");
             availableMovesFile.WriteLine("{");
             var firstTime = true;
             for (int i = 0; i < 64; i++)
             {
                 var board = new Board();
                 board.IsPartialBoard = true;
-                board.Cells[i].Piece = new Rook(Color.White);
+                board.Cells[i].Piece = new Bishop(Color.White);
            
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
 
                 if (!firstTime)
                 {
                     availableMovesFile.Write(",");
+                    firstTime = false;
                 }
-                firstTime = false;
-
-                availableMovesFile.WriteLine("\t\tnew[]{");
                 
-                var firstTimeUp = true;
-                var firstTimeDown = true;
-                var firstTimeRight = true;
-                var firstTimeLeft = true;
-                var top = new[] { 56, 57, 58, 59, 60, 61, 62, 63 };
-                var bottom = new[] { 0, 1, 2, 3, 4, 5, 6, 7 };
-                var right = new[] { 7, 15, 23, 31, 39, 47, 55, 63 };
-                var left = new[] { 0, 8, 16, 24, 32, 40, 48, 56 };
+                
+                var firstTimeUpLeft = true;
+                var firstTimeDownRight = true;
+                var firstTimeUpRight = true;
+                var firstTimeDownLeft = true;
+                var upLeft = new[] { 0, 8, 16, 24, 32, 40, 48, 56, 57, 58, 59, 60, 61, 62, 63 };
+                var downLeft = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 24, 32, 40, 48, 56 };
+                var upRight = new[] { 7, 15, 23, 31, 39, 47, 55, 63, 56, 57, 58, 59, 60, 61, 62 };
+                var downRight = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 7, 15, 23, 31, 39, 47, 55, 63 };
+                availableMovesFile.WriteLine("\t\tnew[]{");
                 foreach (Move move in moves)
                 {
-                    if((move.To - i) % 8 == 0 && move.To > i)
+                    if((move.To - i) % 7 == 0 && move.To > i)
                     {
-                        if(firstTimeUp) 
+                        if(firstTimeUpLeft) 
                         {
                             availableMovesFile.Write("new[]{");
                         }
@@ -53,14 +53,14 @@ namespace chess_engine
                         {
                             availableMovesFile.Write(",");
                         }
-                        firstTimeUp = false;
+                        firstTimeUpLeft = false;
                         availableMovesFile.Write($"{move.To}");
-                        if (top.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        if (upLeft.Contains(move.To)) { availableMovesFile.Write("}, "); }
                         continue;
                     }
-                    if((move.To - i) % 8 == 0 && move.To < i)
+                    if((move.To - i) % 9 == 0 && move.To > i)
                     {
-                        if (firstTimeDown)
+                        if (firstTimeUpRight)
                         {
                             availableMovesFile.Write("new[]{");
                         }
@@ -68,14 +68,14 @@ namespace chess_engine
                         {
                             availableMovesFile.Write(",");
                         }
-                        firstTimeDown = false;
+                        firstTimeUpRight = false;
                         availableMovesFile.Write($"{move.To}");
-                        if (bottom.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        if (upRight.Contains(move.To)) { availableMovesFile.Write("}, "); }
                         continue;
                     }
-                    if((move.To - i) % 8 != 0 && move.To > i)
+                    if((move.To - i) % 7 == 0 && move.To < i)
                     {
-                        if (firstTimeRight)
+                        if (firstTimeDownRight)
                         {
                             availableMovesFile.Write("new[]{");
                         }
@@ -83,14 +83,14 @@ namespace chess_engine
                         {
                             availableMovesFile.Write(",");
                         }
-                        firstTimeRight = false;
+                        firstTimeDownRight = false;
                         availableMovesFile.Write($"{move.To}");
-                        if (right.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        if (downRight.Contains(move.To)) { availableMovesFile.Write("}, "); }
                         continue;
                     }
-                    if ((move.To - i) % 8 != 0 && move.To < i)
+                    if ((move.To - i) % 9 == 0 && move.To < i)
                     {
-                        if (firstTimeLeft)
+                        if (firstTimeDownLeft)
                         {
                             availableMovesFile.Write("new[]{");
                         }
@@ -98,13 +98,14 @@ namespace chess_engine
                         {
                             availableMovesFile.Write(",");
                         }
-                        firstTimeLeft = false;
+                        firstTimeDownLeft = false;
                         availableMovesFile.Write($"{move.To}");
-                        if (left.Contains(move.To)) { availableMovesFile.Write("}, "); }
+                        if (downLeft.Contains(move.To)) { availableMovesFile.Write("} "); }
                         continue;
                     }
+                    availableMovesFile.Write(",");
                 }
-                availableMovesFile.Write("}");
+                availableMovesFile.Write("},");
 
                 availableMovesFile.WriteLine($"\t//{i}");
             }
