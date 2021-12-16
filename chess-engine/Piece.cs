@@ -224,7 +224,6 @@ namespace chess_engine
                 }
                 break;
             }
-            
         }
 
         public IEnumerable<Move> GetBishopMoves()

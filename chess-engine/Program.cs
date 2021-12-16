@@ -14,7 +14,7 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("public static int[][][] BishopMoves = new[]");
+            availableMovesFile.WriteLine("public static int[][] KnightMoves = new[]");
             availableMovesFile.WriteLine("{");
             var firstTime = true;
             for (int i = 0; i < 64; i++)
@@ -30,86 +30,16 @@ namespace chess_engine
                     availableMovesFile.Write(",");
                     firstTime = false;
                 }
-                
-                
-                var firstTimeUpLeft = true;
-                var firstTimeDownRight = true;
-                var firstTimeUpRight = true;
-                var firstTimeDownLeft = true;
-                var upLeft = new[] { 0, 8, 16, 24, 32, 40, 48, 56, 57, 58, 59, 60, 61, 62, 63 };
-                var downLeft = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 24, 32, 40, 48, 56 };
-                var upRight = new[] { 7, 15, 23, 31, 39, 47, 55, 63, 56, 57, 58, 59, 60, 61, 62 };
-                var downRight = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 7, 15, 23, 31, 39, 47, 55, 63 };
-                availableMovesFile.WriteLine("\t\tnew[]{");
+                else
+                    availableMovesFile.WriteLine("\t\tnew[]{");
                 foreach (Move move in moves)
                 {
-                    if((move.To - i) % 7 == 0 && move.To > i)
-                    {
-                        if(firstTimeUpLeft) 
-                        {
-                            availableMovesFile.Write("new[]{");
-                        }
-                        else
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTimeUpLeft = false;
-                        availableMovesFile.Write($"{move.To}");
-                        if (upLeft.Contains(move.To)) { availableMovesFile.Write("}, "); }
-                        continue;
-                    }
-                    if((move.To - i) % 9 == 0 && move.To > i)
-                    {
-                        if (firstTimeUpRight)
-                        {
-                            availableMovesFile.Write("new[]{");
-                        }
-                        else
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTimeUpRight = false;
-                        availableMovesFile.Write($"{move.To}");
-                        if (upRight.Contains(move.To)) { availableMovesFile.Write("}, "); }
-                        continue;
-                    }
-                    if((move.To - i) % 7 == 0 && move.To < i)
-                    {
-                        if (firstTimeDownRight)
-                        {
-                            availableMovesFile.Write("new[]{");
-                        }
-                        else
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTimeDownRight = false;
-                        availableMovesFile.Write($"{move.To}");
-                        if (downRight.Contains(move.To)) { availableMovesFile.Write("}, "); }
-                        continue;
-                    }
-                    if ((move.To - i) % 9 == 0 && move.To < i)
-                    {
-                        if (firstTimeDownLeft)
-                        {
-                            availableMovesFile.Write("new[]{");
-                        }
-                        else
-                        {
-                            availableMovesFile.Write(",");
-                        }
-                        firstTimeDownLeft = false;
-                        availableMovesFile.Write($"{move.To}");
-                        if (downLeft.Contains(move.To)) { availableMovesFile.Write("} "); }
-                        continue;
-                    }
-                    availableMovesFile.Write(",");
+                    
                 }
                 availableMovesFile.Write("},");
 
                 availableMovesFile.WriteLine($"\t//{i}");
             }
-            availableMovesFile.WriteLine("},");
 
             availableMovesFile.WriteLine("};");
             availableMovesFile.Close();

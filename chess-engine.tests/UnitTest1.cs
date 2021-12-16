@@ -547,6 +547,34 @@ namespace chess_engine.tests
             Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
         }
 
+        ///<summary>
+        /// given a white bishop on H8
+        /// a black pawn on B2 
+        /// white bishop on H8 should have 6 available moves
+        ///</summary>
+        [TestMethod()]
+        public void WhiteBishopFromH8To6Available()
+        {
+            var board = new Board();
+            board.IsPartialBoard = true;
+            var expectedMoves = new List<Move>()
+            {
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('g',7) },
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('f',6) },
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('e',5) },
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('d',4) },
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('c',3) },
+                new Move {From = Board.PositionToNumber('h',8), To = Board.PositionToNumber('b',2) }
+            };
+            board.Cell('h', 8).Piece = new Bishop(Color.White);
+            board.Cell('b', 2).Piece = new Pawn(Color.Black);
+
+            var actualMoves = board.GetAvailableMoves(board.Cell('h', 8).Piece);
+
+            Assert.AreEqual(0, actualMoves.Except(expectedMoves).Count());
+            Assert.AreEqual(0, expectedMoves.Except(actualMoves).Count());
+        }
+
         /// <summary>
         /// Given a white bishop on D4
         /// A white pawn on B6
