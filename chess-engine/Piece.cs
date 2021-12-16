@@ -224,9 +224,31 @@ namespace chess_engine
                 }
                 break;
             }
-            
         }
-        internal IEnumerable<Move> GetBishopMoves()
+
+        public IEnumerable<Move> GetBishopMoves()
+        {
+            var board = Cell.Board;
+            var currentPosition = Cell.Number;
+            var directions = Rules.BishopMoves[currentPosition];
+            foreach (var direction in directions)
+            {
+                foreach (var potentialMove in direction)
+                {
+                    if (board.Cells[potentialMove].IsEmpty)
+                    {
+                        yield return new Move { From = currentPosition, To = potentialMove };
+                        continue;
+                    }
+                    else if (board.Cells[potentialMove].Piece.IsOppositeColor(Color))
+                    {
+                        yield return new Move { From = currentPosition, To = potentialMove };
+                    }
+                    break;
+                }
+            }
+        }
+        internal IEnumerable<Move> GetBishopMovesOld()
         {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
