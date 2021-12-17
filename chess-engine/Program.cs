@@ -14,27 +14,21 @@ namespace chess_engine
         public static void Main(string[] args)
         {
             var availableMovesFile = File.CreateText("C:\\test\\movesData.txt");
-            availableMovesFile.WriteLine("public static int[][] KnightMoves = new[]");
+            availableMovesFile.WriteLine("public static int[][] KingMoves = new[]");
             availableMovesFile.WriteLine("{");
-            var firstTime = true;
+           
             for (int i = 0; i < 64; i++)
             {
                 var board = new Board();
                 board.IsPartialBoard = true;
-                board.Cells[i].Piece = new Bishop(Color.White);
+                board.Cells[i].Piece = new King(Color.White);
            
                 var moves = board.GetAvailableMoves(board.Cells[i].Piece).ToArray();
 
-                if (!firstTime)
-                {
-                    availableMovesFile.Write(",");
-                    firstTime = false;
-                }
-                else
-                    availableMovesFile.WriteLine("\t\tnew[]{");
+                availableMovesFile.Write("\t\tnew[]{");
                 foreach (Move move in moves)
                 {
-                    
+                    availableMovesFile.Write($" {move.To},");
                 }
                 availableMovesFile.Write("},");
 
