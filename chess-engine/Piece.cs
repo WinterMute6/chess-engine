@@ -163,6 +163,20 @@ namespace chess_engine
 
         public IEnumerable<Move> GetKnightMoves()
         {
+            var board = Cell.Board;
+            var currentPosition = Cell.Number;
+            var moves = Rules.KnightMoves[currentPosition];
+
+            foreach (var potentialMove in moves)
+            {
+                if (board.Cells[potentialMove].IsEmpty || board.Cells[potentialMove].Piece.IsOppositeColor(Color))
+                {
+                    yield return new Move { From = currentPosition, To = potentialMove };
+                }
+            }
+        }
+        public IEnumerable<Move> GetKnightMovesOld()
+        {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
 
@@ -224,6 +238,7 @@ namespace chess_engine
                 }
                 break;
             }
+
         }
 
         public IEnumerable<Move> GetBishopMoves()
