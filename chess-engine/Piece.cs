@@ -21,7 +21,22 @@ namespace chess_engine
             _color = color;
             Figure = figure;
         }
+
         public IEnumerable<Move> GetKingMoves()
+        {
+            var board = Cell.Board;
+            var currentPosition = Cell.Number;
+            var moves = Rules.KingMoves[currentPosition];
+
+            foreach (var potentialMove in moves)
+            {
+                if (board.Cells[potentialMove].IsEmpty || board.Cells[potentialMove].Piece.IsOppositeColor(Color))
+                {
+                    yield return new Move { From = currentPosition, To = potentialMove };
+                }
+            }
+        }
+        public IEnumerable<Move> GetKingMovesOld()
         {
             var board = this.Cell.Board;
             //var availableMoves = new List<Move>();
